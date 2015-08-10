@@ -5,17 +5,43 @@
  */
 package projectvendingmachine;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.html.HTMLEditorKit;
+
 /**
  *
  * @author Sruti
  */
 public interface Requirements {
+    HashMap<String,String> selectedReq = new HashMap<>();
+    public JsonProgram parser = new JsonProgram();
     public void update(String req);
-    public int display();
+    public int display();  
+}
+class ConcreteRequirements implements Requirements{
+    ConcreteRequirements(){
+        super();
+        try {
+            parser.foodParser(selectedReq);
+        } catch (IOException ex) {
+            Logger.getLogger(ConcreteRequirements.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void update(String req){}
+    public int display(){
+        return 0;
+    }
     
 }
+interface RequirementsDecorator extends Requirements {
+    public void update(String req);
+    public int display();  
+}
 
-class CalorieReq implements Requirements {
+class CalorieReq implements RequirementsDecorator{
     
     String calories;
     GuiSubject subject;
@@ -27,6 +53,7 @@ class CalorieReq implements Requirements {
     
     public void update(String req) {
         calories = req;
+        selectedReq.put("calorie", calories);
         
     }
     
@@ -37,7 +64,7 @@ class CalorieReq implements Requirements {
 }
 
 
-class SugarReq implements Requirements {
+class SugarReq implements RequirementsDecorator {
     String sugars;
     GuiSubject subject;
     public SugarReq (GuiSubject subject) {
@@ -47,6 +74,10 @@ class SugarReq implements Requirements {
     
     public void update(String req) {
         sugars = req;
+        //adding vlaue to hashmap
+        selectedReq.put("calorie", sugars);
+        //System.out.println("Hashmap value"+selectedReq.get("calorie"));
+        
     }
     
     public int display() {
@@ -56,7 +87,7 @@ class SugarReq implements Requirements {
 }
 
 
-class FatReq implements Requirements {
+class FatReq implements RequirementsDecorator {
     String fat;
     GuiSubject subject;
     public FatReq (GuiSubject subject) {
@@ -66,6 +97,7 @@ class FatReq implements Requirements {
     
     public void update(String req) {
         fat = req;
+        selectedReq.put("fat", fat);
         
     }
     
@@ -75,7 +107,7 @@ class FatReq implements Requirements {
     }
 }
 
-class PriceReq implements Requirements {
+class PriceReq implements RequirementsDecorator {
     String price;
     GuiSubject subject;
     public PriceReq (GuiSubject subject) {
@@ -85,6 +117,7 @@ class PriceReq implements Requirements {
     
     public void update(String req) {
         price = req;
+        selectedReq.put("price", price);
         
     }
     
@@ -94,7 +127,7 @@ class PriceReq implements Requirements {
     }
 }
 
-class FoodTypeReq implements Requirements {
+class FoodTypeReq implements RequirementsDecorator {
     String foodType;
     GuiSubject subject;
     public FoodTypeReq (GuiSubject subject) {
@@ -104,6 +137,7 @@ class FoodTypeReq implements Requirements {
     
     public void update(String req) {
         foodType = req;
+        selectedReq.put("foodtype", req);
         
     }
     
