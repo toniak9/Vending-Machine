@@ -25,6 +25,7 @@ class ConcreteRequirements implements Requirements{
     ConcreteRequirements(){
         super();
         try {
+            System.out.println(selectedReq.get("calorie"));
             parser.foodParser(selectedReq);
         } catch (IOException ex) {
             Logger.getLogger(ConcreteRequirements.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,6 +55,7 @@ class CalorieReq implements RequirementsDecorator{
     public void update(String req) {
         calories = req;
         selectedReq.put("calorie", calories);
+         System.out.println("Hashmap value"+selectedReq.get("calorie"));
         
     }
     
@@ -75,8 +77,8 @@ class SugarReq implements RequirementsDecorator {
     public void update(String req) {
         sugars = req;
         //adding vlaue to hashmap
-        selectedReq.put("calorie", sugars);
-        //System.out.println("Hashmap value"+selectedReq.get("calorie"));
+        selectedReq.put("sugars", sugars);
+        System.out.println("Hashmap value"+selectedReq.get("sugars"));
         
     }
     
@@ -98,6 +100,7 @@ class FatReq implements RequirementsDecorator {
     public void update(String req) {
         fat = req;
         selectedReq.put("fat", fat);
+         System.out.println("Hashmap value"+selectedReq.get("fat"));
         
     }
     

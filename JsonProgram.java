@@ -23,12 +23,13 @@ import org.json.simple.parser.ParseException;
  */
 public class JsonProgram {
      public void foodParser(HashMap<String,String> requirements) throws IOException {
-         
-         int calories = Integer.parseInt(requirements.get("calories"));
+        
+         Integer calories = Integer.parseInt(requirements.get("calorie"));
+    
          String sugars = requirements.get("sugars");
-         int fat = Integer.parseInt(requirements.get("fat"));
-         Double price = Double.parseDouble(requirements.get("price"));
-         String foodType = requirements.get("foodtype"); 
+         String fat = requirements.get("fat");
+         //Double price = Double.parseDouble(requirements.get("price"));
+         //String foodType = requirements.get("foodtype"); 
 
         try {
             JSONParser parser = new JSONParser();
@@ -36,22 +37,26 @@ public class JsonProgram {
 
             JSONObject jsonObject = (JSONObject) obj;
             
-           // JSONObject jsonObj = (JSONObject) ;
+     
             JSONObject food = (JSONObject) jsonObject.get("Food");
             JSONObject snack = (JSONObject) food.get("Snacks");
             JSONObject chips = (JSONObject) snack.get("Chips");
             
             JSONArray items = (JSONArray)chips.get("items");
+          
             for(int i=0; i<items.size(); i++){
                 JSONObject nutrition = (JSONObject)items.get(i);
-                if(calories == (Integer)nutrition.get("calorieCount")){
+                JSONObject nutritionalFacts =(JSONObject) nutrition.get("nutritionalFacts");
+                String calorieCount = nutritionalFacts.get("calorieCount").toString();
+            
+                if(calories <= Integer.parseInt(calorieCount)){
                     System.out.println("calories match");
                 }
                 
             }
             
      
-            System.out.println(chips.get("SnackID").toString()); 
+           
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }catch (IOException e) {

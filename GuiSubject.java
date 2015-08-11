@@ -130,10 +130,10 @@ public class GuiSubject {
            System.out.println("Food Type is "+getFoodType());
        }  
        
-       Requirements a = new ConcreteRequirements();
+       
        for(int i = 0; i < requirements.size(); i++)
       requirements.get(i).display();
       
-       
+       Requirements a = new ConcreteRequirements();
     }
 }
