@@ -36,11 +36,10 @@ public class JsonProgram {
 
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
             
-     
             JSONObject food = (JSONObject) jsonObject.get("Food");
             JSONObject snack = (JSONObject) food.get("Snacks");
             JSONObject chips = (JSONObject) snack.get("Chips");
@@ -65,6 +64,8 @@ public class JsonProgram {
                     double itemCost = (Double) nutrition.get("cost");
                     System.out.println("result list"+itemCode+" "+itemName+" "+itemCost);
                     
+                } else {
+                    System.out.println("No options available for your selelction");
                 }
                
                 
