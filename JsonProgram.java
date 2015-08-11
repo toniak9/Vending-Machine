@@ -27,7 +27,10 @@ public class JsonProgram {
          Integer calories = Integer.parseInt(requirements.get("calorie"));
     
          String sugars = requirements.get("sugars");
-         String fat = requirements.get("fat");
+         Integer fats = Integer.parseInt(requirements.get("fat"));
+         Double price = Double.parseDouble(requirements.get("price"));
+       //  Hashmap<> result = new Hashmap<>(); 
+         
          //Double price = Double.parseDouble(requirements.get("price"));
          //String foodType = requirements.get("foodtype"); 
 
@@ -46,12 +49,25 @@ public class JsonProgram {
           
             for(int i=0; i<items.size(); i++){
                 JSONObject nutrition = (JSONObject)items.get(i);
+                Double cost = (Double) nutrition.get("cost");
                 JSONObject nutritionalFacts =(JSONObject) nutrition.get("nutritionalFacts");
                 String calorieCount = nutritionalFacts.get("calorieCount").toString();
+                String sugar = (String) nutritionalFacts.get("sugars");
+                String fat = nutritionalFacts.get("fat").toString();
+               
+             /*   long cal = (Long) nutritionalFacts.get("calorieCount");
+                System.out.println("this is cal value printing now in integers"+cal); */
             
-                if(calories <= Integer.parseInt(calorieCount)){
-                    System.out.println("calories match");
+                if((calories <= Integer.parseInt(calorieCount)) && (sugars.equals(sugar)) && (fats <= Integer.parseInt(fat)) && (price <= cost)){
+                    System.out.println("requirements matched");
+                    long itemCode = (Long) nutrition.get("code");
+                    String itemName = (String) nutrition.get("name");
+                    double itemCost = (Double) nutrition.get("cost");
+                    System.out.println("result list"+itemCode+" "+itemName+" "+itemCost);
+                    
                 }
+               
+                
                 
             }
             

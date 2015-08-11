@@ -118,7 +118,8 @@ public class PriceRangeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
          String price = priceRangeTextField.getText();
-        subject.setFat(price);
+         System.out.println("GUI price text field value"+price);
+        subject.setPrice(price);
         this.dispose();
     }//GEN-LAST:event_priceRangeButtonActionPerformed
 

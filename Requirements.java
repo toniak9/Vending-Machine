@@ -121,7 +121,7 @@ class PriceReq implements RequirementsDecorator {
     public void update(String req) {
         price = req;
         selectedReq.put("price", price);
-        
+        System.out.println("Hashmap value"+selectedReq.get("price"));
     }
     
     public int display() {
