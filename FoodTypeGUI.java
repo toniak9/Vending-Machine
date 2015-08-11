@@ -16,8 +16,16 @@ public class FoodTypeGUI extends javax.swing.JFrame {
     /**
      * Creates new form FoodTypeGUI
      */
+    
+    private GuiSubject subject;
+    
     public FoodTypeGUI() {
+        
+    }
+    
+    public FoodTypeGUI(GuiSubject subject) {
         initComponents();
+        this.subject = subject;
     }
 
     /**
@@ -65,6 +73,11 @@ public class FoodTypeGUI extends javax.swing.JFrame {
         foodTypeLabel.setText("Select the type of food");
 
         okFoodTypeButton.setText("Ok");
+        okFoodTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okFoodTypeButtonActionPerformed(evt);
+            }
+        });
 
         cbSnacks.setText("Snacks");
         cbSnacks.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +148,11 @@ public class FoodTypeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_cbSnacksActionPerformed
+
+    private void okFoodTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okFoodTypeButtonActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+    }//GEN-LAST:event_okFoodTypeButtonActionPerformed
 
     /**
      * @param args the command line arguments

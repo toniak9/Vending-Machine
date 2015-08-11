@@ -130,11 +130,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Price Range "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPriceRangeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="cbFoodType">
           <Properties>
             <Property name="text" type="java.lang.String" value="Food Type"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbFoodTypeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnProceed">
           <Properties>

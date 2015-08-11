@@ -10,6 +10,8 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.*;
 
 /**
  *
@@ -20,13 +22,23 @@ public class CartGUI extends javax.swing.JFrame {
     /**
      * Creates new form CartGUI
      */
+     private JTable outputTable; 
     
     public CartGUI() {
         initComponents();
-        
+        addJTable();
         
     }
 
+     public void addJTable() {
+         outputTable = new JTable();
+         JScrollPane outputScrollpane = new JScrollPane(outputTable);
+    	// create a window
+    	outputPanel.setLayout(new BorderLayout());
+    	outputPanel.add(outputScrollpane, BorderLayout.CENTER);
+
+     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

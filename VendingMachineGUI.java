@@ -73,8 +73,18 @@ public class VendingMachineGUI extends javax.swing.JFrame {
         });
 
         cbPriceRange.setText("Price Range ");
+        cbPriceRange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPriceRangeActionPerformed(evt);
+            }
+        });
 
         cbFoodType.setText("Food Type");
+        cbFoodType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFoodTypeActionPerformed(evt);
+            }
+        });
 
         btnProceed.setText("Proceed");
         btnProceed.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +225,20 @@ public class VendingMachineGUI extends javax.swing.JFrame {
             new FatContentGUI(subject).setVisible(true);
         }
     }//GEN-LAST:event_cbFatContentActionPerformed
+
+    private void cbPriceRangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPriceRangeActionPerformed
+        // TODO add your handling code here:
+        if(cbPriceRange.isSelected()) {
+            new PriceRangeGUI(subject).setVisible(true);
+        }
+    }//GEN-LAST:event_cbPriceRangeActionPerformed
+
+    private void cbFoodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFoodTypeActionPerformed
+        // TODO add your handling code here:
+        if(cbFoodType.isSelected()) {
+            new FoodTypeGUI(subject).setVisible(true);
+        }
+    }//GEN-LAST:event_cbFoodTypeActionPerformed
 
     /**
      * @param args the command line arguments
