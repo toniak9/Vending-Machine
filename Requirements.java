@@ -6,7 +6,9 @@
 package projectvendingmachine;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.html.HTMLEditorKit;
@@ -16,7 +18,7 @@ import javax.swing.text.html.HTMLEditorKit;
  * @author Sruti
  */
 public interface Requirements {
-    HashMap<String,String> selectedReq = new HashMap<>();
+    HashMap selectedReq = new HashMap<>();
     public JsonProgram parser = new JsonProgram();
     public void update(String req);
     public int display();  
@@ -44,7 +46,7 @@ interface RequirementsDecorator extends Requirements {
 
 class CalorieReq implements RequirementsDecorator{
     
-    String calories;
+    int calories;
     GuiSubject subject;
     public CalorieReq (GuiSubject subject) {
         this.subject = subject;
@@ -53,7 +55,7 @@ class CalorieReq implements RequirementsDecorator{
     
     
     public void update(String req) {
-        calories = req;
+        calories = Integer.parseInt(req);
         selectedReq.put("calorie", calories);
          System.out.println("Hashmap value"+selectedReq.get("calorie"));
         
@@ -90,7 +92,7 @@ class SugarReq implements RequirementsDecorator {
 
 
 class FatReq implements RequirementsDecorator {
-    String fat;
+    int fat;
     GuiSubject subject;
     public FatReq (GuiSubject subject) {
         this.subject = subject;
@@ -98,7 +100,7 @@ class FatReq implements RequirementsDecorator {
     }
     
     public void update(String req) {
-        fat = req;
+        fat = Integer.parseInt(req);
         selectedReq.put("fat", fat);
          System.out.println("Hashmap value"+selectedReq.get("fat"));
         
@@ -111,7 +113,7 @@ class FatReq implements RequirementsDecorator {
 }
 
 class PriceReq implements RequirementsDecorator {
-    String price;
+    double price;
     GuiSubject subject;
     public PriceReq (GuiSubject subject) {
         this.subject = subject;
@@ -119,7 +121,7 @@ class PriceReq implements RequirementsDecorator {
     }
     
     public void update(String req) {
-        price = req;
+        price = Double.parseDouble(req);
         selectedReq.put("price", price);
         System.out.println("Hashmap value"+selectedReq.get("price"));
     }
@@ -130,22 +132,90 @@ class PriceReq implements RequirementsDecorator {
     }
 }
 
-class FoodTypeReq implements RequirementsDecorator {
-    String foodType;
-    GuiSubject subject;
+abstract class FoodTypeReq implements RequirementsDecorator {
+    
+    
+  /*  GuiSubject subject;
     public FoodTypeReq (GuiSubject subject) {
         this.subject = subject;
         this.subject.attach(this);
-    }
+    }*/
     
-    public void update(String req) {
-        foodType = req;
-        selectedReq.put("foodtype", req);
+    
+    List foodType = new ArrayList();
+    
+   abstract public void update(String req);
+    
+    abstract public int display(); 
+       
+    
+ }
+    class SnackFoodTypeReq extends FoodTypeReq {
+        String snackType;
+        
+        GuiSubject subject;
+        SnackFoodTypeReq(GuiSubject subject) {
+        this.subject = subject;
+        this.subject.attach(this);
+    }
+        
+        public void update(String req) {
+        snackType = req;
+        foodType.add(snackType);
+        selectedReq.put("foodtype", foodType);
         
     }
     
     public int display() {
-        System.out.println("foodtype in req class Content is :"+foodType);
-        return 100;
+        System.out.println("foodtype in req class Content is :"+snackType);
+        return 1;
     }
-}
+    
+ }
+
+class CandyFoodTypeReq extends FoodTypeReq {
+        String candyType;
+        
+        GuiSubject subject;
+        CandyFoodTypeReq(GuiSubject subject) {
+        this.subject = subject;
+        this.subject.attach(this);
+    }
+        
+        public void update(String req) {
+        candyType = req;
+        foodType.add(candyType);
+        selectedReq.put("foodtype", foodType);
+        
+    }
+    
+    public int display() {
+        System.out.println("foodtype in req class Content is :"+candyType);
+        return 1;
+    }
+    
+ }
+
+class BeverageFoodTypeReq extends FoodTypeReq {
+        String beverageType;
+        
+        GuiSubject subject;
+        BeverageFoodTypeReq(GuiSubject subject) {
+        this.subject = subject;
+        this.subject.attach(this);
+    }
+        
+        public void update(String req) {
+        beverageType = req;
+        foodType.add(beverageType);
+        selectedReq.put("foodtype", foodType);
+        
+    }
+    
+    public int display() {
+        System.out.println("foodtype in req class Content is :"+beverageType);
+        return 1;
+    }
+    
+ }
+  

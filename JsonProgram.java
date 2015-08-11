@@ -22,13 +22,14 @@ import org.json.simple.parser.ParseException;
  * @author Sruti
  */
 public class JsonProgram {
-     public void foodParser(HashMap<String,String> requirements) throws IOException {
+     public void foodParser(HashMap requirements) throws IOException {
         
-         Integer calories = Integer.parseInt(requirements.get("calorie"));
+         int calories = (int) requirements.get("calorie");
     
-         String sugars = requirements.get("sugars");
-         Integer fats = Integer.parseInt(requirements.get("fat"));
-         Double price = Double.parseDouble(requirements.get("price"));
+         String sugars = (String) requirements.get("sugars");
+         int fats = (int) requirements.get("fat");
+         Double price = (Double)requirements.get("price");
+         System.out.println(requirements);
        //  Hashmap<> result = new Hashmap<>(); 
          
          //Double price = Double.parseDouble(requirements.get("price"));

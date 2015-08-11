@@ -5,6 +5,8 @@
  */
 package projectvendingmachine;
 
+import javax.swing.JOptionPane;
+
 
 
 /**
@@ -151,7 +153,24 @@ public class FoodTypeGUI extends javax.swing.JFrame {
 
     private void okFoodTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okFoodTypeButtonActionPerformed
         // TODO add your handling code here:
-         this.dispose();
+        String snacks;
+        String candies;
+        String beverages;
+        
+        if(cbSnacks.isSelected()) {
+            snacks = cbSnacks.getText();
+            subject.setSnacks(snacks);
+        }
+        if(cbCandies.isSelected()) {
+            candies = cbCandies.getText();
+             subject.setCandies(candies);
+        }
+        if(cbBeverages.isSelected()) {
+            beverages = cbBeverages.getText();
+             subject.setBeverages(beverages);
+        } 
+        
+        this.dispose();
     }//GEN-LAST:event_okFoodTypeButtonActionPerformed
 
     /**

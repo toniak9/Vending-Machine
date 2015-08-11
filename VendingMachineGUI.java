@@ -25,6 +25,8 @@ public class VendingMachineGUI extends javax.swing.JFrame {
         initComponents();
         subject = new GuiSubject();
     }
+    
+    
 
     
     /**

@@ -21,7 +21,9 @@ public class GuiSubject {
     private String sugars;
     private String fat;
     private String price;
-    private String foodType;
+    private String snacks = null;
+    private String candies = null;
+    private String beverages = null;
     
     public GuiSubject() {
         
@@ -44,8 +46,16 @@ public class GuiSubject {
          this.price = price;
      }
      
-     public  void setFoodType(String foodType){
-         this.foodType = foodType;
+     public  void setSnacks(String snacks){
+         this.snacks = snacks;
+     }
+     
+     public  void setCandies(String candies){
+         this.candies = candies;
+     }
+     
+     public  void setBeverages(String beverages){
+         this.beverages = beverages;
      }
      
      public String getCalories() {
@@ -64,8 +74,16 @@ public class GuiSubject {
          return price;
      }
      
-     public String getFoodType() {
-         return foodType;
+     public String getSnacks() {
+         return snacks;
+     }
+     
+     public String getCandies() {
+         return candies;
+     }
+     
+     public String getBeverages() {
+         return beverages;
      }
      
      private List<Requirements> requirements = new ArrayList<Requirements>();
@@ -77,33 +95,7 @@ public class GuiSubject {
     
    public void notifyObserver(boolean[] array) {
        
-/*	Iterator<Requirements> it = requirements.iterator();
-        System.out.println("Hai");
-		while (it.hasNext()) {
-			Requirements requirement = it.next();
-                        if(array[0] == true) {
-			requirement.update(calories);
-                        System.out.println("Hai2");
-                        } 
-                        if(array[1] == true) {
-                            requirement.update(sugars);
-                            System.out.println("Sugars Content is :"+getSugars());
-                        }
-                        if(array[2] == true) {
-                            requirement.update(fat);
-                          System.out.println("Fat Content is :"+getFat());
-                        }
-                          if(array[3] == true) {
-                              requirement.update(price);
-                            System.out.println("Price is :"+getPrice());
-                        }
-                        if(array[4] == true) {
-                            requirement.update(foodType);
-                            System.out.println("Food Type is "+getFoodType());
-                        } 
-                }
-	}*/
-     
+
        if(array[0] == true) {
            Requirements r = new CalorieReq(this);
            requirements.get(0).update(calories);
@@ -125,15 +117,28 @@ public class GuiSubject {
            System.out.println("Price is :"+getPrice());
        }
        if(array[4] == true) {
-           Requirements r = new FoodTypeReq(this);
-           requirements.get(4).update(foodType);
-           System.out.println("Food Type is "+getFoodType());
-       }  
-       
+           if(snacks != null) {
+            Requirements r = new SnackFoodTypeReq(this);
+            requirements.get(4).update(snacks);
+             System.out.println("Food Type is "+getSnacks());
+        }
+        if(candies != null) {
+           Requirements r = new CandyFoodTypeReq(this);
+           requirements.get(5).update(candies);
+           System.out.println("Food Type is "+getCandies());
+        }
+        if(beverages != null) {
+            Requirements r = new BeverageFoodTypeReq(this);
+            requirements.get(6).update(beverages);
+            System.out.println("Food Type is "+getBeverages());  
+        }
+       } 
+    
        
        for(int i = 0; i < requirements.size(); i++)
       requirements.get(i).display();
       
        Requirements a = new ConcreteRequirements();
+       
     }
 }
