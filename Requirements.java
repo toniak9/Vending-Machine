@@ -46,7 +46,7 @@ interface RequirementsDecorator extends Requirements {
 
 class CalorieReq implements RequirementsDecorator{
     
-    int calories;
+    long calories;
     GuiSubject subject;
     public CalorieReq (GuiSubject subject) {
         this.subject = subject;
@@ -92,7 +92,7 @@ class SugarReq implements RequirementsDecorator {
 
 
 class FatReq implements RequirementsDecorator {
-    int fat;
+    long fat;
     GuiSubject subject;
     public FatReq (GuiSubject subject) {
         this.subject = subject;

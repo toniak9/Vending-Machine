@@ -217,8 +217,10 @@ public class VendingMachineGUI extends javax.swing.JFrame {
             arr[4] = cbFoodType.isSelected();
             
             subject.notifyObserver(arr);
-           
+            new CartGUI().setVisible(true);
         }
+        
+        
     }//GEN-LAST:event_btnProceedActionPerformed
 
     private void cbFatContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFatContentActionPerformed

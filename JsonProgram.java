@@ -25,19 +25,18 @@ import org.json.simple.parser.ParseException;
  */
 public class JsonProgram {
      public void foodParser(HashMap requirements) throws IOException {
-        
-         int calories = (int) requirements.get("calorie");
-    
+         CartGUI table = new CartGUI();      
+         long calories = (long) requirements.get("calorie");
          String sugars = (String) requirements.get("sugars");
-         int fats = (int) requirements.get("fat");
+         long fats = (long) requirements.get("fat");
          Double price = (Double)requirements.get("price");
          System.out.println(requirements);
-         
-         
-       
+
+         HashMap result = new HashMap<>();
+
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
             
@@ -49,30 +48,33 @@ public class JsonProgram {
           
             for(int i=0; i<items.size(); i++){
                 JSONObject nutrition = (JSONObject)items.get(i);
-                Double cost = (Double) nutrition.get("cost");
-                JSONObject nutritionalFacts =(JSONObject) nutrition.get("nutritionalFacts");
-                String calorieCount = nutritionalFacts.get("calorieCount").toString();
-                String sugar = (String) nutritionalFacts.get("sugars");
-                String fat = nutritionalFacts.get("fat").toString();
-               
-             /*   long cal = (Long) nutritionalFacts.get("calorieCount");
-                System.out.println("this is cal value printing now in integers"+cal); */
+                Double jsonCost = (Double) nutrition.get("cost");
+                JSONObject jsonNutritionalFacts =(JSONObject) nutrition.get("nutritionalFacts");
+                long jsonCalorieCount = (long)jsonNutritionalFacts.get("calorieCount");
+                String jsonSugar = (String) jsonNutritionalFacts.get("sugars");
+                long jsonFat = (long) jsonNutritionalFacts.get("fat");
+                System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat);
             
-                if((calories <= Integer.parseInt(calorieCount)) && (sugars.equals(sugar)) && (fats <= Integer.parseInt(fat)) && (price <= cost)){
+                if((jsonCalorieCount <= calories) || (sugars.equals(jsonSugar)) || (jsonFat <= fats) || (jsonCost <= price)){
+                    //System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat);
                     System.out.println("requirements matched");
                     long itemCode = (Long) nutrition.get("code");
                     String itemName = (String) nutrition.get("name");
                     double itemCost = (Double) nutrition.get("cost");
                     System.out.println("result list"+itemCode+" "+itemName+" "+itemCost);
+                    result.put("itemCode", itemCode);
+                    result.put("itemName", itemName);
+                    result.put("itemCost", itemCost);
+                    System.out.println(result);
+                    
                     
                 } else {
                     System.out.println("No options available for your selelction");
-                }
-               
-                
-                
+                }   
             }
             
+            table.addJTable(result);
+            //table.setVisible(true);
      
            
         } catch (FileNotFoundException ex) {

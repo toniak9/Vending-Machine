@@ -7,11 +7,14 @@ package projectvendingmachine;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,21 +25,37 @@ public class CartGUI extends javax.swing.JFrame {
     /**
      * Creates new form CartGUI
      */
+     DefaultTableModel model = new DefaultTableModel();
      private JTable outputTable; 
+     HashMap userRequirements;
     
     public CartGUI() {
         initComponents();
-        addJTable();
+        addJTable(userRequirements);
         
     }
 
-     public void addJTable() {
-         outputTable = new JTable();
+     public void addJTable(HashMap userRequirements) {
+         System.out.println("In cart GUI");
+         System.out.println(userRequirements);
+         outputTable = new JTable(model);
+         model.addColumn("ItemCode");
+         model.addColumn("Item");
+         model.addColumn("Price");
+         model.addColumn("Nutritional Values");
+         
+         Vector row = new Vector();
+         row.add(0,"itemCode");
+         row.add(1,"itemName");
+         row.add(2,"itemCost");
+         
+         model.addRow(row);
          JScrollPane outputScrollpane = new JScrollPane(outputTable);
     	// create a window
     	outputPanel.setLayout(new BorderLayout());
     	outputPanel.add(outputScrollpane, BorderLayout.CENTER);
-
+        
+        
      }
     
     /**
