@@ -8,8 +8,10 @@ package projectvendingmachine;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -30,14 +32,12 @@ public class JsonProgram {
          int fats = (int) requirements.get("fat");
          Double price = (Double)requirements.get("price");
          System.out.println(requirements);
-       //  Hashmap<> result = new Hashmap<>(); 
          
-         //Double price = Double.parseDouble(requirements.get("price"));
-         //String foodType = requirements.get("foodtype"); 
-
+         
+       
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
             

@@ -117,21 +117,20 @@ public class GuiSubject {
            System.out.println("Price is :"+getPrice());
        }
        if(array[4] == true) {
+           CompositeFoodType compositeFood = new CompositeFoodType();
            if(snacks != null) {
-            Requirements r = new SnackFoodTypeReq(this);
-            requirements.get(4).update(snacks);
-             System.out.println("Food Type is "+getSnacks());
+            Requirements snack = new SnackFoodTypeReq(this);
+            compositeFood.add((FoodTypeReq) snack);
         }
         if(candies != null) {
-           Requirements r = new CandyFoodTypeReq(this);
-           requirements.get(5).update(candies);
-           System.out.println("Food Type is "+getCandies());
+           Requirements candy = new CandyFoodTypeReq(this);
+            compositeFood.add((FoodTypeReq) candy);
         }
         if(beverages != null) {
-            Requirements r = new BeverageFoodTypeReq(this);
-            requirements.get(6).update(beverages);
-            System.out.println("Food Type is "+getBeverages());  
+            Requirements beverages = new BeverageFoodTypeReq(this);
+            compositeFood.add((FoodTypeReq) beverages);
         }
+        compositeFood.update(null);
        } 
     
        

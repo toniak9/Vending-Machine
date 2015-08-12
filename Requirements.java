@@ -144,12 +144,35 @@ abstract class FoodTypeReq implements RequirementsDecorator {
     
     List foodType = new ArrayList();
     
-   abstract public void update(String req);
-    
+    abstract public void update(String req);
     abstract public int display(); 
+    abstract public String getType(); 
+    
        
     
  }
+
+    class CompositeFoodType extends FoodTypeReq {
+        
+    public void update(String req) {
+         selectedReq.put("foodType", foodType);
+    }
+    public void add(FoodTypeReq food ){
+        foodType.add(food.getType());
+    }
+    
+    public void remove(FoodTypeReq food ){
+        System.out.println("food removed from list");
+    }
+     
+    public int display() {
+         System.out.println("foodtype in req class Content is :");
+        return 1;
+    }
+    public String getType(){
+        return null;
+    }
+}
     class SnackFoodTypeReq extends FoodTypeReq {
         String snackType;
         
@@ -161,14 +184,15 @@ abstract class FoodTypeReq implements RequirementsDecorator {
         
         public void update(String req) {
         snackType = req;
-        foodType.add(snackType);
-        selectedReq.put("foodtype", foodType);
         
     }
     
     public int display() {
         System.out.println("foodtype in req class Content is :"+snackType);
         return 1;
+    }
+    public String getType(){
+        return "Snacks";
     }
     
  }
@@ -184,14 +208,17 @@ class CandyFoodTypeReq extends FoodTypeReq {
         
         public void update(String req) {
         candyType = req;
-        foodType.add(candyType);
-        selectedReq.put("foodtype", foodType);
+       // foodType.add(candyType);
+      //  selectedReq.put("foodtype", foodType);
         
     }
     
     public int display() {
         System.out.println("foodtype in req class Content is :"+candyType);
         return 1;
+    }
+    public String getType(){
+        return "Candies";
     }
     
  }
@@ -207,14 +234,17 @@ class BeverageFoodTypeReq extends FoodTypeReq {
         
         public void update(String req) {
         beverageType = req;
-        foodType.add(beverageType);
-        selectedReq.put("foodtype", foodType);
+       // foodType.add(beverageType);
+       // selectedReq.put("foodtype");
         
     }
     
     public int display() {
         System.out.println("foodtype in req class Content is :"+beverageType);
         return 1;
+    }
+    public String getType(){
+        return "Beverages";
     }
     
  }
