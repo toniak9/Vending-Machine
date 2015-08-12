@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 
 /**
  *
@@ -50,12 +52,29 @@ public class CartGUI extends javax.swing.JFrame {
          row.add(2,"itemCost");
          
          model.addRow(row);
+
          JScrollPane outputScrollpane = new JScrollPane(outputTable);
     	// create a window
     	outputPanel.setLayout(new BorderLayout());
     	outputPanel.add(outputScrollpane, BorderLayout.CENTER);
+
+     /*   JButton cbView = new JButton("View");
+       outputTable.add(cbView);
         
+        model.addColumn("Item Code"); 
+        model.addColumn(" Name"); 
+        model.addColumn(" Price");
+        model.addColumn(" Nutritional Facts");
         
+        model.addRow(new Object[]{"v1", "v2","v3","v4"});
+        model.addRow(new Object[] {cbView});
+        
+        // JTable table = new JTable();
+    TableColumn col = outputTable.getColumnModel().getColumn(3);
+    col.setCellEditor(new MyTableCellEditor());
+        
+      */  
+
      }
     
     /**
@@ -219,16 +238,10 @@ public class CartGUI extends javax.swing.JFrame {
             keyPadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(keyPadPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(keyPadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(keyPadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(keyPadPanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(keyPadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(keyPadPanelLayout.createSequentialGroup()
-                                .addComponent(Button7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
-                                .addComponent(Button8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Button9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(keyPadPanelLayout.createSequentialGroup()
                                 .addGroup(keyPadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(keyPadPanelLayout.createSequentialGroup()
@@ -245,10 +258,16 @@ public class CartGUI extends javax.swing.JFrame {
                                     .addComponent(Button6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(keyPadPanelLayout.createSequentialGroup()
                                 .addComponent(Button0, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonADD, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ButtonADD, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(keyPadPanelLayout.createSequentialGroup()
+                                .addComponent(Button7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
+                                .addComponent(Button8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(Button9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(keyPadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -275,8 +294,8 @@ public class CartGUI extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(keyPadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button0)
-                    .addComponent(ButtonADD, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonX))
+                    .addComponent(ButtonX)
+                    .addComponent(ButtonADD, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(189, 189, 189))
         );
 
@@ -306,7 +325,7 @@ public class CartGUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))))
+                        .addGap(113, 113, 113))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
