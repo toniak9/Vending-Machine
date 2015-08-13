@@ -29,17 +29,17 @@ public class CartGUI extends javax.swing.JFrame {
      */
      DefaultTableModel model = new DefaultTableModel();
      private JTable outputTable; 
-     HashMap userRequirements;
+    // HashMap userRequirements;
     
-    public CartGUI() {
-        initComponents();
+    public CartGUI(HashMap userRequirements) {
+        initComponents(); 
         addJTable(userRequirements);
         
     }
 
      public void addJTable(HashMap userRequirements) {
          System.out.println("In cart GUI");
-         System.out.println(userRequirements);
+        //System.out.println(userRequirements);
          outputTable = new JTable(model);
          model.addColumn("ItemCode");
          model.addColumn("Item");
@@ -434,7 +434,7 @@ public class CartGUI extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CartGUI().setVisible(true);
+              //  new CartGUI().setVisible(true);
                 
                 
             }

@@ -25,14 +25,16 @@ import org.json.simple.parser.ParseException;
  */
 public class JsonProgram {
      public void foodParser(HashMap requirements) throws IOException {
-         CartGUI table = new CartGUI();      
+              
          long calories = (long) requirements.get("calorie");
          String sugars = (String) requirements.get("sugars");
          long fats = (long) requirements.get("fat");
          Double price = (Double)requirements.get("price");
          System.out.println(requirements);
 
-         HashMap result = new HashMap<>();
+        HashMap result = new HashMap<>();
+        List<HashMap> reqList= new ArrayList<>();
+        Iterator<Integer> keySetIterator = result.keySet().iterator();
 
         try {
             JSONParser parser = new JSONParser();
@@ -45,8 +47,9 @@ public class JsonProgram {
             JSONObject chips = (JSONObject) snack.get("Chips");
             
             JSONArray items = (JSONArray)chips.get("items");
-          
+            List k = new ArrayList<>();
             for(int i=0; i<items.size(); i++){
+                
                 JSONObject nutrition = (JSONObject)items.get(i);
                 Double jsonCost = (Double) nutrition.get("cost");
                 JSONObject jsonNutritionalFacts =(JSONObject) nutrition.get("nutritionalFacts");
@@ -66,17 +69,16 @@ public class JsonProgram {
                     result.put("itemName", itemName);
                     result.put("itemCost", itemCost);
                     System.out.println(result);
+                    reqList.add(i, result);
+                    System.out.println(reqList);
                     
-                    
+                   
                 } else {
                     System.out.println("No options available for your selelction");
-                }   
+                }
+                
             }
-            
-            table.addJTable(result);
-            //table.setVisible(true);
-     
-           
+         
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }catch (IOException e) {
@@ -84,8 +86,9 @@ public class JsonProgram {
 	} catch (ParseException e) {
 		e.printStackTrace();
     }
-
-    
+             
+            System.out.println(reqList);
+            //new CartGUI(reqHashTable).setVisible(true);
      }
 }
  

@@ -217,7 +217,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
             arr[4] = cbFoodType.isSelected();
             
             subject.notifyObserver(arr);
-            new CartGUI().setVisible(true);
+            //new CartGUI().setVisible(true);
         }
         
         
