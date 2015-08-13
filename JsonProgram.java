@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -25,11 +26,31 @@ import org.json.simple.parser.ParseException;
  */
 public class JsonProgram {
      public void foodParser(HashMap requirements) throws IOException {
-              
-         long calories = (long) requirements.get("calorie");
-         String sugars = (String) requirements.get("sugars");
-         long fats = (long) requirements.get("fat");
-         Double price = (Double)requirements.get("price");
+         long calories = 0;
+         String sugars = null;
+         long fats = 0;
+         Double price = null; 
+          
+          Iterator it = requirements.entrySet().iterator();
+          while (it.hasNext()) {
+               Map.Entry pair = (Map.Entry)it.next();
+               if(pair.getKey() == "calorie") {
+                   calories = (long) requirements.get("calorie");
+               }
+               if(pair.getKey() == "sugars") {
+                   sugars = (String) requirements.get("sugars");
+               }
+               if(pair.getKey() == "fat") {
+                   fats = (long) requirements.get("fat");
+               }
+               if(pair.getKey() == "price") {
+                   price = (Double)requirements.get("price"); 
+               }
+          }
+        
+         
+         
+        
          System.out.println(requirements);
 
          
@@ -63,12 +84,17 @@ public class JsonProgram {
                 long jsonFat = (long) jsonNutritionalFacts.get("fat");
                 System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat+" "+jsonCost);
                 System.out.println("1: " + (jsonCalorieCount <= calories));
-                System.out.println("2: " + (sugars.equals(jsonSugar)));
+                System.out.println("2: " + (jsonSugar.equals(sugars)));
                 System.out.println("sugars:" + sugars +":" + " jsonSugsrs:" +jsonSugar +":");
                 System.out.println("3: " + (jsonFat <= fats));
-                System.out.println("4: " + (jsonCost <= price));
-            
-                if((jsonCalorieCount <= calories) && (sugars.equals(jsonSugar)) && (jsonFat <= fats) && (jsonCost <= price)){
+//                System.out.println("4: " + (jsonCost <= price));
+                
+                 boolean a = ((calories == 0) ? true : (jsonCalorieCount <= calories));
+                 boolean b = (null == sugars) ? true : (sugars.equals(jsonSugar));
+                 boolean c = (fats == 0) ? true : (jsonFat <= fats);
+                 boolean d = (price == null) ? true : (jsonCost <= price);
+                        if(a && b && c && d) {
+               // if((jsonCalorieCount <= calories) && (sugars.equals(jsonSugar)) && (jsonFat <= fats) && (jsonCost <= price)){
                     //System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat);
                     System.out.println("requirements matched");
                     long itemCode = (Long) nutrition.get("code");

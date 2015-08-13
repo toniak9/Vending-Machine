@@ -55,9 +55,9 @@ class CalorieReq implements RequirementsDecorator{
     
     
     public void update(String req) {
-        calories = Integer.parseInt(req);
+        calories = Long.parseLong(req);
         selectedReq.put("calorie", calories);
-         System.out.println("Hashmap value"+selectedReq.get("calorie"));
+        System.out.println("Hashmap value calories"+selectedReq.get("calorie"));
         
     }
     
@@ -80,7 +80,7 @@ class SugarReq implements RequirementsDecorator {
         sugars = req;
         //adding vlaue to hashmap
         selectedReq.put("sugars", sugars);
-        System.out.println("Hashmap value"+selectedReq.get("sugars"));
+        System.out.println("Hashmap value sugars"+selectedReq.get("sugars"));
         
     }
     
@@ -100,9 +100,11 @@ class FatReq implements RequirementsDecorator {
     }
     
     public void update(String req) {
-        fat = Integer.parseInt(req);
+        
+        fat = Long.parseLong(req);
+        
         selectedReq.put("fat", fat);
-         System.out.println("Hashmap value"+selectedReq.get("fat"));
+        System.out.println("Hashmap value fat"+selectedReq.get("fat"));
         
     }
     
@@ -121,9 +123,12 @@ class PriceReq implements RequirementsDecorator {
     }
     
     public void update(String req) {
+       
         price = Double.parseDouble(req);
+       
+        
         selectedReq.put("price", price);
-        System.out.println("Hashmap value"+selectedReq.get("price"));
+        System.out.println("Hashmap value price"+selectedReq.get("price"));
     }
     
     public int display() {

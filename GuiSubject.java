@@ -21,11 +21,23 @@ public class GuiSubject {
     private String sugars;
     private String fat;
     private String price;
-    private String snacks = null;
-    private String candies = null;
-    private String beverages = null;
+    private String snacks;
+    private String candies;
+    private String beverages;
+    
+    private List<Requirements> requirements = new ArrayList<Requirements>();
     
     public GuiSubject() {
+        calories = null;
+        sugars = null;
+        fat = null;
+        price = null;
+        snacks = null;
+        candies = null;
+        beverages = null;
+        Requirements r = new CalorieReq(this);
+        Requirements r1 = new SugarReq(this);
+        Requirements r2 = new PriceReq(this);
         
     }
     
@@ -85,8 +97,7 @@ public class GuiSubject {
      public String getBeverages() {
          return beverages;
      }
-     
-     private List<Requirements> requirements = new ArrayList<Requirements>();
+    
      
     public void attach(Requirements requirement){
         requirements.add(requirement);		
@@ -95,47 +106,46 @@ public class GuiSubject {
     
    public void notifyObserver(boolean[] array) {
        
-
+       
        if(array[0] == true) {
-           Requirements r = new CalorieReq(this);
+         
            requirements.get(0).update(calories);
             System.out.println("Calories Content is :"+getCalories());
        }
        if(array[1] == true) {
-           Requirements r = new SugarReq(this);
            requirements.get(1).update(sugars);
            System.out.println("Sugars Content is :"+getSugars());
        }
        if(array[2] == true) {
-           Requirements r = new FatReq(this);
-           requirements.get(2).update(fat);
+          requirements.get(2).update(fat);
            System.out.println("Fat Content is :"+getFat());
        }
        if(array[3] == true) {
-           Requirements r = new PriceReq(this);
            requirements.get(3).update(price);
            System.out.println("Price is :"+getPrice());
        }
        if(array[4] == true) {
            CompositeFoodType compositeFood = new CompositeFoodType();
-           if(snacks != null) {
-            Requirements snack = new SnackFoodTypeReq(this);
+           Requirements snack = new SnackFoodTypeReq(this);
+           Requirements candy = new CandyFoodTypeReq(this);
+           Requirements beverages = new BeverageFoodTypeReq(this);
+           
+           
+           if(snacks != null) {   
             compositeFood.add((FoodTypeReq) snack);
         }
         if(candies != null) {
-           Requirements candy = new CandyFoodTypeReq(this);
-            compositeFood.add((FoodTypeReq) candy);
+           compositeFood.add((FoodTypeReq) candy);
         }
         if(beverages != null) {
-            Requirements beverages = new BeverageFoodTypeReq(this);
             compositeFood.add((FoodTypeReq) beverages);
         }
         compositeFood.update(null);
        } 
     
        
-       for(int i = 0; i < requirements.size(); i++)
-      requirements.get(i).display();
+      // for(int i = 0; i < requirements.size(); i++)
+      //requirements.get(i).display();
       
        Requirements a = new ConcreteRequirements();
        
