@@ -82,6 +82,9 @@ public class CartGUI extends javax.swing.JFrame {
                 {
                     
                     System.out.println("Button action performed");
+                    JTable table = (JTable)e.getSource();
+                    int modelRow = Integer.valueOf( e.getActionCommand() );
+                    ((DefaultTableModel)table.getModel()).removeRow(modelRow);
                 }
             };
             ButtonColumn buttonColumn = new ButtonColumn(outputTable, delete, 3);
@@ -356,7 +359,7 @@ public class CartGUI extends javax.swing.JFrame {
                 .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cartPanelLayout.createSequentialGroup()
-                        .addGap(321, 321, 321)
+                        .addGap(347, 347, 347)
                         .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()

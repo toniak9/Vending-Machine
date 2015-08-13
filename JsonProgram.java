@@ -56,13 +56,19 @@ public class JsonProgram {
 
                 JSONObject nutrition = (JSONObject)items.get(i);
                 Double jsonCost = (Double) nutrition.get("cost");
+                
                 JSONObject jsonNutritionalFacts =(JSONObject) nutrition.get("nutritionalFacts");
                 long jsonCalorieCount = (long)jsonNutritionalFacts.get("calorieCount");
                 String jsonSugar = (String) jsonNutritionalFacts.get("sugars");
                 long jsonFat = (long) jsonNutritionalFacts.get("fat");
-                System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat);
+                System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat+" "+jsonCost);
+                System.out.println("1: " + (jsonCalorieCount <= calories));
+                System.out.println("2: " + (sugars.equals(jsonSugar)));
+                System.out.println("sugars:" + sugars +":" + " jsonSugsrs:" +jsonSugar +":");
+                System.out.println("3: " + (jsonFat <= fats));
+                System.out.println("4: " + (jsonCost <= price));
             
-                if((jsonCalorieCount <= calories) || (sugars.equals(jsonSugar)) || (jsonFat <= fats) || (jsonCost <= price)){
+                if((jsonCalorieCount <= calories) && (sugars.equals(jsonSugar)) && (jsonFat <= fats) && (jsonCost <= price)){
                     //System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat);
                     System.out.println("requirements matched");
                     long itemCode = (Long) nutrition.get("code");

@@ -52,7 +52,7 @@ public class SugarContentGUI extends javax.swing.JFrame {
         sugarContentLabel.setText("Select the level of sugar content ");
 
         buttonGroup1.add(lowSugarRadioButton);
-        lowSugarRadioButton.setText("Low ");
+        lowSugarRadioButton.setText("Low");
 
         sugarContentButton.setText("Ok");
         sugarContentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,7 +65,7 @@ public class SugarContentGUI extends javax.swing.JFrame {
         mediumSugarRadioButton.setText("Medium");
 
         buttonGroup1.add(highSugarRadioButton);
-        highSugarRadioButton.setText("High ");
+        highSugarRadioButton.setText("High");
 
         lowRangeLabel.setText("(0 - 50)");
 
