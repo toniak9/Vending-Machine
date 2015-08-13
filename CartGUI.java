@@ -6,8 +6,15 @@
 package projectvendingmachine;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import static java.util.Collections.list;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 
@@ -31,28 +39,57 @@ public class CartGUI extends javax.swing.JFrame {
      private JTable outputTable; 
     // HashMap userRequirements;
     
-    public CartGUI(HashMap userRequirements) {
+     public CartGUI() {
+         initComponents();
+     }
+     
+    public CartGUI(List userRequirements) {
         initComponents(); 
         addJTable(userRequirements);
         
     }
 
-     public void addJTable(HashMap userRequirements) {
+    private static class JTableButtonRenderer implements TableCellRenderer {        
+        @Override public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JButton button = (JButton)value;
+            return button;  
+        }
+    }
+     public void addJTable(List userRequirements) {
          System.out.println("In cart GUI");
         //System.out.println(userRequirements);
          outputTable = new JTable(model);
          model.addColumn("ItemCode");
-         model.addColumn("Item");
+         model.addColumn("ItemName");
          model.addColumn("Price");
          model.addColumn("Nutritional Values");
          
-         Vector row = new Vector();
-         row.add(0,"itemCode");
-         row.add(1,"itemName");
-         row.add(2,"itemCost");
          
-         model.addRow(row);
-
+        Iterator<HashMap> iterator = userRequirements.iterator();
+	while (iterator.hasNext()) {
+            HashMap hashRow = iterator.next();
+            JButton cbView = new JButton("View");
+            TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+           // outputTable.getColumn("Button2").setCellRenderer(buttonRenderer);
+            
+            Vector row = new Vector();
+            row.add(hashRow.get("itemCode"));
+            row.add(hashRow.get("itemName"));
+            row.add(hashRow.get("itemCost"));
+            
+            Action delete = new AbstractAction() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    
+                    System.out.println("Button action performed");
+                }
+            };
+            ButtonColumn buttonColumn = new ButtonColumn(outputTable, delete, 3);
+            // buttonColumn.setMnemonic(KeyEvent.VK_D);
+          row.add("Increment");
+            
+            model.addRow(row);
+	}
          JScrollPane outputScrollpane = new JScrollPane(outputTable);
     	// create a window
     	outputPanel.setLayout(new BorderLayout());
@@ -434,7 +471,7 @@ public class CartGUI extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              //  new CartGUI().setVisible(true);
+                new CartGUI().setVisible(true);
                 
                 
             }

@@ -32,13 +32,16 @@ public class JsonProgram {
          Double price = (Double)requirements.get("price");
          System.out.println(requirements);
 
-        HashMap result = new HashMap<>();
+         
         List<HashMap> reqList= new ArrayList<>();
-        Iterator<Integer> keySetIterator = result.keySet().iterator();
+      //  Iterator<Integer> keySetIterator = result.keySet().iterator();
+        
+        
+        
 
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
             
@@ -49,7 +52,8 @@ public class JsonProgram {
             JSONArray items = (JSONArray)chips.get("items");
             List k = new ArrayList<>();
             for(int i=0; i<items.size(); i++){
-                
+                HashMap result = new HashMap<>();
+
                 JSONObject nutrition = (JSONObject)items.get(i);
                 Double jsonCost = (Double) nutrition.get("cost");
                 JSONObject jsonNutritionalFacts =(JSONObject) nutrition.get("nutritionalFacts");
@@ -64,7 +68,7 @@ public class JsonProgram {
                     long itemCode = (Long) nutrition.get("code");
                     String itemName = (String) nutrition.get("name");
                     double itemCost = (Double) nutrition.get("cost");
-                    System.out.println("result list"+itemCode+" "+itemName+" "+itemCost);
+                    System.out.println("result list: "+itemCode+" "+itemName+" "+itemCost);
                     result.put("itemCode", itemCode);
                     result.put("itemName", itemName);
                     result.put("itemCost", itemCost);
@@ -86,9 +90,10 @@ public class JsonProgram {
 	} catch (ParseException e) {
 		e.printStackTrace();
     }
+         
              
-            System.out.println(reqList);
-            //new CartGUI(reqHashTable).setVisible(true);
+           System.out.println(reqList);
+            new CartGUI(reqList).setVisible(true);
      }
 }
  
