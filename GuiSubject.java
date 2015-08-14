@@ -36,8 +36,8 @@ public class GuiSubject {
         candies = null;
         beverages = null;
         Requirements r = new CalorieReq(this);
-        Requirements r1 = new FatReq(this);
-        Requirements r2 = new SugarReq(this);
+        Requirements r1 = new SugarReq(this);
+        Requirements r2 = new FatReq(this);
         Requirements r3 = new PriceReq(this);
         
     }
