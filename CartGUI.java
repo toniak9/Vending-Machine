@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -36,16 +37,26 @@ public class CartGUI extends javax.swing.JFrame {
      * Creates new form CartGUI
      */
      DefaultTableModel model = new DefaultTableModel();
-     private JTable outputTable; 
-    // HashMap userRequirements;
+     DefaultTableModel model3 = new DefaultTableModel();
+     DefaultTableModel model1 = new DefaultTableModel();
+     private JTable outputTable;
+     private JTable wishListTable;
+     private JTable nutritionalFactsTable;
+     List userRequirements;
     
      public CartGUI() {
-         initComponents();
+         //initComponents();
      }
      
     public CartGUI(List userRequirements) {
-        initComponents(); 
-        addJTable(userRequirements);
+        initComponents();
+        this.userRequirements = userRequirements;
+      //  addJTable3();
+       // addJTable2();
+        addJTable();
+        
+        //  addJTable3();
+      //  addJTable2(userRequirements);
         
     }
 
@@ -55,7 +66,9 @@ public class CartGUI extends javax.swing.JFrame {
             return button;  
         }
     }
-     public void addJTable(List userRequirements) {
+    
+    
+     public void addJTable() {
          System.out.println("In cart GUI");
         //System.out.println(userRequirements);
          outputTable = new JTable(model);
@@ -67,6 +80,7 @@ public class CartGUI extends javax.swing.JFrame {
          
         Iterator<HashMap> iterator = userRequirements.iterator();
 	while (iterator.hasNext()) {
+             System.out.println("Entered while loop");
             HashMap hashRow = iterator.next();
             JButton cbView = new JButton("View");
             TableCellRenderer buttonRenderer = new JTableButtonRenderer();
@@ -76,27 +90,36 @@ public class CartGUI extends javax.swing.JFrame {
             row.add(hashRow.get("itemCode"));
             row.add(hashRow.get("itemName"));
             row.add(hashRow.get("itemCost"));
-            
+            row.add("Increment"); 
             Action delete = new AbstractAction() {
                 public void actionPerformed(ActionEvent e)
                 {
                     
                     System.out.println("Button action performed");
-                    JTable table = (JTable)e.getSource();
+                 /*   JTable table = (JTable)e.getSource();
                     int modelRow = Integer.valueOf( e.getActionCommand() );
-                    ((DefaultTableModel)table.getModel()).removeRow(modelRow);
+                    ((DefaultTableModel)table.getModel()).removeRow(modelRow); 
+                    
+                    */
+                     addJTable2();
+                     System.out.println("Entered action button performed"); 
+                   
                 }
             };
             ButtonColumn buttonColumn = new ButtonColumn(outputTable, delete, 3);
             // buttonColumn.setMnemonic(KeyEvent.VK_D);
-          row.add("Increment");
+          
             
             model.addRow(row);
 	}
+        
          JScrollPane outputScrollpane = new JScrollPane(outputTable);
     	// create a window
     	outputPanel.setLayout(new BorderLayout());
     	outputPanel.add(outputScrollpane, BorderLayout.CENTER);
+        
+        //addJTable2();
+      //  addJTable3();
 
      /*   JButton cbView = new JButton("View");
        outputTable.add(cbView);
@@ -115,6 +138,68 @@ public class CartGUI extends javax.swing.JFrame {
         
       */  
 
+     }
+     
+     public void addJTable2() {
+        
+        nutritionalFactsTable = new JTable(model1);
+        model1.addColumn("Nutritional Facts");
+        model1.addColumn("Values");
+        
+       
+        Iterator<HashMap> iterator2 = userRequirements.iterator();
+	while (iterator2.hasNext()) {
+            HashMap hashRow = iterator2.next();
+            Set<String> keys = hashRow.keySet();
+            for(String key: keys){
+               Vector row = new Vector();
+                row.add(key);
+                row.add(hashRow.get(key));
+                System.out.println(key +""+hashRow.get(key));
+                model1.addRow(row);
+            }
+          
+        }
+        
+        JScrollPane nutritionsScrollpane = new JScrollPane(nutritionalFactsTable);
+        nutritionalFactsPanel.setLayout(new BorderLayout());
+        nutritionalFactsPanel.add(nutritionsScrollpane, BorderLayout.CENTER);
+ 
+    } 
+     
+     
+     public void addJTable3(long guiCode) {
+        
+         wishListTable = new JTable(model3);
+         
+         model3.addColumn("ItemName");
+         model3.addColumn("Qunatity");
+         model3.addColumn("Price");
+        
+         
+         Iterator<HashMap> iterator = userRequirements.iterator();
+	while (iterator.hasNext()) {
+            HashMap hashRow = iterator.next();
+            System.out.println("hashrow"+ hashRow.get("itemCode"));
+            
+            long code =(long) hashRow.get("itemCode");
+            System.out.println("code is"+code);
+            Vector row = new Vector();
+            if( code == guiCode) {
+                
+                row.add(hashRow.get("itemName"));
+               // row.add(hashRow.get("itemCost"));
+                model3.addRow(row);
+            } 
+            
+        }
+         
+         JScrollPane wishListScrollpane = new JScrollPane(wishListTable);
+    	// create a window
+    	wishListPanel.setLayout(new BorderLayout());
+    	wishListPanel.add(wishListScrollpane, BorderLayout.CENTER);
+        
+         
      }
     
     /**
@@ -145,6 +230,8 @@ public class CartGUI extends javax.swing.JFrame {
         Button9 = new javax.swing.JButton();
         Button0 = new javax.swing.JButton();
         ButtonADD = new javax.swing.JButton();
+        nutritionalFactsPanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -339,6 +426,25 @@ public class CartGUI extends javax.swing.JFrame {
                 .addGap(189, 189, 189))
         );
 
+        jLabel3.setText("nutritional panel");
+
+        javax.swing.GroupLayout nutritionalFactsPanelLayout = new javax.swing.GroupLayout(nutritionalFactsPanel);
+        nutritionalFactsPanel.setLayout(nutritionalFactsPanelLayout);
+        nutritionalFactsPanelLayout.setHorizontalGroup(
+            nutritionalFactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nutritionalFactsPanelLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        nutritionalFactsPanelLayout.setVerticalGroup(
+            nutritionalFactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nutritionalFactsPanelLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jLabel3)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
         cartPanelLayout.setHorizontalGroup(
@@ -348,24 +454,29 @@ public class CartGUI extends javax.swing.JFrame {
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(wishListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cartPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(cartPanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         cartPanelLayout.setVerticalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cartPanelLayout.createSequentialGroup()
-                        .addGap(347, 347, 347)
-                        .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113))))
+                .addGap(347, 347, 347)
+                .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -439,7 +550,9 @@ public class CartGUI extends javax.swing.JFrame {
 
     private void ButtonADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonADDActionPerformed
         // TODO add your handling code here:
-        
+       long guiCode = Long.parseLong(keyPadTextField.getText());
+       System.out.println("guicode"+guiCode);
+        addJTable3(guiCode);
     }//GEN-LAST:event_ButtonADDActionPerformed
 
     /**
@@ -474,7 +587,7 @@ public class CartGUI extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CartGUI().setVisible(true);
+               // new CartGUI().setVisible(true);
                 
                 
             }
@@ -497,8 +610,10 @@ public class CartGUI extends javax.swing.JFrame {
     private javax.swing.JPanel cartPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel keyPadPanel;
     private javax.swing.JTextField keyPadTextField;
+    private javax.swing.JPanel nutritionalFactsPanel;
     private javax.swing.JPanel outputPanel;
     private javax.swing.JPanel wishListPanel;
     // End of variables declaration//GEN-END:variables
