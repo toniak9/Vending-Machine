@@ -103,15 +103,12 @@ public class GuiSubject {
     public void attach(Requirements requirement){
         requirements.add(requirement);		
    }
-    
-    
+ 
    public void notifyObserver(boolean[] array) {
-       
-       
+  
        if(array[0] == true) {
-         
-           requirements.get(0).update(calories);
-            System.out.println("Calories Content is :"+getCalories());
+        requirements.get(0).update(calories);
+        System.out.println("Calories Content is :"+getCalories());
        }
        if(array[1] == true) {
            requirements.get(1).update(sugars);
@@ -127,18 +124,21 @@ public class GuiSubject {
        }
        if(array[4] == true) {
            CompositeFoodType compositeFood = new CompositeFoodType();
-           Requirements snack = new SnackFoodTypeReq(this);
-           Requirements candy = new CandyFoodTypeReq(this);
-           Requirements beverages = new BeverageFoodTypeReq(this);
+          
+           
+          
            
            
-           if(snacks != null) {   
+           if(snacks != null) {  
+            Requirements snack = new SnackFoodTypeReq(this);
             compositeFood.add((FoodTypeReq) snack);
         }
         if(candies != null) {
+           Requirements candy = new CandyFoodTypeReq(this);
            compositeFood.add((FoodTypeReq) candy);
         }
         if(beverages != null) {
+            Requirements beverages = new BeverageFoodTypeReq(this);
             compositeFood.add((FoodTypeReq) beverages);
         }
         compositeFood.update(null);
