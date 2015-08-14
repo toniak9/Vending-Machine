@@ -47,19 +47,10 @@ public class JsonProgram {
                    price = (Double)requirements.get("price"); 
                }
           }
-        
-         
-         
-        
          System.out.println(requirements);
-
-         
-        List<HashMap> reqList= new ArrayList<>();
-      //  Iterator<Integer> keySetIterator = result.keySet().iterator();
-        
-        
-        
-
+ 
+         List<HashMap> reqList= new ArrayList<>();
+       
         try {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
@@ -71,13 +62,10 @@ public class JsonProgram {
             JSONObject chips = (JSONObject) snack.get("Chips");
             
             JSONArray items = (JSONArray)chips.get("items");
-            
-            System.out.println("Entered into try block");
-            
+          
             List k = new ArrayList<>();
             for(int i=0; i<items.size(); i++){
                 
-                System.out.println("Entered into for loop");
                 HashMap result = new HashMap<>();
 
                 JSONObject nutrition = (JSONObject)items.get(i);
@@ -90,7 +78,7 @@ public class JsonProgram {
                 
                 
                    
-            /*    System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat+" "+jsonCost);
+            /*  System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat+" "+jsonCost);
                 System.out.println("1: " + (jsonCalorieCount <= calories));
                 System.out.println("2: " + (jsonSugar.equals(sugars)));
                 System.out.println("sugars:" + sugars +":" + " jsonSugsrs:" +jsonSugar +":");
@@ -107,8 +95,7 @@ public class JsonProgram {
                   //  System.out.println("requirements matched");
                  if(a && b && c && d) {
                      //System.out.println("result list: "+itemCode+" "+itemName+" "+itemCost);
-                   System.out.println("Entered into if block");  
-                     
+                   
                 long itemCode = (Long) nutrition.get("code");
                 String itemName = (String) nutrition.get("name");
                 double itemCost = (Double) nutrition.get("cost");
@@ -188,19 +175,13 @@ class RealResult extends AbstractResult {
 
     @Override
     public HashMap getResult() {
-                    System.out.println("Entered into getResult()");
-        
-                    resultMap.put("itemCode", itemCode);
-                    resultMap.put("itemName", itemName);
-                    resultMap.put("itemCost", itemCost);
-                    resultMap.put("itemCalories", jsonCalorieCount);
-                    resultMap.put("itemSugars", jsonSugar);
-                    resultMap.put("itemFat", jsonFat);
-                  //  System.out.println(result);
-                    
-                   // System.out.println(reqList);
-                    
-                    System.out.println("reached end of getResult");
+        resultMap.put("itemCode", itemCode);
+        resultMap.put("itemName", itemName);
+        resultMap.put("itemCost", itemCost);
+        resultMap.put("itemCalories", jsonCalorieCount);
+        resultMap.put("itemSugars", jsonSugar);
+        resultMap.put("itemFat", jsonFat);
+                 
         return resultMap;//"Succesful";
    }
 }

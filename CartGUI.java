@@ -7,19 +7,14 @@ package projectvendingmachine;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import static java.util.Collections.list;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
+import java.util.Set;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -64,39 +59,52 @@ public class CartGUI extends javax.swing.JFrame {
         }
     }
     
-    class MyTableCellEditor extends AbstractCellEditor implements TableCellEditor {
+  /*  class MyTableCellEditor extends AbstractCellEditor implements TableCellEditor {
     private JComboBox editor;
+    ActionListener actionListenerComboBox;
     private String [] values = {"1", "2", "3","4","5"};
 
     public MyTableCellEditor()
     {
-    // Create a new Combobox with the array of values.
-    editor = new JComboBox(values);
+        // Create a new Combobox with the array of values.
+        editor = new JComboBox(values);
+        actionListenerComboBox = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Action performed " + editor.getSelectedItem());
+            }
+        };
+        editor.addActionListener(actionListenerComboBox);
+        
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int rowIndex, int colIndex) 
     {
         System.out.println("selected");
-    // Set the model data of the table
-    if(isSelected)
-    {
-    editor.setSelectedItem(value);
-    TableModel model = table.getModel();
-    model.setValueAt(value, rowIndex, colIndex);
-    }
+        
+        // editor.addActionListener(editor);
+        // Set the model data of the table
+        if(isSelected)
+        {
+            editor.setSelectedItem(value);
+            TableModel model = table.getModel();
+            model.setValueAt(value, rowIndex, colIndex);
+            System.out.println("value is"+(Integer)value);
+        }
 
-    return editor;
+        return editor;
     }
 
     @Override
     public Object getCellEditorValue() 
     {
-    return editor.getSelectedItem();
+        return editor.getSelectedItem();
     }
 }
      
-    
+   */ 
      public void addJTable() {
          System.out.println("In cart GUI");
         //System.out.println(userRequirements);
@@ -200,14 +208,13 @@ public class CartGUI extends javax.swing.JFrame {
      public void addJTable3(long guiCode) {
          double itemPrice = 0;
          wishListTable = new JTable(model3);
+  //       TableColumn column = wishListTable.getColumnModel().getColumn(2);
+   //      column.setCellEditor(new MyTableCellEditor());
         
          model3.addColumn("ItemCode");
          model3.addColumn("ItemName");
          model3.addColumn("Qunatity");
          model3.addColumn("Price");
-        
-         TableColumn column = wishListTable.getColumnModel().getColumn(2);
-         column.setCellEditor(new MyTableCellEditor());
          
          Iterator<HashMap> iterator = userRequirements.iterator();
 	 while (iterator.hasNext()) {
@@ -220,9 +227,6 @@ public class CartGUI extends javax.swing.JFrame {
             if( code == guiCode) {
                 row.add(hashRow.get("itemCode"));
                 row.add(hashRow.get("itemName"));
-                
-                
-                
                // row.add(hashRow.get("itemCost"));
                 model3.addRow(row);
             } 
@@ -568,7 +572,7 @@ public class CartGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
        long guiCode = Long.parseLong(keyPadTextField.getText());
        System.out.println("guicode"+guiCode);
-        addJTable3(guiCode);
+       addJTable3(guiCode);
     }//GEN-LAST:event_ButtonADDActionPerformed
 
     /**
