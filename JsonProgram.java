@@ -53,27 +53,87 @@ public class JsonProgram {
           }
 
     
-         System.out.println(requirements);
-       List<HashMap> reqList= new ArrayList<>();
+        System.out.println(requirements);
+        List<HashMap> reqList= new ArrayList<>();
       //  Iterator<Integer> keySetIterator = result.keySet().iterator();
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+
+            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/newjson.json"));
+
 
             JSONObject jsonObject = (JSONObject) obj;
-            JSONObject food = (JSONObject) jsonObject.get("Food");
-
-            int k=0;
-            //if(foodType != null){       
-            for(int j=0; j< foodType.size(); j++){
-                
-                String getFoodType = (String)foodType.get(j);
-                System.out.println(getFoodType);
-                JSONObject jsonFoodType = (JSONObject) food.get(getFoodType);
+            JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems"); 
+            System.out.println("initial food items size"+foodItems.size()+foodItems);
+            int index=0;
+            if(foodType.isEmpty() == false) { 
+                System.out.println("food type is not null");
+                // get the user selected requirements in foodType list
+            for(int i=0; i< foodType.size(); i++){ 
+                String getFoodType = (String)foodType.get(i);
+                System.out.println("Food type"+getFoodType);
+                //iterate through the json file to compare with the food items
+                for(int k=0; k<foodItems.size(); k++){
+                    
+                    JSONObject jsonFoodType = (JSONObject) foodItems.get(k);
+                    String jsonItemType = (String) jsonFoodType.get("itemType");
+                    
+                    if(jsonItemType.compareTo(getFoodType)==0){
+                        System.out.println("matched");
+                        JSONArray items = (JSONArray)jsonFoodType.get("items");
+                        System.out.println(items);
+                        //get the items in selected food type and iterate through them
+                        for(int j=0; j<items.size(); j++) {
+                            HashMap result = new HashMap<>();
+                            JSONObject itemDetails = (JSONObject)items.get(j);
+                            Double jsonCost = (Double) itemDetails.get("cost");
+                            JSONObject jsonNutritionalFacts =(JSONObject) itemDetails.get("nutritionalFacts");
+                            long jsonCalorieCount = (long)jsonNutritionalFacts.get("calorieCount");
+                            String jsonSugar = (String) jsonNutritionalFacts.get("sugars");
+                            long jsonFat = (long) jsonNutritionalFacts.get("fat");
+                            
+                            System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat+" "+jsonCost);
+                            System.out.println("1: " + (jsonCalorieCount <= calories));
+                            System.out.println("2: " + (jsonSugar.equals(sugars)));
+                            System.out.println("sugars:" + sugars +":" + " jsonSugsrs:" +jsonSugar +":");
+                            System.out.println("3: " + (jsonFat <= fats));
+    //                      System.out.println("4: " + (jsonCost <= price));
+                            //check for the user requiremts for calories, sugars, fat etc.
+                            boolean a = ((calories == 0) ? true : (jsonCalorieCount <= calories));
+                            boolean b = (null == sugars) ? true : (sugars.equalsIgnoreCase(jsonSugar));
+                            boolean c = (fats == 0) ? true : (jsonFat <= fats);
+                            boolean d = (price == null) ? true : (jsonCost <= price);
+                            if(a && b && c && d) {
+                   // if((jsonCalorieCount <= calories) && (sugars.equals(jsonSugar)) && (jsonFat <= fats) && (jsonCost <= price)){
+                        //System.out.println("JSON values:"+jsonCalorieCount+" "+jsonSugar+" "+jsonFat);
+                                System.out.println("requirements matched");
+                                long itemCode = (Long) itemDetails.get("code");
+                                String itemName = (String) itemDetails.get("name");
+                                double itemCost = (Double) itemDetails.get("cost");
+                                System.out.println("result list: "+itemCode+" "+itemName+" "+itemCost);
+                      
+                                RealResult r =  new RealResult(itemCode,itemName,itemCost,jsonCalorieCount,jsonSugar,jsonFat);
+                                //get the result in a list to disply in the jTable
+                                result =r.getResult();
+                                reqList.add(index, result);
+                                index++;
+                                System.out.println(reqList);
+                            }
+                        }
+          
+                    } else {
+                        /* NullResult n = new NullResult();
+                         System.out.println(" "+n.getResult());*/
+                           System.out.println(" NO Data");
+                    }               
+                } 
+            }
+        } else{
+            for(int i=0; i<foodItems.size(); i++){
+                JSONObject jsonFoodType = (JSONObject)foodItems.get(i);
                 JSONArray items = (JSONArray)jsonFoodType.get("items");
-                System.out.println(items);
-                
-                 for(int i=0; i<items.size(); i++){
+
+                for(int j=0; j<items.size(); j++){
                     HashMap result = new HashMap<>();
                     JSONObject itemDetails = (JSONObject)items.get(i);
                     Double jsonCost = (Double) itemDetails.get("cost");
@@ -111,18 +171,15 @@ public class JsonProgram {
                     RealResult r =  new RealResult(itemCode,itemName,itemCost,jsonCalorieCount,jsonSugar,jsonFat);
                     
                         result =r.getResult();
-                        reqList.add(k, result);
-                        k++;
+                        reqList.add(index, result);
+                        index++;
                         System.out.println(reqList);
-
-                } else {
-                  /* NullResult n = new NullResult();
-                   System.out.println(" "+n.getResult());*/
-                     System.out.println(" NO Data");
+    
                 }
                 
             }
-        }
+                }
+            }
          
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
