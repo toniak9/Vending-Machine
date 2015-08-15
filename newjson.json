@@ -1,0 +1,129 @@
+{
+"FoodItems":[
+    {
+     "Snacks":{       
+     "items":[
+            {
+            "name": "Lays",
+            "category": "chips",
+            "code": 101,
+            "id": "Chips1",
+            "count": 10,
+            "cost": 2.0,
+            "nutritionalFacts": {
+                            "calorieCount": 150,
+                            "sugars": "Low",
+                            "protein": 2,
+                            "fat": 100
+                            }
+                        },
+            {
+            "name": "Cheetos",
+                        "category": "chips",
+                        "code":102,
+            "id": "Chips2",
+            "count": 8,
+            "cost": 1.0,
+            "nutritionalFacts": {
+                            "calorieCount": 190,
+                            "sugars": "Medium",
+                            "protein": 3,
+                            "fat": 150
+                            }
+                        },
+            {
+            "name": "Oreo",
+                        "category": "biscuits",
+                        "code": 103,
+            "id": "Biscuits1",
+            "count": 10,
+            "cost": 2.0,
+            "nutritionalFacts": {
+                            "calorieCount": 150,
+                            "sugars": "High",
+                            "protein": 2,
+                            "fat": 10
+                            }
+                        },
+                        {
+            "name": "Bites",
+            "category": "biscuits",
+            "code": 104,
+            "id": "Biscuits2",
+            "count": 8,
+            "cost": 1.0,
+            "nutritionalFacts": {
+                            "calorieCount": 120,
+                            "sugars": "Low",
+                            "protein": 5,
+                            "fat": 5
+                            }
+                        }
+            ]       
+                
+     }
+    },
+    {
+    "Beverages":{       
+     "items":[
+            {
+            "name": "Coke",
+            "category": "Soft Drink",
+            "code": 301,
+            "id": "SoftDrinks1",
+            "count": 10,
+            "cost": 2.0,
+            "nutritionalFacts": {
+                "calorieCount": 150,
+                "sugars": "medium",
+                "protein": 2,
+                "fat": 100
+            }
+            },
+            {
+            "name": "Sprite",
+            "category": "Soft Drink",
+            "code": 302,
+            "id": "SoftDrinks2",
+            "count": 8,
+            "cost": 1.0,
+            "nutritionalFacts": {
+                "calorieCount": 190,
+                "sugars": "Medium",
+                "protein": 3,
+                "fat": 150
+                }
+            },
+            {
+            "name": "RedBull",
+            "category": "Energy Drink",
+            "code": 303,
+            "id": "EnergyDrink1",
+            "count": 10,
+            "cost": 2.0,
+            "nutritionalFacts": {
+                "calorieCount": 150,
+                "sugars": "low",
+                "protein": 2,
+                "fat": 10
+                }
+            },
+            {
+            "name": "DietCoke",
+            "category": "Soft Drink",
+            "code":304,
+            "id": "EnergyDrink2",
+            "count": 8,
+            "cost": 1.0,
+            "nutritionalFacts": {
+                "calorieCount": 120,
+                "sugars": "medium",
+                "protein": 5,
+                "fat": 5
+                }
+            }
+        ]               
+        }
+    } 
+]
+}
