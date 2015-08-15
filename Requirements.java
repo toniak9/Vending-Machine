@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.text.html.HTMLEditorKit;
+
 
 /**
  *
@@ -27,7 +27,7 @@ class ConcreteRequirements implements Requirements{
     ConcreteRequirements(){
         super();
         try {
-            System.out.println(selectedReq.get("calorie"));
+        //  System.out.println(selectedReq.get("calorie"));
             parser.foodParser(selectedReq);
         } catch (IOException ex) {
             Logger.getLogger(ConcreteRequirements.class.getName()).log(Level.SEVERE, null, ex);
@@ -57,7 +57,7 @@ class CalorieReq implements RequirementsDecorator{
     public void update(String req) {
         calories = Long.parseLong(req);
         selectedReq.put("calorie", calories);
-        System.out.println("Hashmap value calories"+selectedReq.get("calorie"));
+  //      System.out.println("Hashmap value calories"+selectedReq.get("calorie"));
         
     }
     
@@ -80,7 +80,7 @@ class SugarReq implements RequirementsDecorator {
         sugars = req;
         //adding vlaue to hashmap
         selectedReq.put("sugars", sugars);
-        System.out.println("Hashmap value sugars"+selectedReq.get("sugars"));
+    //    System.out.println("Hashmap value sugars"+selectedReq.get("sugars"));
         
     }
     
@@ -104,7 +104,7 @@ class FatReq implements RequirementsDecorator {
         fat = Long.parseLong(req);
         
         selectedReq.put("fat", fat);
-        System.out.println("Hashmap value fat"+selectedReq.get("fat"));
+   //     System.out.println("Hashmap value fat"+selectedReq.get("fat"));
         
     }
     
@@ -128,7 +128,7 @@ class PriceReq implements RequirementsDecorator {
        
         
         selectedReq.put("price", price);
-        System.out.println("Hashmap value price"+selectedReq.get("price"));
+    //    System.out.println("Hashmap value price"+selectedReq.get("price"));
     }
     
     public int display() {

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
  *
  * @author Tonia
  */
+
 public class VendingMachineGUI extends javax.swing.JFrame {
 
     private GuiSubject subject;
