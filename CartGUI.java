@@ -7,6 +7,7 @@ package projectvendingmachine;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class CartGUI extends javax.swing.JFrame {
      * Creates new form CartGUI
      */
      DefaultTableModel model = new DefaultTableModel();
-     DefaultTableModel model3 = new DefaultTableModel();
+     DefaultTableModel model3 = null;
      DefaultTableModel model1 = null;
 
      private JTable outputTable;
@@ -59,7 +60,14 @@ public class CartGUI extends javax.swing.JFrame {
         }
     }
     
-  /*  class MyTableCellEditor extends AbstractCellEditor implements TableCellEditor {
+    private static class JTableComboBoxRenderer implements TableCellRenderer {        
+        @Override public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JComboBox combobox = (JComboBox)value;
+            return combobox;  
+        }
+    }
+   /*
+    class MyTableCellEditor extends AbstractCellEditor implements TableCellEditor {
     private JComboBox editor;
     ActionListener actionListenerComboBox;
     private String [] values = {"1", "2", "3","4","5"};
@@ -68,11 +76,13 @@ public class CartGUI extends javax.swing.JFrame {
     {
         // Create a new Combobox with the array of values.
         editor = new JComboBox(values);
+        editor.setSelectedIndex(1);
         actionListenerComboBox = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Action performed " + editor.getSelectedItem());
+                
             }
         };
         editor.addActionListener(actionListenerComboBox);
@@ -86,12 +96,14 @@ public class CartGUI extends javax.swing.JFrame {
         
         // editor.addActionListener(editor);
         // Set the model data of the table
-        if(isSelected)
+        //if(isSelected)
         {
+                    System.out.println("selected1");
+
             editor.setSelectedItem(value);
             TableModel model = table.getModel();
             model.setValueAt(value, rowIndex, colIndex);
-            System.out.println("value is"+(Integer)value);
+            System.out.println("value is "+value);
         }
 
         return editor;
@@ -102,18 +114,18 @@ public class CartGUI extends javax.swing.JFrame {
     {
         return editor.getSelectedItem();
     }
-}
+}*/
      
-   */ 
+   
      public void addJTable() {
-         System.out.println("In cart GUI");
+        // System.out.println("In cart GUI");
         //System.out.println(userRequirements);
          outputTable = new JTable(model);
          model.addColumn("ItemCode");
          model.addColumn("ItemName");
          model.addColumn("Price");
          model.addColumn("Nutritional Values");
-         
+
          
         Iterator<HashMap> iterator = userRequirements.iterator();
 	while (iterator.hasNext()) {
@@ -131,7 +143,7 @@ public class CartGUI extends javax.swing.JFrame {
                 public void actionPerformed(ActionEvent e)
                 {
                     
-                    //System.out.println("Button action performed:" +e.getSource());
+                    System.out.println("Button action performed:" +e.getSource());
                     JTable table = (JTable)e.getSource();
                     int modelRow = Integer.valueOf(e.getActionCommand());
                     // ((DefaultTableModel)table.getModel()).removeRow(modelRow); 
@@ -152,6 +164,7 @@ public class CartGUI extends javax.swing.JFrame {
     	// create a window
     	outputPanel.setLayout(new BorderLayout());
     	outputPanel.add(outputScrollpane, BorderLayout.CENTER);
+        outputPanel.revalidate();
 
      }
      
@@ -206,29 +219,92 @@ public class CartGUI extends javax.swing.JFrame {
      
     
      public void addJTable3(long guiCode) {
+         String [] values = {"1", "2", "3","4","5"};
          double itemPrice = 0;
+         if (model3 == null) {
+            model3 = new DefaultTableModel();
+            model3.addColumn("ItemCode");
+            model3.addColumn("ItemName");
+            model3.addColumn("Qunatity");
+            model3.addColumn("Price");
+            model3.addColumn("Remove");
+
+         } 
          wishListTable = new JTable(model3);
-  //       TableColumn column = wishListTable.getColumnModel().getColumn(2);
-   //      column.setCellEditor(new MyTableCellEditor());
-        
-         model3.addColumn("ItemCode");
-         model3.addColumn("ItemName");
-         model3.addColumn("Qunatity");
-         model3.addColumn("Price");
          
+    //     TableColumn column = wishListTable.getColumnModel().getColumn(2);
+    //     column.setCellEditor(new MyTableCellEditor());
+         
+        
          Iterator<HashMap> iterator = userRequirements.iterator();
 	 while (iterator.hasNext()) {
             HashMap hashRow = iterator.next();
-            System.out.println("hashrow"+ hashRow.get("itemCode"));
+            
             
             long code =(long) hashRow.get("itemCode");
-            System.out.println("code is"+code);
+         //   System.out.println("code is"+code);
             Vector row = new Vector();
-            if( code == guiCode) {
+            if(code == guiCode) {
                 row.add(hashRow.get("itemCode"));
                 row.add(hashRow.get("itemName"));
+                row.add("");
+                row.add("$"+ hashRow.get("itemCost"));
+                row.add("delete");
                // row.add(hashRow.get("itemCost"));
                 model3.addRow(row);
+                
+                // System.out.println("hashrow"+ hashRow.get("itemCode"));
+
+
+                 TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+                 Action delete = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e)
+                    {
+
+                        //System.out.println("Button action performed:" +e.getSource());
+                        JTable table = (JTable)e.getSource();
+                        int modelRow = Integer.valueOf(e.getActionCommand()); 
+
+                        System.out.println("modelRow is:" + modelRow);
+                        // Selected Row, column 1 (itemCode)
+                        addJTable2((long)table.getValueAt(modelRow, 0));
+                        ((DefaultTableModel)table.getModel()).removeRow(modelRow);
+                    }
+                };
+                ButtonColumn buttonColumn = new ButtonColumn(wishListTable, delete, 4);
+
+                /* jCombo Action */
+                ComboColumn comboColumn = null;
+                TableCellRenderer comboRenderer = new JTableComboBoxRenderer();
+                Action update = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        // System.out.println("Combo action performed:" +e);
+                        JTable table = (JTable)e.getSource();
+                        System.out.println("Table row is: " + table.getSelectedRow());
+                        //int modelRow = Integer.valueOf(e.getActionCommand());
+                        // ((DefaultTableModel)table.getModel()).removeRow(modelRow); 
+                        //System.out.println("Row is:" + modelRow);
+
+                        // Selected Row, column 3 (itemCode)
+                         long itemCode = (long) table.getValueAt(table.getSelectedRow(), 0);
+                         // System.out.println("Quantity:" + e.getModifiers());
+                         Iterator<HashMap> iterator = userRequirements.iterator();
+                         while (iterator.hasNext()) {
+                            HashMap hashRow = iterator.next();
+                            if (itemCode == (long) hashRow.get("itemCode")) {
+                                double price = ((double)hashRow.get("itemCost")) * e.getModifiers();
+                                table.setValueAt("$"+price, table.getSelectedRow(), 3);
+                                model3.fireTableCellUpdated(table.getSelectedRow(), 3);
+                                break;
+                            }
+                         }
+                    }
+                };
+                comboColumn = new ComboColumn(wishListTable, update, 2, values);
+                // wishListTable.putClientProperty("JComboBox.isTableCellEditor", Boolean.FALSE);
+                // buttonColumn.setMnemonic(KeyEvent.VK_D);
+                break;
             } 
         }
          
@@ -237,6 +313,10 @@ public class CartGUI extends javax.swing.JFrame {
     	wishListPanel.setLayout(new BorderLayout());
     	wishListPanel.add(wishListScrollpane, BorderLayout.CENTER);
         wishListPanel.revalidate();
+        
+        keyPadTextField.setText("");
+        
+        //wishListPanel.validate();
          
      }
     
@@ -275,11 +355,11 @@ public class CartGUI extends javax.swing.JFrame {
         outputPanel.setLayout(outputPanelLayout);
         outputPanelLayout.setHorizontalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
         outputPanelLayout.setVerticalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 127, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jLabel2.setText("wish list panel or cart panel");
@@ -298,7 +378,7 @@ public class CartGUI extends javax.swing.JFrame {
             .addGroup(wishListPanelLayout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jLabel2)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         keyPadPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -458,11 +538,11 @@ public class CartGUI extends javax.swing.JFrame {
         nutritionalFactsPanel.setLayout(nutritionalFactsPanelLayout);
         nutritionalFactsPanelLayout.setHorizontalGroup(
             nutritionalFactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 236, Short.MAX_VALUE)
+            .addGap(0, 181, Short.MAX_VALUE)
         );
         nutritionalFactsPanelLayout.setVerticalGroup(
             nutritionalFactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 196, Short.MAX_VALUE)
+            .addGap(0, 213, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
@@ -471,43 +551,43 @@ public class CartGUI extends javax.swing.JFrame {
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cartPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(wishListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cartPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addGroup(cartPanelLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cartPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         cartPanelLayout.setVerticalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(347, 347, 347)
-                .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
+                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cartPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(cartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -571,7 +651,7 @@ public class CartGUI extends javax.swing.JFrame {
     private void ButtonADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonADDActionPerformed
         // TODO add your handling code here:
        long guiCode = Long.parseLong(keyPadTextField.getText());
-       System.out.println("guicode"+guiCode);
+     //  System.out.println("guicode"+guiCode);
        addJTable3(guiCode);
     }//GEN-LAST:event_ButtonADDActionPerformed
 
