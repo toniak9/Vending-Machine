@@ -16,11 +16,18 @@ public interface PaymentStrategy {
 class OperationCoinsVerify implements PaymentStrategy{
   
    public String doOperation(double num1, double num2) {
+        double a;
        if(num1 == num2) {
            return "coins matched";
+       } else if(num1 < num2) {
+           a = num1 - num2;
+           return "your change is returned";
+       } else if(num1 > num2) {
+           a = num2 - num1;
+           return "Please add more coins";
        } else {
-           return "coins not matched";
-       } 
+           return " do nothing";
+       }
    }
 }
 
@@ -28,7 +35,11 @@ class OperationCoinsVerify implements PaymentStrategy{
 class OperationCardVerify implements PaymentStrategy{
    @Override
    public String doOperation(double num1, double num2) {
-      return null;
+      if(num1 == num2) {
+           return "Transaction Successful";
+       } else {
+           return "Not a valid user";
+       } 
    }
 }
 
@@ -41,11 +52,7 @@ class Context {
    }
 
    public String executeStrategy(double num1, double num2){
-      if(num1 == num2) {
-          return "Transaction Successful";
-      } else {
-          return "Not a valid user";
-      }
+       return strategy.doOperation(num1, num2);
       
    }
 }
