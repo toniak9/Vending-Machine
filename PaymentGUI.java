@@ -421,7 +421,8 @@ public class PaymentGUI extends javax.swing.JFrame {
     private void coinsClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coinsClearButtonActionPerformed
         // TODO add your handling code here:
         double temp = 0.0;
-        coinsTotalTextField.setText(Double.toHexString(temp));
+        DecimalFormat df = new DecimalFormat("#.##");
+        coinsTotalTextField.setText((df.format(temp)));
     }//GEN-LAST:event_coinsClearButtonActionPerformed
 
     private void coinConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coinConfirmButtonActionPerformed
