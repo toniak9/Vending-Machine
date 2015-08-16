@@ -544,6 +544,11 @@ public class CartGUI extends javax.swing.JFrame {
         checkoutLabel.setText("Total Cost in USD :");
 
         CheckoutButton.setText("CheckOut");
+        CheckoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckoutButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout checkoutPanelLayout = new javax.swing.GroupLayout(checkoutPanel);
         checkoutPanel.setLayout(checkoutPanelLayout);
@@ -655,6 +660,12 @@ public class CartGUI extends javax.swing.JFrame {
       
        
     }//GEN-LAST:event_ButtonADDActionPerformed
+
+    private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckoutButtonActionPerformed
+        // TODO add your handling code here:
+        new PaymentGUI(checkoutTextField.getText()).setVisible(true);
+                
+    }//GEN-LAST:event_CheckoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
