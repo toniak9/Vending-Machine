@@ -1,0 +1,19 @@
+{
+"Login IDs":[
+    {
+        "username":"Tonia",
+        "password":"pass1",
+        "role":"admin"
+    },
+    {
+        "username":"Sruti",
+        "password":"pass2",
+        "role":"admin"
+    },
+    {
+        "username":"John",
+        "password":"pass3",
+        "role":"manager"
+    }
+]
+}

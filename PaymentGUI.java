@@ -364,13 +364,11 @@ public class PaymentGUI extends javax.swing.JFrame {
 
     private void cardConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardConfirmButtonActionPerformed
         // TODO add your handling code here:
-        double a = Double.parseDouble(cardNumberField.getText());
-        double b = Double.parseDouble(accessCodeTextField.getText());
+        double cardNumber = Double.parseDouble(cardNumberField.getText());
+        double accessCode = Double.parseDouble(accessCodeTextField.getText());
         context = new Context(new OperationCardVerify());		
-        String msg = context.executeStrategy(a, b);
+        String msg = context.executeStrategy(cardNumber, accessCode,Double.parseDouble(totalPrice));
         cardErrorMsgLabel.setText(msg);
-        
-
     }//GEN-LAST:event_cardConfirmButtonActionPerformed
 
     private void rbCoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCoinsActionPerformed
@@ -435,8 +433,9 @@ public class PaymentGUI extends javax.swing.JFrame {
     private void coinConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coinConfirmButtonActionPerformed
         // TODO add your handling code here:
         context = new Context(new OperationCoinsVerify());
-        double temp = Double.parseDouble(coinsTotalTextField.getText());
-        String msg = context.executeStrategy(Double.parseDouble(totalPrice), temp);
+        double coinsValue = Double.parseDouble(coinsTotalTextField.getText());
+        double temp = 0.0;
+        String msg = context.executeStrategy(Double.parseDouble(totalPrice), coinsValue, temp);
         coinsMsgLabel.setText(msg);
 
         

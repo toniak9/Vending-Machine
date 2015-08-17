@@ -10,6 +10,8 @@ package projectvendingmachine;
  * @author Sruti
  */
 public class LoginGUI extends javax.swing.JFrame {
+    
+    LoginValidation loginValidation;
 
     /**
      * Creates new form LoginGUI
@@ -30,7 +32,7 @@ public class LoginGUI extends javax.swing.JFrame {
         loginPanel = new javax.swing.JPanel();
         userNameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        loginTextField = new javax.swing.JTextField();
+        usernameTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
 
@@ -43,6 +45,11 @@ public class LoginGUI extends javax.swing.JFrame {
         passwordLabel.setText("Password : ");
 
         loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
@@ -57,8 +64,9 @@ public class LoginGUI extends javax.swing.JFrame {
                             .addComponent(passwordLabel))
                         .addGap(63, 63, 63)
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGap(176, 176, 176)
                         .addComponent(loginButton)))
@@ -70,7 +78,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,6 +108,17 @@ public class LoginGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        loginValidation = new LoginValidation();
+        String username = usernameTextField.getText();
+        char[] enteredPassword = passwordField.getPassword();
+        String password = enteredPassword.toString();
+        String message = loginValidation.setFields(username, password);
+        System.out.println("Message "+ message);
+        new AdminLoginGUI(message);
+    }//GEN-LAST:event_loginButtonActionPerformed
+    
+          
     /**
      * @param args the command line arguments
      */
@@ -138,9 +157,9 @@ public class LoginGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
-    private javax.swing.JTextField loginTextField;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel userNameLabel;
+    private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 }

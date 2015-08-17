@@ -1,0 +1,24 @@
+{
+"cardDetails":[
+    {
+        "cardNumber":124567,
+        "accessCode":345,
+        "balance":50.0
+    },
+    {
+        "cardNumber":12370,
+        "accessCode":389,
+        "balance":40.0
+    },
+    {
+        "cardNumber":561567,
+        "accessCode":805,
+        "balance":30.0
+    },
+    {
+        "cardNumber":477719,
+        "accessCode":700,
+        "balance":20.0
+    }
+]
+}
