@@ -72,6 +72,8 @@ public class FoodTypeGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        foodTypePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Food Type"));
+
         foodTypeLabel.setText("Select the type of food");
 
         okFoodTypeButton.setText("Ok");
@@ -108,20 +110,20 @@ public class FoodTypeGUI extends javax.swing.JFrame {
                             .addComponent(foodTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbCandies)
                             .addComponent(cbBeverages))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         foodTypePanelLayout.setVerticalGroup(
             foodTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(foodTypePanelLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(37, 37, 37)
                 .addComponent(foodTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbSnacks)
                 .addGap(18, 18, 18)
                 .addComponent(cbCandies)
                 .addGap(18, 18, 18)
                 .addComponent(cbBeverages)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(okFoodTypeButton)
                 .addGap(31, 31, 31))
         );
@@ -131,16 +133,16 @@ public class FoodTypeGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(foodTypePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(48, 48, 48)
+                .addComponent(foodTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(foodTypePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(foodTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         pack();

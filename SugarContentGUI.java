@@ -49,6 +49,8 @@ public class SugarContentGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        SugarContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Sugars Level"));
+
         sugarContentLabel.setText("Select the level of sugar content ");
 
         buttonGroup1.add(lowSugarRadioButton);
@@ -80,50 +82,49 @@ public class SugarContentGUI extends javax.swing.JFrame {
             .addGroup(SugarContentPanelLayout.createSequentialGroup()
                 .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SugarContentPanelLayout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(sugarContentButton))
-                    .addGroup(SugarContentPanelLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
                         .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(SugarContentPanelLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
                                 .addComponent(lowSugarRadioButton)
-                                .addGap(26, 26, 26)
-                                .addComponent(lowRangeLabel))
-                            .addGroup(SugarContentPanelLayout.createSequentialGroup()
+                                .addGap(31, 31, 31))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SugarContentPanelLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mediumSugarRadioButton)
-                                    .addComponent(highSugarRadioButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(SugarContentPanelLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(highRangeLabel))
-                                    .addComponent(mediumRangeLabel)))))
+                                    .addComponent(highSugarRadioButton)
+                                    .addComponent(mediumSugarRadioButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lowRangeLabel)
+                            .addComponent(highRangeLabel)
+                            .addComponent(mediumRangeLabel)))
                     .addGroup(SugarContentPanelLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(111, 111, 111)
+                        .addComponent(sugarContentButton))
+                    .addGroup(SugarContentPanelLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
                         .addComponent(sugarContentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         SugarContentPanelLayout.setVerticalGroup(
             SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SugarContentPanelLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(23, 23, 23)
                 .addComponent(sugarContentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lowSugarRadioButton)
                     .addComponent(lowRangeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mediumSugarRadioButton)
                     .addComponent(mediumRangeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SugarContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(highSugarRadioButton)
                     .addComponent(highRangeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(sugarContentButton)
-                .addGap(14, 14, 14))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,14 +132,16 @@ public class SugarContentGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SugarContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(SugarContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(SugarContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(SugarContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();

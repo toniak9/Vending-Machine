@@ -42,6 +42,8 @@ public class FatContentGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        fatContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Fat Content"));
+
         fatContentLabel.setText("Enter the range of fat content (0 - 200)");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fatSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), FatTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -62,7 +64,6 @@ public class FatContentGUI extends javax.swing.JFrame {
 
         fatSlider.setMajorTickSpacing(50);
         fatSlider.setMaximum(250);
-        fatSlider.setMinimum(50);
         fatSlider.setMinorTickSpacing(20);
         fatSlider.setPaintLabels(true);
         fatSlider.setPaintTicks(true);
@@ -72,32 +73,36 @@ public class FatContentGUI extends javax.swing.JFrame {
         fatContentPanel.setLayout(fatContentPanelLayout);
         fatContentPanelLayout.setHorizontalGroup(
             fatContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fatContentPanelLayout.createSequentialGroup()
+                .addGap(0, 53, Short.MAX_VALUE)
+                .addComponent(fatContentLabel)
+                .addGap(51, 51, 51))
             .addGroup(fatContentPanelLayout.createSequentialGroup()
                 .addGroup(fatContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fatContentPanelLayout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addGroup(fatContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(FatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fatContentButton)))
+                        .addGap(72, 72, 72)
+                        .addComponent(fatSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fatContentPanelLayout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addGap(107, 107, 107)
                         .addGroup(fatContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fatSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fatContentLabel))))
-                .addContainerGap(86, Short.MAX_VALUE))
+                            .addComponent(FatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(fatContentPanelLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(fatContentButton)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         fatContentPanelLayout.setVerticalGroup(
             fatContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fatContentPanelLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(fatContentLabel)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fatSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(FatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(fatContentButton)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,15 +110,16 @@ public class FatContentGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(fatContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(48, 48, 48)
+                .addComponent(fatContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(fatContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(fatContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
