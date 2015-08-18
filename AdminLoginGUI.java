@@ -7,10 +7,14 @@ package projectvendingmachine;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -46,9 +50,12 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     public AdminLoginGUI(String userRole) {
         if(userRole.equalsIgnoreCase("Admin")){
             role = new AdminRole();
+            AddButton.setEnabled(false);
+            DeleteButton.setEnabled(false);
         }
         if(userRole.equalsIgnoreCase("Manager")) {
             role = new ManagerRole();
+           
         }
     }
    /* public AdminLoginGUI(String message) {
@@ -68,7 +75,25 @@ public class AdminLoginGUI extends javax.swing.JFrame {
          model.addColumn("ItemCost");
          model.addColumn("ItemCount");
       //   summaryTable.getCellEditor(1, 4);
-        
+         Action action = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                TableCellListener tcl = (TableCellListener)e.getSource();
+                /*System.out.println("Row   : " + tcl.getRow());
+                System.out.println("Column: " + tcl.getColumn());
+                System.out.println("Old   : " + tcl.getOldValue());
+                System.out.println("New   : " + tcl.getNewValue());*/
+                
+                for (int i = 0; i < summaryTable.getRowCount(); i ++) {
+                    System.out.println("itemCount" + i +": " + summaryTable.getValueAt(i, 4));
+                }
+            }
+        };
+
+        TableCellListener tcl = new TableCellListener(summaryTable, action);
+
+
         
           Iterator<HashMap> iterator = itemSummary.iterator();
         //  System.out.println("size"+iterator.);
@@ -277,21 +302,34 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         // TODO add your handling code here:
         
-        HashMap updatedValues;
+        HashMap updatedHashMap;
+        List<HashMap> updatedList =new ArrayList<>();
          for(int i = 0; i < summaryTable.getRowCount(); i++) {
-             for(int j = 0; j< summaryTable.getColumnCount(); j++) {
-                updatedValues = new HashMap();
-                int itemCode = (int) summaryTable.getValueAt(i, 0);
-                Double itemCost =(double) summaryTable.getValueAt(i, 4);
-                updatedValues.put("itemCode",itemCode);
-                updatedValues.put("itemCost", itemCost);
+               updatedHashMap = new HashMap();
+               //System.out.println("I:" + i);
+               long itemCode = 0;
+               String itemCount = "";
+               try {
+                itemCode = (long) summaryTable.getValueAt(i, 0);
+                // long a = Long.valueOf(itemCode);
+                itemCount = (String) summaryTable.getValueAt(i, 4);
                 
-                itemSummary.add(updatedValues);
-             
-          }
+                // long b = Long.valueOf(itemCount);
+               } catch (Exception e) {
+                  System.out.println("I:" + i);
+                  System.out.println("Item Count is " + summaryTable.getValueAt(i, 4));
+                  e.printStackTrace();
+                  return;
+               }
+                updatedHashMap.put("itemCode",itemCode);
+                updatedHashMap.put("itemCount", Long.parseLong(itemCount));
+                
+                updatedList.add(updatedHashMap);
+                // System.out.println("updated values"+updatedHashMap);
+          
          }
-         
-         role.restockAction(itemSummary);
+         role = new AdminRole();
+         role.restockAction(updatedList);
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
 

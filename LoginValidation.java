@@ -26,7 +26,7 @@ public class LoginValidation {
         String message = null;
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/loginDetails.json"));
+            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/loginDetails.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray loginID = (JSONArray) jsonObject.get("Login IDs");
             System.out.println(loginID);

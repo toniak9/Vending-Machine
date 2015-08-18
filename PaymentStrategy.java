@@ -48,7 +48,7 @@ class OperationCardVerify implements PaymentStrategy{
           String message = null;
           try {
               JSONParser parser = new JSONParser();
-              Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/cardDetails.json"));
+              Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/cardDetails.json"));
               JSONObject jsonObject = (JSONObject) obj;
               JSONArray cardDetails = (JSONArray) jsonObject.get("cardDetails");
               

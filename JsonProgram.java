@@ -58,7 +58,7 @@ public class JsonProgram {
       //  Iterator<Integer> keySetIterator = result.keySet().iterator();
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems"); 
        //   System.out.println("initial food items size"+foodItems.size()+foodItems);

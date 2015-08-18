@@ -35,7 +35,7 @@ public class JSONParser {
         
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -50,14 +50,14 @@ public class JSONParser {
                     Double itemCost = (Double) itemObject.get("cost");
                     long itemCode = (Long) itemObject.get("code");
                     String itemCategory = (String) itemObject.get("category");
-                    long itemCount = (long) itemObject.get("count");
+                    long itemCount = (Long) itemObject.get("count");
                     // put the item list into summary HashMap
                     
                     summary.put("itemCode", itemCode);
                     summary.put("itemName", itemName);
                     summary.put("itemCategory", itemCategory);
                     summary.put("itemCost",itemCost);
-                    summary.put("itemCount",itemCount);
+                    summary.put("itemCount",Long.toString(itemCount));
                     
                     // put each item (table row) in a list and pass the list to 
                     itemSummary.add(summary);    
@@ -69,10 +69,12 @@ public class JSONParser {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
+        
+        new AdminLoginGUI(itemSummary).setVisible(true);
     }
     
-    /*public static void main(String args[]){
+    public static void main(String args[]){
         JSONParser itemParser = new JSONParser();
         itemParser.parseItems();
-    }*/
+    }
 }

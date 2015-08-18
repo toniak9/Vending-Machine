@@ -1,6 +1,5 @@
 package projectvendingmachine;
 
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,24 +40,24 @@ class AdminRole implements Role {
     public void restockAction(List<HashMap> itemsChanged) {
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
             for(int i=0; i<itemsChanged.size(); i++){
                 HashMap itemsSummary = itemsChanged.get(i);
-                int itemCode = (int) itemsSummary.get("itemCode");
+                long itemCode = (long) itemsSummary.get("itemCode");
                 
                 for(int j=0; j<foodItems.size(); j++){
                     
-                    JSONObject foodObject = (JSONObject) foodItems.get(i);
+                    JSONObject foodObject = (JSONObject) foodItems.get(j);
                     JSONArray items = (JSONArray) foodObject.get("items");
                     
                     for(int k=0; k< items.size(); k++){
                         JSONObject itemsObject = (JSONObject) items.get(k);
                    
                         if(itemCode == (long)itemsObject.get("code")){
-                            int itemCount = (int) itemsSummary.get("itemCount");
+                            long itemCount = (long) itemsSummary.get("itemCount");
                             itemsObject.put("count", itemCount);
                             System.out.println("new item count is put");
                         }
@@ -85,7 +84,7 @@ class ManagerRole implements Role {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public static void main(String args[]){
+   /* public static void main(String args[]){
         Role admin = new AdminRole();
         HashMap items = new HashMap<>();
         items.put("itemCode", 101);
@@ -95,5 +94,5 @@ class ManagerRole implements Role {
         
         admin.restockAction(itemsChanged);
         
-    }
+    }*/
 }
