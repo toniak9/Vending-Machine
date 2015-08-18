@@ -5,27 +5,94 @@
  */
 package projectvendingmachine;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Tonia
  */
 public class AdminLoginGUI extends javax.swing.JFrame {
     String adminMessage = null;
+    List itemSummary;
+    //Role role;
+   
+    DefaultTableModel model = new DefaultTableModel();
+    
 
+     private JTable summaryTable;
     /**
      * Creates new form AdminLoginGUI
      */
-    public AdminLoginGUI(String message) {
+    
+    public AdminLoginGUI() {
+    }
+     
+    public AdminLoginGUI(List itemSummary) {
+        this.itemSummary = itemSummary;
+         initComponents();
+        addJTableItemSummary();
+    }
+     
+   /* public AdminLoginGUI(String message) {
        // this.adminMessage = message;
         System.out.println("msg in adminGUI"+message);
         adminLoginMessage.setText(message);
         initComponents();
-    }
-
-    private AdminLoginGUI() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    }*/
+   
+   
+    void addJTableItemSummary() {
+         summaryTable = new JTable(model);
+         summaryTable.setSize(new Dimension(100, 100));
+         model.addColumn("ItemCode");
+         model.addColumn("ItemName");
+         model.addColumn("ItemCategory");
+         model.addColumn("ItemCost");
+         model.addColumn("ItemCount");
+      //   summaryTable.getCellEditor(1, 4);
+        
+        
+          Iterator<HashMap> iterator = itemSummary.iterator();
+        //  System.out.println("size"+iterator.);
+         
+	 while (iterator.hasNext()) {
+            HashMap hashRow = iterator.next();
+            
+            Vector row = new Vector();
+            row.add(hashRow.get("itemCode"));
+            row.add(hashRow.get("itemName"));
+            row.add(hashRow.get("itemCategory"));
+            row.add(hashRow.get("itemCost"));
+            row.add(hashRow.get("itemCount"));
+            
+            model.addRow(row);
+             System.out.println("table values:"+hashRow);
+         }
+        
+         
+         
+         JScrollPane itemSummaryScrollpane = new JScrollPane(summaryTable);
+    	// create a window
+        itemSummaryScrollpane.setPreferredSize(new Dimension(500, 200));
+    	adminSummaryPanel.setLayout(new BorderLayout());
+    	adminSummaryPanel.add(itemSummaryScrollpane, BorderLayout.CENTER);
+     //   itemSummary.revalidate();
+        
+    }   
+        
+       
+    
+    
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,6 +179,11 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         DeleteButton.setText("Delete");
 
         UpdateButton.setText("Update");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout adminFileterPanelLayout = new javax.swing.GroupLayout(adminFileterPanel);
         adminFileterPanel.setLayout(adminFileterPanelLayout);
@@ -192,6 +264,23 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private void snacksCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snacksCheckBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_snacksCheckBoxActionPerformed
+
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+        // TODO add your handling code here:
+        
+        HashMap updatedValues = new HashMap();
+         for(int i = 0; i < summaryTable.getRowCount(); i++) {
+             for(int j = 0; j< summaryTable.getColumnCount(); j++) {
+                int itemCode = (int) summaryTable.getValueAt(i, 0);
+                Double itemCost =(double) summaryTable.getValueAt(i, 4);
+                updatedValues.put("itemCode",itemCode);
+                updatedValues.put("itemCost", itemCost);
+                
+    
+          }
+         }
+        
+    }//GEN-LAST:event_UpdateButtonActionPerformed
 
     /**
      * @param args the command line arguments

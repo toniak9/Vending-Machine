@@ -115,7 +115,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String password = enteredPassword.toString();
         String message = loginValidation.setFields(username, password);
         System.out.println("Message "+ message);
-        new AdminLoginGUI(message);
+     //   new AdminLoginGUI(message);
     }//GEN-LAST:event_loginButtonActionPerformed
     
           
