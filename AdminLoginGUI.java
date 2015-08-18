@@ -40,8 +40,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
      */
     
     public AdminLoginGUI() {
-        initComponents();
-        addJTableItemSummary();
+      //  initComponents();
+      //  addJTableItemSummary();
     }
      
   /*  public AdminLoginGUI(List itemSummary) {
@@ -50,8 +50,14 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         addJTableItemSummary();
         
     }*/
-     
-  /*  public AdminLoginGUI(String userRole) {
+   
+    public AdminLoginGUI(String message, String userRole) {
+       // this.adminMessage = message;
+        System.out.println("msg in adminGUI"+message);
+        initComponents();
+        adminLoginMessage.setText(message);
+        //sanJoseVMButton.setEnabled(true);
+        
         if(userRole.equalsIgnoreCase("Admin")){
             role = new AdminRole();
             AddButton.setEnabled(false);
@@ -62,13 +68,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         } else {
             System.out.println("No one to handle");
         }
-    }*/
-   /* public AdminLoginGUI(String message) {
-       // this.adminMessage = message;
-        System.out.println("msg in adminGUI"+message);
-        adminLoginMessage.setText(message);
-        initComponents();
-    }*/
+    }
 
     void addJTableItemSummary() {
         
@@ -90,13 +90,13 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         if(filtersList.isEmpty()) {
             FilterContext context = new FilterContext(new ViewAllFilter());		
             this.itemSummary = context.executeStrategy();
-            System.out.println("viewAll itemSummary"+itemSummary);
+         //   System.out.println("viewAll itemSummary"+itemSummary);
 
         } else {
             itemSummary.clear();
             FilterContext context = new FilterContext(new ItemTypeFilter(filtersList));		
             this.itemSummary = context.executeStrategy();
-            System.out.println("ItemType filter itemSummary"+itemSummary);
+          //  System.out.println("ItemType filter itemSummary"+itemSummary);
 
         }
          
@@ -184,6 +184,11 @@ public class AdminLoginGUI extends javax.swing.JFrame {
 
         buttonGroup1.add(snataClaraVMButton);
         snataClaraVMButton.setText("Santa Clara Vending Machine");
+        snataClaraVMButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                snataClaraVMButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout vendingMachinePanelLayout = new javax.swing.GroupLayout(vendingMachinePanel);
         vendingMachinePanel.setLayout(vendingMachinePanelLayout);
@@ -243,8 +248,18 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         });
 
         AddButton.setText("Add");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
 
         DeleteButton.setText("Delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
 
         UpdateButton.setText("Update");
         UpdateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +288,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                         .addComponent(DeleteButton)
                         .addGap(18, 18, 18)
                         .addComponent(UpdateButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
         adminFileterPanelLayout.setVerticalGroup(
             adminFileterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,9 +319,11 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(adminSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(adminFileterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                            .addComponent(adminSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(adminFileterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +334,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                 .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(adminSummaryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(adminFileterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -327,6 +344,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
 
     private void sanJoseVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sanJoseVMButtonActionPerformed
         // TODO add your handling code here:
+        if(sanJoseVMButton.isSelected())
+            addJTableItemSummary();
     }//GEN-LAST:event_sanJoseVMButtonActionPerformed
 
     private void snacksCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snacksCheckBoxActionPerformed
@@ -373,7 +392,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                 // System.out.println("updated values"+updatedHashMap);
           
          }
-         role = new AdminRole();
+         //role = new AdminRole();
          role.restockAction(updatedList);
 
         
@@ -407,6 +426,29 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_candiesCheckBoxActionPerformed
 
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+        // TODO add your handling code here:
+     //   new AddItem(role).setVisible(true);
+    }//GEN-LAST:event_AddButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+            
+           int x = summaryTable.getSelectedRow();
+           long deleteItemCode = (long) summaryTable.getValueAt(x, 0);
+           model.removeRow(x);
+          
+         //  role = new ManagerRole();
+           role.deleteItem(deleteItemCode);
+         
+           summaryTable.revalidate();
+           
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void snataClaraVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snataClaraVMButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_snataClaraVMButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -437,7 +479,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminLoginGUI().setVisible(true);
+              //  new AdminLoginGUI().setVisible(true);
             }
         });
     }

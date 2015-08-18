@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
  * @author Tonia
  */
 public class LoginValidation {
+    String userRole;
     
     public String setFields(String username, String password){
         System.out.println("In validation class"+ username+"---"+password);
@@ -34,12 +35,20 @@ public class LoginValidation {
                 JSONObject loginObject = (JSONObject) loginID.get(i);
                 String jsonUsername = (String) loginObject.get("username");
                 String jsonPassword = (String) loginObject.get("password");
+                String jsonRole = (String) loginObject.get("role");
+                this.userRole = jsonRole;
                 if((username.equals(jsonUsername)) && (password.equals(jsonPassword))){
                     message = "successful";
+                    System.out.println(message);
                     break;
-                } else {
-                    message = "unsuccessful";
-                    break;
+                } 
+                else{
+                    if(i == (loginID.size()-1)){
+                        message = "unsuccessful";
+                    }
+                    else {
+                        continue;
+                    }
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -50,6 +59,10 @@ public class LoginValidation {
             Logger.getLogger(LoginValidation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return message;
+    }
+    
+    public String getRole(){
+        return userRole;
     }
     
 }
