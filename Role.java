@@ -1,7 +1,10 @@
 package projectvendingmachine;
 
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +41,7 @@ public interface Role {
 class AdminRole implements Role {
     @Override
     public void restockAction(List<HashMap> itemsChanged) {
+        System.out.println("Items passed"+ itemsChanged);
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
             Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
@@ -66,6 +70,12 @@ class AdminRole implements Role {
                 
             }
             System.out.println("Food items"+ foodItems);
+            File file=new File("/Users/Tonia/Desktop/Food.json");   
+            FileWriter fileWriter = new FileWriter(file);  
+            fileWriter.write(jsonObject.toJSONString());  
+            fileWriter.flush();  
+            fileWriter.close(); 
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -85,6 +95,9 @@ class ManagerRole implements Role {
     }
     
    /* public static void main(String args[]){
+=======
+    /*public static void main(String args[]){
+>>>>>>> Stashed changes
         Role admin = new AdminRole();
         HashMap items = new HashMap<>();
         items.put("itemCode", 101);
