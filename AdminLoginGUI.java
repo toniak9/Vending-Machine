@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class AdminLoginGUI extends javax.swing.JFrame {
     String adminMessage = null;
     List itemSummary;
-    //Role role;
+    Role role;
    
     DefaultTableModel model = new DefaultTableModel();
     
@@ -40,8 +40,17 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         this.itemSummary = itemSummary;
          initComponents();
         addJTableItemSummary();
+        
     }
      
+    public AdminLoginGUI(String userRole) {
+        if(userRole.equalsIgnoreCase("Admin")){
+            role = new AdminRole();
+        }
+        if(userRole.equalsIgnoreCase("Manager")) {
+            role = new ManagerRole();
+        }
+    }
    /* public AdminLoginGUI(String message) {
        // this.adminMessage = message;
         System.out.println("msg in adminGUI"+message);
@@ -268,17 +277,21 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         // TODO add your handling code here:
         
-        HashMap updatedValues = new HashMap();
+        HashMap updatedValues;
          for(int i = 0; i < summaryTable.getRowCount(); i++) {
              for(int j = 0; j< summaryTable.getColumnCount(); j++) {
+                updatedValues = new HashMap();
                 int itemCode = (int) summaryTable.getValueAt(i, 0);
                 Double itemCost =(double) summaryTable.getValueAt(i, 4);
                 updatedValues.put("itemCode",itemCode);
                 updatedValues.put("itemCost", itemCost);
                 
-    
+                itemSummary.add(updatedValues);
+             
           }
          }
+         
+         role.restockAction(itemSummary);
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
