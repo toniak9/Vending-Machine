@@ -70,7 +70,7 @@ public class JSONParser {
             ex.printStackTrace();
         }
         
-        new AdminLoginGUI(itemSummary).setVisible(true);
+       // new AdminLoginGUI(itemSummary).setVisible(true);
     }
     
     public static void main(String args[]){

@@ -6,8 +6,6 @@
 package projectvendingmachine;
 
 import java.text.DecimalFormat;
-import sun.org.mozilla.javascript.internal.ScriptRuntime;
-
 /**
  *
  * @author Sruti
@@ -471,7 +469,7 @@ public class PaymentGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaymentGUI().setVisible(true);
+                // new PaymentGUI().setVisible(true);
             }
         });
     }

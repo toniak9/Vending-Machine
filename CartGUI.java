@@ -55,7 +55,8 @@ public class CartGUI extends javax.swing.JFrame {
     public CartGUI(List userRequirements) {
         initComponents();
         this.userRequirements = userRequirements;
-        addJTable(); 
+        addJTable();
+        checkoutPanel.setVisible(false);
         
       /*  JScrollPane cartScrollpane = new JScrollPane();
         cartScrollpane.setPreferredSize(new Dimension(200, 200));
@@ -234,6 +235,9 @@ public class CartGUI extends javax.swing.JFrame {
                             String a = (String)table.getValueAt(i, 3);
                             totalPrice = totalPrice + Double.parseDouble(a.substring(1));
                         }
+                        if (checkoutPanel.isVisible() && (table.getRowCount() == 0)) {
+                            checkoutPanel.setVisible(false);
+                        }
                         checkoutTextField.setText(Double.toString(totalPrice));
                     }
                 };
@@ -333,7 +337,7 @@ public class CartGUI extends javax.swing.JFrame {
         outputPanel.setLayout(outputPanelLayout);
         outputPanelLayout.setHorizontalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 505, Short.MAX_VALUE)
         );
         outputPanelLayout.setVerticalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +380,7 @@ public class CartGUI extends javax.swing.JFrame {
             }
         });
 
-        ButtonX.setText("X");
+        ButtonX.setText("CLR");
         ButtonX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonXActionPerformed(evt);
@@ -465,8 +469,8 @@ public class CartGUI extends javax.swing.JFrame {
                                     .addComponent(Button6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(keyPadPanelLayout.createSequentialGroup()
                                 .addComponent(Button0, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ButtonADD, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(keyPadPanelLayout.createSequentialGroup()
@@ -562,9 +566,9 @@ public class CartGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cartPanelLayout.createSequentialGroup()
-                        .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(wishListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -661,8 +665,20 @@ public class CartGUI extends javax.swing.JFrame {
 
     private void ButtonADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonADDActionPerformed
         // TODO add your handling code here:
+        
        long guiCode = Long.parseLong(keyPadTextField.getText());
+       if(wishListTable != null) {
+            for(int i = 0; i < wishListTable.getRowCount(); i++) {
+                if(((long)wishListTable.getValueAt(i, 0)) == guiCode) {
+                    JOptionPane.showMessageDialog(null, " It is already added to cart ", "error messages", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+       }
      //  System.out.println("guicode"+guiCode);
+       if (!checkoutPanel.isVisible()) {
+           checkoutPanel.setVisible(true);
+       }
        addJTable3(guiCode);
        
       
@@ -671,6 +687,7 @@ public class CartGUI extends javax.swing.JFrame {
 
     private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckoutButtonActionPerformed
         // TODO add your handling code here:
+        System.out.println(checkoutTextField.getText());
         new PaymentGUI(checkoutTextField.getText()).setVisible(true);
                 
     }//GEN-LAST:event_CheckoutButtonActionPerformed

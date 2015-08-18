@@ -27,37 +27,43 @@ import javax.swing.table.DefaultTableModel;
 public class AdminLoginGUI extends javax.swing.JFrame {
     String adminMessage = null;
     List itemSummary;
+    List filtersList = new ArrayList();
+   
     Role role;
    
     DefaultTableModel model = new DefaultTableModel();
     
 
-     private JTable summaryTable;
+    private JTable summaryTable;
     /**
      * Creates new form AdminLoginGUI
      */
     
     public AdminLoginGUI() {
+        filtersList = null;
+        initComponents();
+        addJTableItemSummary();
     }
      
-    public AdminLoginGUI(List itemSummary) {
+  /*  public AdminLoginGUI(List itemSummary) {
         this.itemSummary = itemSummary;
          initComponents();
         addJTableItemSummary();
         
-    }
+    }*/
      
-    public AdminLoginGUI(String userRole) {
+  /*  public AdminLoginGUI(String userRole) {
         if(userRole.equalsIgnoreCase("Admin")){
             role = new AdminRole();
             AddButton.setEnabled(false);
             DeleteButton.setEnabled(false);
-        }
-        if(userRole.equalsIgnoreCase("Manager")) {
+        } else if(userRole.equalsIgnoreCase("Manager")) {
             role = new ManagerRole();
            
+        } else {
+            System.out.println("No one to handle");
         }
-    }
+    }*/
    /* public AdminLoginGUI(String message) {
        // this.adminMessage = message;
         System.out.println("msg in adminGUI"+message);
@@ -67,6 +73,18 @@ public class AdminLoginGUI extends javax.swing.JFrame {
    
    
     void addJTableItemSummary() {
+        
+        if(filtersList == null) {
+            FilterContext context = new FilterContext(new ViewAllFilter());		
+            this.itemSummary = context.executeStrategy();
+            System.out.println("viewAll itemSummary"+itemSummary);
+
+        } else {
+            FilterContext context = new FilterContext(new ItemTypeFilter(filtersList));		
+            this.itemSummary = context.executeStrategy();
+            System.out.println("ItemType filter itemSummary"+itemSummary);
+
+        }
          summaryTable = new JTable(model);
          summaryTable.setSize(new Dimension(100, 100));
          model.addColumn("ItemCode");
@@ -154,6 +172,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
 
         adminLoginMessage.setText("Message:");
 
+        vendingMachinePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Vending Machines LIst"));
+
         buttonGroup1.add(sanJoseVMButton);
         sanJoseVMButton.setText("San Jose Vending Machine");
         sanJoseVMButton.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +206,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
+        adminSummaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Items Summary"));
+
         javax.swing.GroupLayout adminSummaryPanelLayout = new javax.swing.GroupLayout(adminSummaryPanel);
         adminSummaryPanel.setLayout(adminSummaryPanelLayout);
         adminSummaryPanelLayout.setHorizontalGroup(
@@ -197,6 +219,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             .addGap(0, 175, Short.MAX_VALUE)
         );
 
+        adminFileterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Category Filters"));
+
         snacksCheckBox.setText("Snacks");
         snacksCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,8 +229,18 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         });
 
         beveragesCheckBox.setText("Beverages");
+        beveragesCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beveragesCheckBoxActionPerformed(evt);
+            }
+        });
 
         candiesCheckBox.setText("Candies");
+        candiesCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                candiesCheckBoxActionPerformed(evt);
+            }
+        });
 
         AddButton.setText("Add");
 
@@ -297,6 +331,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
 
     private void snacksCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snacksCheckBoxActionPerformed
         // TODO add your handling code here:
+        if(snacksCheckBox.isSelected()) {
+            filtersList.add("Snacks");
+            return;
+        }
     }//GEN-LAST:event_snacksCheckBoxActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
@@ -332,6 +370,22 @@ public class AdminLoginGUI extends javax.swing.JFrame {
          role.restockAction(updatedList);
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
+
+    private void beveragesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beveragesCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(beveragesCheckBox.isSelected()) {
+            filtersList.add("Beverages");
+            return;
+        }
+    }//GEN-LAST:event_beveragesCheckBoxActionPerformed
+
+    private void candiesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_candiesCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(candiesCheckBox.isSelected()) {
+            filtersList.add("Candies");
+            return;
+        }
+    }//GEN-LAST:event_candiesCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
