@@ -31,7 +31,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
    
     Role role;
    
-    DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel model = null;
     
 
     private JTable summaryTable;
@@ -40,7 +40,6 @@ public class AdminLoginGUI extends javax.swing.JFrame {
      */
     
     public AdminLoginGUI() {
-        filtersList = null;
         initComponents();
         addJTableItemSummary();
     }
@@ -70,28 +69,37 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         adminLoginMessage.setText(message);
         initComponents();
     }*/
-   
-   
+
     void addJTableItemSummary() {
         
-        if(filtersList == null) {
+        if(model == null){
+            
+            model = new DefaultTableModel();
+            model.addColumn("ItemCode");
+            model.addColumn("ItemName");
+            model.addColumn("ItemCategory");
+            model.addColumn("ItemCost");
+            model.addColumn("ItemCount");
+        } else {
+            model.setRowCount(0);
+        }
+        
+        summaryTable = new JTable(model);
+        summaryTable.setSize(new Dimension(100, 100));
+        
+        if(filtersList.isEmpty()) {
             FilterContext context = new FilterContext(new ViewAllFilter());		
             this.itemSummary = context.executeStrategy();
             System.out.println("viewAll itemSummary"+itemSummary);
 
         } else {
+            itemSummary.clear();
             FilterContext context = new FilterContext(new ItemTypeFilter(filtersList));		
             this.itemSummary = context.executeStrategy();
             System.out.println("ItemType filter itemSummary"+itemSummary);
 
         }
-         summaryTable = new JTable(model);
-         summaryTable.setSize(new Dimension(100, 100));
-         model.addColumn("ItemCode");
-         model.addColumn("ItemName");
-         model.addColumn("ItemCategory");
-         model.addColumn("ItemCost");
-         model.addColumn("ItemCount");
+         
       //   summaryTable.getCellEditor(1, 4);
          Action action = new AbstractAction()
         {
@@ -111,9 +119,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
 
         TableCellListener tcl = new TableCellListener(summaryTable, action);
 
-
-        
-          Iterator<HashMap> iterator = itemSummary.iterator();
+        Iterator<HashMap> iterator = itemSummary.iterator();
         //  System.out.println("size"+iterator.);
          
 	 while (iterator.hasNext()) {
@@ -129,22 +135,16 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             model.addRow(row);
              System.out.println("table values:"+hashRow);
          }
-        
-         
-         
-         JScrollPane itemSummaryScrollpane = new JScrollPane(summaryTable);
+ 
+        JScrollPane itemSummaryScrollpane = new JScrollPane(summaryTable);
     	// create a window
         itemSummaryScrollpane.setPreferredSize(new Dimension(500, 200));
     	adminSummaryPanel.setLayout(new BorderLayout());
     	adminSummaryPanel.add(itemSummaryScrollpane, BorderLayout.CENTER);
-     //   itemSummary.revalidate();
+        summaryTable.revalidate();
         
     }   
-        
-       
-    
-    
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -333,6 +333,12 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(snacksCheckBox.isSelected()) {
             filtersList.add("Snacks");
+            addJTableItemSummary();
+            return;
+        }
+        if(snacksCheckBox.isSelected() == false){
+            filtersList.remove("Snacks");
+            addJTableItemSummary();
             return;
         }
     }//GEN-LAST:event_snacksCheckBoxActionPerformed
@@ -343,6 +349,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         HashMap updatedHashMap;
         List<HashMap> updatedList =new ArrayList<>();
          for(int i = 0; i < summaryTable.getRowCount(); i++) {
+
                updatedHashMap = new HashMap();
                //System.out.println("I:" + i);
                long itemCode = 0;
@@ -368,6 +375,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
          }
          role = new AdminRole();
          role.restockAction(updatedList);
+
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
@@ -375,6 +383,12 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(beveragesCheckBox.isSelected()) {
             filtersList.add("Beverages");
+            addJTableItemSummary();
+            return;
+        }
+        if(beveragesCheckBox.isSelected() == false){
+            filtersList.remove("Beverages");
+            addJTableItemSummary();
             return;
         }
     }//GEN-LAST:event_beveragesCheckBoxActionPerformed
@@ -383,6 +397,12 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(candiesCheckBox.isSelected()) {
             filtersList.add("Candies");
+            addJTableItemSummary();
+            return;
+        }
+        if(candiesCheckBox.isSelected() == false){
+            filtersList.remove("Candies");
+            addJTableItemSummary();
             return;
         }
     }//GEN-LAST:event_candiesCheckBoxActionPerformed
