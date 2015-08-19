@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -46,14 +47,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
       //  initComponents();
       //  addJTableItemSummary();
     }
-     
-  /*  public AdminLoginGUI(List itemSummary) {
-        this.itemSummary = itemSummary;
-         initComponents();
-        addJTableItemSummary();
-        
-    }*/
-   
+ 
     public AdminLoginGUI(String message, String userRole) {
        // this.adminMessage = message;
         System.out.println("msg in adminGUI"+message);
@@ -169,6 +163,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         vendingMachinePanel = new javax.swing.JPanel();
         sanJoseVMButton = new javax.swing.JRadioButton();
         snataClaraVMButton = new javax.swing.JRadioButton();
+        statisticsButton = new javax.swing.JButton();
         adminSummaryPanel = new javax.swing.JPanel();
         adminFileterPanel = new javax.swing.JPanel();
         snacksCheckBox = new javax.swing.JCheckBox();
@@ -200,6 +195,13 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             }
         });
 
+        statisticsButton.setText("View Statistics");
+        statisticsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statisticsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout vendingMachinePanelLayout = new javax.swing.GroupLayout(vendingMachinePanel);
         vendingMachinePanel.setLayout(vendingMachinePanelLayout);
         vendingMachinePanelLayout.setHorizontalGroup(
@@ -207,17 +209,25 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             .addGroup(vendingMachinePanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(snataClaraVMButton)
-                    .addComponent(sanJoseVMButton))
-                .addContainerGap(498, Short.MAX_VALUE))
+                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
+                        .addComponent(sanJoseVMButton)
+                        .addContainerGap(516, Short.MAX_VALUE))
+                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
+                        .addComponent(snataClaraVMButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(statisticsButton)
+                        .addGap(51, 51, 51))))
         );
         vendingMachinePanelLayout.setVerticalGroup(
             vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vendingMachinePanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(sanJoseVMButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(snataClaraVMButton)
+                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(statisticsButton)
+                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
+                        .addComponent(sanJoseVMButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(snataClaraVMButton)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -461,6 +471,15 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_snataClaraVMButtonActionPerformed
 
+    private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
+        // TODO add your handling code here:
+        PieChart demo = new PieChart("Vending Machine");
+        demo.pack();
+        RefineryUtilities.centerFrameOnScreen(demo);
+        demo.setVisible(true);
+
+    }//GEN-LAST:event_statisticsButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -509,6 +528,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton sanJoseVMButton;
     private javax.swing.JCheckBox snacksCheckBox;
     private javax.swing.JRadioButton snataClaraVMButton;
+    private javax.swing.JButton statisticsButton;
     private javax.swing.JPanel vendingMachinePanel;
     // End of variables declaration//GEN-END:variables
 }
