@@ -1,9 +1,12 @@
+
+
+package projectvendingmachine;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectvendingmachine;
+
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -56,18 +59,24 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         System.out.println("msg in adminGUI"+message);
         initComponents();
         adminLoginMessage.setText(message);
-        //sanJoseVMButton.setEnabled(true);
+        sanJoseVMButton.setSelected(true);
+        
         
         if(userRole.equalsIgnoreCase("Admin")){
             role = new AdminRole();
             AddButton.setEnabled(false);
             DeleteButton.setEnabled(false);
+           
+            addJTableItemSummary();
         } else if(userRole.equalsIgnoreCase("Manager")) {
             role = new ManagerRole();
+           //  sanJoseVMButton.setEnabled(true);
+            addJTableItemSummary();
            
         } else {
             System.out.println("No one to handle");
         }
+       
     }
 
     void addJTableItemSummary() {
@@ -88,9 +97,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         summaryTable.setSize(new Dimension(100, 100));
         
         if(filtersList.isEmpty()) {
+          
             FilterContext context = new FilterContext(new ViewAllFilter());		
             this.itemSummary = context.executeStrategy();
-         //   System.out.println("viewAll itemSummary"+itemSummary);
+            System.out.println("viewAll itemSummary"+itemSummary);
 
         } else {
             itemSummary.clear();
@@ -344,8 +354,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
 
     private void sanJoseVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sanJoseVMButtonActionPerformed
         // TODO add your handling code here:
-        if(sanJoseVMButton.isSelected())
+        if(sanJoseVMButton.isSelected()){
+           // itemSummary.clear();
             addJTableItemSummary();
+        }
     }//GEN-LAST:event_sanJoseVMButtonActionPerformed
 
     private void snacksCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snacksCheckBoxActionPerformed
