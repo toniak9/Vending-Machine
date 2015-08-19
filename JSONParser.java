@@ -30,12 +30,14 @@ import org.json.simple.parser.ParseException;
  */
 public class JSONParser {
     public void parseItems(){
-        HashMap summary;
-        List<HashMap> itemSummary = new ArrayList<>(); 
+        
+        int snackTotalCount = 0;
+        int beveragesTotalCount =0;
+        int candiesTotalCount =0;
         
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -43,27 +45,32 @@ public class JSONParser {
                 JSONObject foodObject = (JSONObject) foodItems.get(i);
                 JSONArray items = (JSONArray) foodObject.get("items");
                 
-                for(int j=0; j<items.size(); j++) {
-                    summary = new HashMap<>();
-                    JSONObject itemObject = (JSONObject) items.get(j);
-                    String itemName = (String) itemObject.get("name");
-                    Double itemCost = (Double) itemObject.get("cost");
-                    long itemCode = (Long) itemObject.get("code");
-                    String itemCategory = (String) itemObject.get("category");
-                    long itemCount = (Long) itemObject.get("count");
-                    // put the item list into summary HashMap
+                if(((String)foodObject.get("itemType")).equalsIgnoreCase("snacks")){
+                    for(int j=0; j<items.size(); j++) {
+                        JSONObject itemObject = (JSONObject) items.get(j);
+                        long itemCount = (Long) itemObject.get("count");
+                        snackTotalCount += itemCount;
                     
-                    summary.put("itemCode", itemCode);
-                    summary.put("itemName", itemName);
-                    summary.put("itemCategory", itemCategory);
-                    summary.put("itemCost",itemCost);
-                    summary.put("itemCount",Long.toString(itemCount));
+                }
+                }
+                if(((String)foodObject.get("itemType")).equalsIgnoreCase("beverages")){
+                    for(int j=0; j<items.size(); j++) {
+                        JSONObject itemObject = (JSONObject) items.get(j);
+                        long itemCount = (Long) itemObject.get("count");
+                        beveragesTotalCount += itemCount;
                     
-                    // put each item (table row) in a list and pass the list to 
-                    itemSummary.add(summary);    
-                }    
+                }
+                }
+                if(((String)foodObject.get("itemType")).equalsIgnoreCase("candies")){
+                    for(int j=0; j<items.size(); j++) {
+                        JSONObject itemObject = (JSONObject) items.get(j);
+                        long itemCount = (Long) itemObject.get("count");
+                        candiesTotalCount += itemCount;
+                    
+                }
+                } 
             }
-            System.out.println(itemSummary);
+            
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (ParseException ex) {
@@ -71,10 +78,6 @@ public class JSONParser {
         }
         
        // new AdminLoginGUI(itemSummary).setVisible(true);
-    }
-    
-    public static void main(String args[]){
-        JSONParser itemParser = new JSONParser();
-        itemParser.parseItems();
+
     }
 }

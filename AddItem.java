@@ -15,11 +15,12 @@ import java.util.logging.Logger;
  * @author Sruti
  */
 public class AddItem extends javax.swing.JFrame {
-
+    private Role role = new ManagerRole();
     /**
      * Creates new form AddItem
      */
     public AddItem() {
+        
         initComponents();
     }
 
@@ -241,9 +242,9 @@ public class AddItem extends javax.swing.JFrame {
         addToItemsMap.put("sugars",sugars);
         addToItemsMap.put("protein", proteins);
         addToItemsMap.put("fat", fat);
-       
         
-                
+        role.addItem(addToItemsMap);
+        System.out.println("item added");
     }//GEN-LAST:event_ADDButtonActionPerformed
 
     private void CLEARButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLEARButtonActionPerformed
@@ -291,7 +292,7 @@ public class AddItem extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddItem().setVisible(true);
+               // new AddItem().setVisible(true);
             }
         });
     }

@@ -34,7 +34,8 @@ import org.json.simple.parser.ParseException;
  * @AdminRole has limited view; cannot perform actions like introducing new items, 
  * deleting existing ones
  */
-public interface Role {
+public interface Role{
+   
    public void restockAction(List<HashMap> itemsChanged);
    public void addItem(HashMap addItem);
    public void deleteItem(long code);
@@ -112,7 +113,7 @@ class ManagerRole implements Role {
         System.out.println("Items passed"+ itemsChanged);
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -171,16 +172,16 @@ class ManagerRole implements Role {
                 if(jsonItemType.equalsIgnoreCase(itemType)){
                     JSONArray items = (JSONArray) foodObject.get("items");
                     JSONObject itemObj = new JSONObject();  
-                    itemObj.put("name", addItem.get("itemName"));  
-                    itemObj.put("category", addItem.get("itemCategory"));  
-                    itemObj.put("code", addItem.get("itemCode"));
-                    itemObj.put("cost", addItem.get("itemCost"));
-                    itemObj.put("count", addItem.get("itemCount"));
+                    itemObj.put("name", addItem.get("name"));  
+                    itemObj.put("category", addItem.get("category"));  
+                    itemObj.put("code", addItem.get("code"));
+                    itemObj.put("cost", addItem.get("cost"));
+                    itemObj.put("count", addItem.get("count"));
                     
                     JSONObject nutritionObj = new JSONObject();
                     nutritionObj.put("calorieCount", addItem.get("calorieCount"));
                     nutritionObj.put("sugars", addItem.get("sugars"));
-                    nutritionObj.put("protien", addItem.get("protien"));
+                    nutritionObj.put("protein", addItem.get("protein"));
                     nutritionObj.put("fat", addItem.get("fat"));
                     
                     itemObj.put("nutritionalFacts", nutritionObj);
