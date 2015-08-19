@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
  * @author Tonia
  */
 public class LoginValidation {
-    String userRole;
+    private String userRole;
     
     public String setFields(String username, String password){
         System.out.println("In validation class"+ username+"---"+password);

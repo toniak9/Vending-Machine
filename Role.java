@@ -36,7 +36,7 @@ import org.json.simple.parser.ParseException;
  */
 public interface Role {
    public void restockAction(List<HashMap> itemsChanged);
-   public void addItem(HashMap addItemMap);
+   public void addItem(HashMap addItem);
    public void deleteItem(long code);
    public void update();
 }
@@ -47,7 +47,7 @@ class AdminRole implements Role {
         System.out.println("Items passed"+ itemsChanged);
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -155,13 +155,95 @@ class ManagerRole implements Role {
     }
    
     @Override
-    public void addItem(HashMap addItemMap) {
+    public void addItem(HashMap addItem) {
         
+        try {
+            org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
+            String itemType = (String) addItem.get("itemType");
+            
+            for(int i=0; i<foodItems.size(); i++){
+                JSONObject foodObject = (JSONObject) foodItems.get(i);
+                String jsonItemType = (String) foodObject.get("itemType");
+                
+                if(jsonItemType.equalsIgnoreCase(itemType)){
+                    JSONArray items = (JSONArray) foodObject.get("items");
+                    JSONObject itemObj = new JSONObject();  
+                    itemObj.put("name", addItem.get("itemName"));  
+                    itemObj.put("category", addItem.get("itemCategory"));  
+                    itemObj.put("code", addItem.get("itemCode"));
+                    itemObj.put("cost", addItem.get("itemCost"));
+                    itemObj.put("count", addItem.get("itemCount"));
+                    
+                    JSONObject nutritionObj = new JSONObject();
+                    nutritionObj.put("calorieCount", addItem.get("calorieCount"));
+                    nutritionObj.put("sugars", addItem.get("sugars"));
+                    nutritionObj.put("protien", addItem.get("protien"));
+                    nutritionObj.put("fat", addItem.get("fat"));
+                    
+                    itemObj.put("nutritionalFacts", nutritionObj);
+                    items.add(itemObj);
+                    System.out.println("items: "+items);
+                    break;
+                }
+            }
+ 
+            File file=new File("/Users/Tonia/Desktop/Food.json");   
+            FileWriter fileWriter = new FileWriter(file);  
+            fileWriter.write(jsonObject.toJSONString());  
+            fileWriter.flush();  
+            fileWriter.close(); 
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
 
     @Override
     public void deleteItem(long code) {
         System.out.println("Item is deleted");
+        try {
+            org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
+            
+                for(int j=0; j<foodItems.size(); j++){
+                    
+                    JSONObject foodObject = (JSONObject) foodItems.get(j);
+                    JSONArray items = (JSONArray) foodObject.get("items");
+                    
+                    for(int k=0; k< items.size(); k++){
+                        JSONObject itemsObject = (JSONObject) items.get(k);
+                   
+                        if(code == (long)itemsObject.get("code")){
+                            itemsObject.clear();
+                            break;
+                        }
+                    }
+                }
+                
+            System.out.println("Food items"+ foodItems);
+            File file=new File("/Users/Tonia/Desktop/Food.json");   
+            FileWriter fileWriter = new FileWriter(file);  
+            fileWriter.write(jsonObject.toJSONString());  
+            fileWriter.flush();  
+            fileWriter.close(); 
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
