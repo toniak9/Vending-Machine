@@ -474,6 +474,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
         // TODO add your handling code here:
         PieChart demo = new PieChart("Vending Machine");
+        PieChartModel chartModel = new PieChartModel();
+        PieChartController controller = new PieChartController(demo, chartModel);
+        controller.updateView();
+        
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);

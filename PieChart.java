@@ -32,9 +32,9 @@ import org.jfree.ui.RefineryUtilities;
  */
 public class PieChart extends ApplicationFrame {
 
-   int x, y, z;
+   int snackCount, beverageCount, candyCount;
    
-   JSONParser counts = new JSONParser();
+   
     /**
      * Default constructor.
      *
@@ -43,15 +43,15 @@ public class PieChart extends ApplicationFrame {
   
     public PieChart(String title) {
         super(title);
-        piechartValues();
-        setContentPane(createDemoPanel());
-    }
-    public void piechartValues() {
-        counts.parseItems();
-        this.x = counts.snackTotalCount;
-        this.y = counts.beveragesTotalCount;
-        this.z = counts.candiesTotalCount;
+       // piechartValues();
         
+    }
+    public void piechartValues(int snackCount, int beverageCount, int candyCount) {
+        
+        this.snackCount = snackCount;
+        this.beverageCount = beverageCount;
+        this.candyCount = candyCount;
+        setContentPane(createDemoPanel());
     }
     /**
      * Creates a sample dataset.
@@ -60,9 +60,9 @@ public class PieChart extends ApplicationFrame {
      */
     private PieDataset createDataset() {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Snacks", new Integer(x));
-        dataset.setValue("Beverages", new Integer(y));
-        dataset.setValue("Candies", new Integer(z));
+        dataset.setValue("Snacks", new Integer(snackCount));
+        dataset.setValue("Beverages", new Integer(beverageCount));
+        dataset.setValue("Candies", new Integer(candyCount));
       //  dataset.setValue("Four", new Double(17.5));
       //  dataset.setValue("Five", new Double(11.0));
       //  dataset.setValue("Six", new Double(19.4));
