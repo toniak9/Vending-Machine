@@ -5,8 +5,10 @@
  */
 package projectvendingmachine;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,7 +50,7 @@ class OperationCardVerify implements PaymentStrategy{
           String message = null;
           try {
               JSONParser parser = new JSONParser();
-              Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/cardDetails.json"));
+              Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/cardDetails.json"));
               JSONObject jsonObject = (JSONObject) obj;
               JSONArray cardDetails = (JSONArray) jsonObject.get("cardDetails");
               
@@ -57,9 +59,11 @@ class OperationCardVerify implements PaymentStrategy{
                   long cardNumber = (long) cardDetailsObject.get("cardNumber");
                   System.out.println("Card details"+ cardDetails);
                   long accessCode = (long) cardDetailsObject.get("accessCode");
+                  
                   if(cardNumber == (long)num1 && accessCode == (long)num2){
                     double balance = (double) cardDetailsObject.get("balance");
                     balance -= num3;
+                    cardDetailsObject.put("balance", balance);
                     System.out.println("balance is "+balance);
                     message = new String("Transaction Successful"); 
                     System.out.println("message"+ message);
@@ -69,6 +73,11 @@ class OperationCardVerify implements PaymentStrategy{
                      break;
                     } 
               }
+            File file=new File("/Users/Tonia/Desktop/cardDetails.json");   
+            FileWriter fileWriter = new FileWriter(file);  
+            fileWriter.write(jsonObject.toJSONString());  
+            fileWriter.flush();  
+            fileWriter.close(); 
               
           } catch (FileNotFoundException ex) {
               Logger.getLogger(OperationCardVerify.class.getName()).log(Level.SEVERE, null, ex);

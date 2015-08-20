@@ -22,11 +22,11 @@ public class PieChartModel {
     private int beveragesTotalCount =0;
     private int candiesTotalCount =0;
     
-    public void parseItems(){
+    public void parseItems(String filename){
    
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             

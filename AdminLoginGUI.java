@@ -1,5 +1,4 @@
 
-
 package projectvendingmachine;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,7 +6,12 @@ package projectvendingmachine;
  * and open the template in the editor.
  */
 
-
+/**
+ * This class is responsible for Administrator/Manger GUI and provides limited or full view 
+ * depending on the user logged in.
+ * This class gets the backend data of selected vending machine form FileStrtegy class
+ * The actions performed by each user is mentioned in the Role class
+ */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -20,7 +24,6 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
 
@@ -30,15 +33,11 @@ import org.jfree.ui.RefineryUtilities;
  */
 public class AdminLoginGUI extends javax.swing.JFrame {
     String adminMessage = null;
-    List itemSummary;
+    List itemSummary = new ArrayList();
     List filtersList = new ArrayList();
-   
+    private String filename = null;
     Role role;
-   
-    DefaultTableModel model = null;
-    
-
-    private JTable summaryTable;
+    DefaultTableModel model = null;private JTable summaryTable;
     /**
      * Creates new form AdminLoginGUI
      */
@@ -48,31 +47,29 @@ public class AdminLoginGUI extends javax.swing.JFrame {
       //  addJTableItemSummary();
     }
  
-    public AdminLoginGUI(String message, String userRole) {
+    public AdminLoginGUI(String message, String userRole, String username) {
        // this.adminMessage = message;
         System.out.println("msg in adminGUI"+message);
         initComponents();
-        adminLoginMessage.setText(message);
+        adminLoginMessage.setText("Welcome "+username);
         sanJoseVMButton.setSelected(true);
         
-        
+       //depending on the user logged, role object is created
         if(userRole.equalsIgnoreCase("Admin")){
             role = new AdminRole();
             AddButton.setEnabled(false);
             DeleteButton.setEnabled(false);
-           
             addJTableItemSummary();
         } else if(userRole.equalsIgnoreCase("Manager")) {
             role = new ManagerRole();
-           //  sanJoseVMButton.setEnabled(true);
             addJTableItemSummary();
            
         } else {
             System.out.println("No one to handle");
-        }
-       
+        }   
     }
 
+    //addJTableItemSummary displays the list of all items present in the selected Vending Machine
     void addJTableItemSummary() {
         
         if(model == null){
@@ -90,15 +87,20 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         summaryTable = new JTable(model);
         summaryTable.setSize(new Dimension(100, 100));
         
+        //checks if any filters are selected and calls the FilterStrategy class
         if(filtersList.isEmpty()) {
-          
-            FilterContext context = new FilterContext(new ViewAllFilter());		
+            if(! itemSummary.isEmpty()){
+                itemSummary.clear();
+            }
+            FilterContext context = new FilterContext(new ViewAllFilter(),filename);		
             this.itemSummary = context.executeStrategy();
             System.out.println("viewAll itemSummary"+itemSummary);
 
         } else {
-            itemSummary.clear();
-            FilterContext context = new FilterContext(new ItemTypeFilter(filtersList));		
+            if(! itemSummary.isEmpty()){
+                itemSummary.clear();
+            }
+            FilterContext context = new FilterContext(new ItemTypeFilter(filtersList),filename);		
             this.itemSummary = context.executeStrategy();
           //  System.out.println("ItemType filter itemSummary"+itemSummary);
 
@@ -110,17 +112,12 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 TableCellListener tcl = (TableCellListener)e.getSource();
-                /*System.out.println("Row   : " + tcl.getRow());
-                System.out.println("Column: " + tcl.getColumn());
-                System.out.println("Old   : " + tcl.getOldValue());
-                System.out.println("New   : " + tcl.getNewValue());*/
-                
                 for (int i = 0; i < summaryTable.getRowCount(); i ++) {
                     System.out.println("itemCount" + i +": " + summaryTable.getValueAt(i, 4));
                 }
             }
         };
-
+        
         TableCellListener tcl = new TableCellListener(summaryTable, action);
 
         Iterator<HashMap> iterator = itemSummary.iterator();
@@ -145,7 +142,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         itemSummaryScrollpane.setPreferredSize(new Dimension(500, 200));
     	adminSummaryPanel.setLayout(new BorderLayout());
     	adminSummaryPanel.add(itemSummaryScrollpane, BorderLayout.CENTER);
-        summaryTable.revalidate();
+       // summaryTable.revalidate();
         
     }   
 
@@ -162,7 +159,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         adminLoginMessage = new javax.swing.JLabel();
         vendingMachinePanel = new javax.swing.JPanel();
         sanJoseVMButton = new javax.swing.JRadioButton();
-        snataClaraVMButton = new javax.swing.JRadioButton();
+        santaClaraVMButton = new javax.swing.JRadioButton();
         statisticsButton = new javax.swing.JButton();
         adminSummaryPanel = new javax.swing.JPanel();
         adminFileterPanel = new javax.swing.JPanel();
@@ -172,6 +169,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         AddButton = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
         UpdateButton = new javax.swing.JButton();
+        userLogoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,11 +185,11 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(snataClaraVMButton);
-        snataClaraVMButton.setText("Santa Clara Vending Machine");
-        snataClaraVMButton.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(santaClaraVMButton);
+        santaClaraVMButton.setText("Santa Clara Vending Machine");
+        santaClaraVMButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                snataClaraVMButtonActionPerformed(evt);
+                santaClaraVMButtonActionPerformed(evt);
             }
         });
 
@@ -213,7 +211,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                         .addComponent(sanJoseVMButton)
                         .addContainerGap(516, Short.MAX_VALUE))
                     .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                        .addComponent(snataClaraVMButton)
+                        .addComponent(santaClaraVMButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(statisticsButton)
                         .addGap(51, 51, 51))))
@@ -227,7 +225,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                     .addGroup(vendingMachinePanelLayout.createSequentialGroup()
                         .addComponent(sanJoseVMButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(snataClaraVMButton)))
+                        .addComponent(santaClaraVMButton)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -326,6 +324,13 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        userLogoutButton.setText("Logout");
+        userLogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userLogoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -333,24 +338,33 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(adminLoginMessage))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(adminSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(adminFileterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(adminFileterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(36, 36, 36)
+                            .addComponent(adminLoginMessage)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(userLogoutButton))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(adminSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(adminLoginMessage)
-                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(adminLoginMessage)
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(userLogoutButton)
+                        .addGap(18, 18, 18)))
                 .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(adminSummaryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,15 +377,16 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sanJoseVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sanJoseVMButtonActionPerformed
-        // TODO add your handling code here:
+        
         if(sanJoseVMButton.isSelected()){
-           // itemSummary.clear();
+            filename = "SanJoseVMFood.json"; 
+            role.setFilename(filename);
             addJTableItemSummary();
         }
     }//GEN-LAST:event_sanJoseVMButtonActionPerformed
 
     private void snacksCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snacksCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
         if(snacksCheckBox.isSelected()) {
             filtersList.add("Snacks");
             addJTableItemSummary();
@@ -384,8 +399,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_snacksCheckBoxActionPerformed
 
+    //This method calls the Role class to update the backend JSON data
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        // TODO add your handling code here:
         
         HashMap updatedHashMap;
         List<HashMap> updatedList =new ArrayList<>();
@@ -421,7 +436,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void beveragesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beveragesCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
         if(beveragesCheckBox.isSelected()) {
             filtersList.add("Beverages");
             addJTableItemSummary();
@@ -435,7 +450,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_beveragesCheckBoxActionPerformed
 
     private void candiesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_candiesCheckBoxActionPerformed
-        // TODO add your handling code here:
+       
         if(candiesCheckBox.isSelected()) {
             filtersList.add("Candies");
             addJTableItemSummary();
@@ -449,33 +464,36 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candiesCheckBoxActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        // TODO add your handling code here:
+       
         new AddItem().setVisible(true);
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-        // TODO add your handling code here:
-            
+       
            int x = summaryTable.getSelectedRow();
            long deleteItemCode = (long) summaryTable.getValueAt(x, 0);
            model.removeRow(x);
           
          //  role = new ManagerRole();
            role.deleteItem(deleteItemCode);
-         
            summaryTable.revalidate();
            
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    private void snataClaraVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snataClaraVMButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_snataClaraVMButtonActionPerformed
+    private void santaClaraVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_santaClaraVMButtonActionPerformed
+        if(santaClaraVMButton.isSelected()){
+            filename = "SantaClaraVMFood.json"; 
+            role.setFilename(filename);
+            addJTableItemSummary();
+        }
+    }//GEN-LAST:event_santaClaraVMButtonActionPerformed
 
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
-        // TODO add your handling code here:
+       
         PieChart demo = new PieChart("Vending Machine");
         PieChartModel chartModel = new PieChartModel();
         PieChartController controller = new PieChartController(demo, chartModel);
+        controller.setFilename(filename);
         controller.updateView();
         
         demo.pack();
@@ -483,6 +501,12 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         demo.setVisible(true);
 
     }//GEN-LAST:event_statisticsButtonActionPerformed
+
+    private void userLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogoutButtonActionPerformed
+        
+        new LoginGUI().setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_userLogoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,7 +542,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
     private javax.swing.JButton DeleteButton;
@@ -530,9 +554,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox candiesCheckBox;
     private javax.swing.JRadioButton sanJoseVMButton;
+    private javax.swing.JRadioButton santaClaraVMButton;
     private javax.swing.JCheckBox snacksCheckBox;
-    private javax.swing.JRadioButton snataClaraVMButton;
     private javax.swing.JButton statisticsButton;
+    private javax.swing.JButton userLogoutButton;
     private javax.swing.JPanel vendingMachinePanel;
     // End of variables declaration//GEN-END:variables
 }

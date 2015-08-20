@@ -124,7 +124,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String message = loginValidation.setFields(username, password);
         if(message.equalsIgnoreCase("successful")) {
             String role = loginValidation.getRole();
-            new AdminLoginGUI(message,role).setVisible(true);
+            new AdminLoginGUI(message,role,username).setVisible(true);
         } else {
             loginLabel.setText(message);
             usernameTextField.setText("");

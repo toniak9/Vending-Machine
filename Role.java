@@ -40,15 +40,22 @@ public interface Role{
    public void addItem(HashMap addItem);
    public void deleteItem(long code);
    public void update();
+   public void setFilename(String filename);
 }
 
 class AdminRole implements Role {
+    private String filename;
+    
     @Override
-    public void restockAction(List<HashMap> itemsChanged) {
+    public void setFilename(String filename){
+        this.filename = filename;    
+    }
+    @Override
+    public synchronized void restockAction(List<HashMap> itemsChanged) {
         System.out.println("Items passed"+ itemsChanged);
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -74,7 +81,7 @@ class AdminRole implements Role {
                 
             }
             System.out.println("Food items"+ foodItems);
-            File file=new File("/Users/Sruti/Desktop/json files/Food.json");   
+            File file=new File("/Users/Tonia/Desktop/"+filename);   
             FileWriter fileWriter = new FileWriter(file);  
             fileWriter.write(jsonObject.toJSONString());  
             fileWriter.flush();  
@@ -107,13 +114,19 @@ class AdminRole implements Role {
 }
 
 class ManagerRole implements Role {
+    private String filename;
+    
+    @Override
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
  
     @Override
     public void restockAction(List<HashMap> itemsChanged) {
         System.out.println("Items passed"+ itemsChanged);
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -131,7 +144,9 @@ class ManagerRole implements Role {
                    
                         if(itemCode == (long)itemsObject.get("code")){
                             long itemCount = (long) itemsSummary.get("itemCount");
+                            double itemCost = (double) itemsSummary.get("itemCost");
                             itemsObject.put("count", itemCount);
+                            itemsObject.put("cost", itemCost);
                             System.out.println("new item count is put");
                         }
                     }
@@ -139,7 +154,7 @@ class ManagerRole implements Role {
                 
             }
             System.out.println("Food items"+ foodItems);
-            File file=new File("/Users/Sruti/Desktop/json files/Food.json");   
+            File file=new File("/Users/Tonia/Desktop/"+filename);   
             FileWriter fileWriter = new FileWriter(file);  
             fileWriter.write(jsonObject.toJSONString());  
             fileWriter.flush();  
@@ -156,11 +171,11 @@ class ManagerRole implements Role {
     }
    
     @Override
-    public void addItem(HashMap addItem) {
+    public synchronized void addItem(HashMap addItem) {
         
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             String itemType = (String) addItem.get("itemType");
@@ -208,11 +223,11 @@ class ManagerRole implements Role {
     }
 
     @Override
-    public void deleteItem(long code) {
+    public synchronized void deleteItem(long code) {
         System.out.println("Item is deleted");
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -232,7 +247,7 @@ class ManagerRole implements Role {
                 }
                 
             System.out.println("Food items"+ foodItems);
-            File file=new File("/Users/Tonia/Desktop/Food.json");   
+            File file=new File("/Users/Tonia/Desktop/"+filename);   
             FileWriter fileWriter = new FileWriter(file);  
             fileWriter.write(jsonObject.toJSONString());  
             fileWriter.flush();  

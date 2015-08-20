@@ -31,6 +31,7 @@ import org.json.simple.parser.ParseException;
 public class PieChartController {
         private PieChart view;
         private PieChartModel model;
+        private String filename;
         
     public PieChartController(PieChart view, PieChartModel model) {
         this.view = view;
@@ -46,9 +47,12 @@ public class PieChartController {
     public int getTotalCandiesCount() {
         return model.getCandiesCount();
     }
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
     
     public void updateView() {
-        model.parseItems();
+        model.parseItems(filename);
         view.piechartValues(getTotalSnackCount(), getTotalBeverageCount(), getTotalCandiesCount());
     }
     

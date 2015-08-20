@@ -21,17 +21,19 @@ import org.json.simple.parser.ParseException;
 public interface FiltersStrategy {
     
     List<HashMap> itemSummary = new ArrayList<>(); 
-    public List doOperation();
+    public List doOperation(String file);
+    
     
 }
 
 class ViewAllFilter implements FiltersStrategy {
     HashMap FilterSummary;
     
-    public List doOperation() {
+    
+    public List doOperation(String file) {
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+file));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
@@ -76,11 +78,11 @@ class ItemTypeFilter implements FiltersStrategy {
         this.requestedFiltersList = requestedFiltersList;
     }
     
-    public List doOperation() {
+    public List doOperation(String file) {
         HashMap FilterSummary;
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-            Object obj = parser.parse(new FileReader("/Users/Sruti/Desktop/json files/Food.json"));
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+file));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             for(int k = 0; k < requestedFiltersList.size(); k++) {
@@ -129,13 +131,15 @@ class ItemTypeFilter implements FiltersStrategy {
 
  class FilterContext {
    private FiltersStrategy strategy;
+   private String filename;
 
-   public FilterContext(FiltersStrategy strategy){
+   public FilterContext(FiltersStrategy strategy, String filename){
       this.strategy = strategy;
+      this.filename = filename;
    }
 
    public List executeStrategy(){
-      return strategy.doOperation();
+      return strategy.doOperation(filename);
    }
 }
 
