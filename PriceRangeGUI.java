@@ -40,7 +40,7 @@ public class PriceRangeGUI extends javax.swing.JFrame {
         priceRangeButton = new javax.swing.JButton();
         priceSlider = new javax.swing.JSlider();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         priceRangePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Price Range"));
 

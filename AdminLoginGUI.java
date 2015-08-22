@@ -15,6 +15,7 @@ package projectvendingmachine;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,6 +25,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
 
@@ -37,7 +39,9 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     List filtersList = new ArrayList();
     private String filename = null;
     Role role;
-    DefaultTableModel model = null;private JTable summaryTable;
+    DefaultTableModel model = null;
+    private JTable summaryTable;
+    Timer timer;
     /**
      * Creates new form AdminLoginGUI
      */
@@ -49,31 +53,39 @@ public class AdminLoginGUI extends javax.swing.JFrame {
  
     public AdminLoginGUI(String message, String userRole, String username) {
        // this.adminMessage = message;
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println( "Hello" );
+                 new LoginGUI().setVisible(true);
+                 dispose();
+                 timer.stop();
+            }
+        };
+        timer = new Timer( (15 * 60 * 1000), actionListener );
+        timer.start();
         System.out.println("msg in adminGUI"+message);
         initComponents();
         adminLoginMessage.setText("Welcome "+username);
-        sanJoseVMButton.setSelected(true);
+      //  sanJoseVMButton.setSelected(true);
         
        //depending on the user logged, role object is created
         if(userRole.equalsIgnoreCase("Admin")){
             role = new AdminRole();
             AddButton.setEnabled(false);
             DeleteButton.setEnabled(false);
-            addJTableItemSummary();
         } else if(userRole.equalsIgnoreCase("Manager")) {
             role = new ManagerRole();
-            addJTableItemSummary();
-           
         } else {
             System.out.println("No one to handle");
-        }   
+        }
+        
     }
 
     //addJTableItemSummary displays the list of all items present in the selected Vending Machine
     void addJTableItemSummary() {
         
         if(model == null){
-            
+          //  System.out.println("model value" +model);
             model = new DefaultTableModel();
             model.addColumn("ItemCode");
             model.addColumn("ItemName");
@@ -85,16 +97,18 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         }
         
         summaryTable = new JTable(model);
-        summaryTable.setSize(new Dimension(100, 100));
+        // summaryTable.setSize(new Dimension(100, 100));
         
         //checks if any filters are selected and calls the FilterStrategy class
         if(filtersList.isEmpty()) {
             if(! itemSummary.isEmpty()){
                 itemSummary.clear();
             }
+            
+          //  System.out.println("Filename:" + filename);
             FilterContext context = new FilterContext(new ViewAllFilter(),filename);		
             this.itemSummary = context.executeStrategy();
-            System.out.println("viewAll itemSummary"+itemSummary);
+         //   System.out.println("viewAll itemSummary"+itemSummary);
 
         } else {
             if(! itemSummary.isEmpty()){
@@ -121,11 +135,11 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         TableCellListener tcl = new TableCellListener(summaryTable, action);
 
         Iterator<HashMap> iterator = itemSummary.iterator();
-        //  System.out.println("size"+iterator.);
+         // System.out.println("reached near iterator");
          
 	 while (iterator.hasNext()) {
             HashMap hashRow = iterator.next();
-            
+            // System.out.println("reached into whileloop");
             Vector row = new Vector();
             row.add(hashRow.get("itemCode"));
             row.add(hashRow.get("itemName"));
@@ -134,7 +148,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             row.add(hashRow.get("itemCount"));
             
             model.addRow(row);
-             System.out.println("table values:"+hashRow);
+        //    System.out.println("table values:"+hashRow);
          }
  
         JScrollPane itemSummaryScrollpane = new JScrollPane(summaryTable);
@@ -142,7 +156,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         itemSummaryScrollpane.setPreferredSize(new Dimension(500, 200));
     	adminSummaryPanel.setLayout(new BorderLayout());
     	adminSummaryPanel.add(itemSummaryScrollpane, BorderLayout.CENTER);
-       // summaryTable.revalidate();
+     //   System.out.println("reached end of addjtable method");
+        adminSummaryPanel.revalidate();
         
     }   
 
@@ -377,7 +392,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sanJoseVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sanJoseVMButtonActionPerformed
-        
+        timer.restart();
+      //  System.out.println("Selected : " + sanJoseVMButton.isSelected());
         if(sanJoseVMButton.isSelected()){
             filename = "SanJoseVMFood.json"; 
             role.setFilename(filename);
@@ -386,7 +402,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_sanJoseVMButtonActionPerformed
 
     private void snacksCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snacksCheckBoxActionPerformed
-        
+        timer.restart();
         if(snacksCheckBox.isSelected()) {
             filtersList.add("Snacks");
             addJTableItemSummary();
@@ -401,7 +417,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
 
     //This method calls the Role class to update the backend JSON data
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        
+        timer.restart();
         HashMap updatedHashMap;
         List<HashMap> updatedList =new ArrayList<>();
          for(int i = 0; i < summaryTable.getRowCount(); i++) {
@@ -426,8 +442,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                 updatedHashMap.put("itemCount", Long.parseLong(itemCount));
                 
                 updatedList.add(updatedHashMap);
-                // System.out.println("updated values"+updatedHashMap);
-          
+               
          }
          //role = new AdminRole();
          role.restockAction(updatedList);
@@ -436,7 +451,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void beveragesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beveragesCheckBoxActionPerformed
-        
+                timer.restart();
         if(beveragesCheckBox.isSelected()) {
             filtersList.add("Beverages");
             addJTableItemSummary();
@@ -450,7 +465,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_beveragesCheckBoxActionPerformed
 
     private void candiesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_candiesCheckBoxActionPerformed
-       
+               timer.restart();
         if(candiesCheckBox.isSelected()) {
             filtersList.add("Candies");
             addJTableItemSummary();
@@ -464,12 +479,12 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candiesCheckBoxActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-       
+               timer.restart();
         new AddItem().setVisible(true);
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-       
+               timer.restart();
            int x = summaryTable.getSelectedRow();
            long deleteItemCode = (long) summaryTable.getValueAt(x, 0);
            model.removeRow(x);
@@ -481,6 +496,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void santaClaraVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_santaClaraVMButtonActionPerformed
+        timer.restart();
         if(santaClaraVMButton.isSelected()){
             filename = "SantaClaraVMFood.json"; 
             role.setFilename(filename);
@@ -489,7 +505,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_santaClaraVMButtonActionPerformed
 
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
-       
+        timer.restart();
         PieChart demo = new PieChart("Vending Machine");
         PieChartModel chartModel = new PieChartModel();
         PieChartController controller = new PieChartController(demo, chartModel);

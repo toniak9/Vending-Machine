@@ -40,7 +40,7 @@ public class FatContentGUI extends javax.swing.JFrame {
         fatContentButton = new javax.swing.JButton();
         fatSlider = new javax.swing.JSlider();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         fatContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Fat Content"));
 

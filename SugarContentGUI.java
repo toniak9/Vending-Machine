@@ -47,7 +47,7 @@ public class SugarContentGUI extends javax.swing.JFrame {
         mediumRangeLabel = new javax.swing.JLabel();
         highRangeLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         SugarContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Sugars Level"));
 

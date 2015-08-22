@@ -10,12 +10,12 @@ package projectvendingmachine;
  * @author Sruti
  */
 
- 
-
-
 import java.awt.Font;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -33,8 +33,7 @@ import org.jfree.ui.RefineryUtilities;
 public class PieChart extends ApplicationFrame {
 
    int snackCount, beverageCount, candyCount;
-   
-   
+  
     /**
      * Default constructor.
      *
@@ -43,14 +42,14 @@ public class PieChart extends ApplicationFrame {
   
     public PieChart(String title) {
         super(title);
-       // piechartValues();
-        
+        this.setDefaultCloseOperation(ApplicationFrame.DISPOSE_ON_CLOSE);
     }
     public void piechartValues(int snackCount, int beverageCount, int candyCount) {
-        
+
         this.snackCount = snackCount;
         this.beverageCount = beverageCount;
         this.candyCount = candyCount;
+       
         setContentPane(createDemoPanel());
     }
     /**
@@ -95,6 +94,12 @@ public class PieChart extends ApplicationFrame {
         
     }
     
+   @Override
+    public void windowClosing(final WindowEvent evt){
+        if(evt.getWindow() == this){
+            dispose();         
+        }
+    }
     /**
      * Creates a panel for the demo (used by SuperDemo.java).
      * 
@@ -104,6 +109,8 @@ public class PieChart extends ApplicationFrame {
         JFreeChart chart = createChart(createDataset());
         return new ChartPanel(chart);
     }
+    
+    
     
     /**
      * Starting point for the demonstration application.

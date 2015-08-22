@@ -254,7 +254,7 @@ public class CartGUI extends javax.swing.JFrame {
                         JTable table = (JTable)e.getSource();
                        // System.out.println("Table row is: " + table.getSelectedRow());
                         
-                        // Selected Row, column 3 (itemCode)
+                        // Selected Row, column 1 (itemCode)
                         long itemCode = (long) table.getValueAt(table.getSelectedRow(), 0);
                         // System.out.println("Quantity:" + e.getModifiers());
                         Iterator<HashMap> iterator = userRequirements.iterator();
@@ -262,6 +262,7 @@ public class CartGUI extends javax.swing.JFrame {
                             HashMap hashRow = iterator.next();
                             if (itemCode == (long) hashRow.get("itemCode")) {
                                 double price = ((double)hashRow.get("itemCost")) * e.getModifiers();
+                                System.out.println("modifiers"+e.getModifiers());
                                 table.setValueAt("$"+price, table.getSelectedRow(), 3);
                                 model3.fireTableCellUpdated(table.getSelectedRow(), 3);
                                
@@ -328,8 +329,9 @@ public class CartGUI extends javax.swing.JFrame {
         checkoutLabel = new javax.swing.JLabel();
         checkoutTextField = new javax.swing.JTextField();
         CheckoutButton = new javax.swing.JButton();
+        CartGuiHomeButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Suggestion List"));
 
@@ -558,6 +560,13 @@ public class CartGUI extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
+        CartGuiHomeButton.setText("Home");
+        CartGuiHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CartGuiHomeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
         cartPanelLayout.setHorizontalGroup(
@@ -572,9 +581,13 @@ public class CartGUI extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(keyPadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(checkoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                            .addComponent(keyPadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(cartPanelLayout.createSequentialGroup()
+                        .addComponent(checkoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CartGuiHomeButton)
+                        .addGap(61, 61, 61))))
         );
         cartPanelLayout.setVerticalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,7 +601,9 @@ public class CartGUI extends javax.swing.JFrame {
                     .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(checkoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(checkoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CartGuiHomeButton))
                 .addContainerGap())
         );
 
@@ -687,10 +702,24 @@ public class CartGUI extends javax.swing.JFrame {
 
     private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckoutButtonActionPerformed
         // TODO add your handling code here:
+     /*   for(int i = 0; i < wishListTable.getRowCount(); i++) {
+            long itemcode = (long)wishListTable.getValueAt(i, 0);
+            System.out.println("item code for checkout"+itemcode);
+            long itemCount = Long.parseLong((String) wishListTable.getValueAt(i, 2));
+            System.out.println("item count for checkout"+itemCount);
+        }*/
+        
+        
         System.out.println(checkoutTextField.getText());
-        new PaymentGUI(checkoutTextField.getText()).setVisible(true);
+        new PaymentGUI(checkoutTextField.getText(),"BuyItems").setVisible(true);
                 
     }//GEN-LAST:event_CheckoutButtonActionPerformed
+
+    private void CartGuiHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartGuiHomeButtonActionPerformed
+        // TODO add your handling code here:
+        new VendingMachineGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CartGuiHomeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -744,6 +773,7 @@ public class CartGUI extends javax.swing.JFrame {
     private javax.swing.JButton Button9;
     private javax.swing.JButton ButtonADD;
     private javax.swing.JButton ButtonX;
+    private javax.swing.JButton CartGuiHomeButton;
     private javax.swing.JButton CheckoutButton;
     private javax.swing.JPanel cartPanel;
     private javax.swing.JLabel checkoutLabel;

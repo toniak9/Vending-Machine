@@ -5,10 +5,12 @@
  */
 package projectvendingmachine;
 
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,7 +60,7 @@ public class AddItem extends javax.swing.JFrame {
         ADDButton = new javax.swing.JButton();
         CLEARButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         itemTypeLabel.setText("Item Type");
 
@@ -244,7 +246,10 @@ public class AddItem extends javax.swing.JFrame {
         addToItemsMap.put("fat", fat);
         
         role.addItem(addToItemsMap);
+        
+        JOptionPane.showMessageDialog(null, " Item is Added");
         System.out.println("item added");
+        
     }//GEN-LAST:event_ADDButtonActionPerformed
 
     private void CLEARButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLEARButtonActionPerformed
@@ -262,6 +267,9 @@ public class AddItem extends javax.swing.JFrame {
         
     }//GEN-LAST:event_CLEARButtonActionPerformed
 
+    //AddItem.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -293,6 +301,8 @@ public class AddItem extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                // new AddItem().setVisible(true);
+               
+                
             }
         });
     }

@@ -125,11 +125,13 @@ public class LoginGUI extends javax.swing.JFrame {
         if(message.equalsIgnoreCase("successful")) {
             String role = loginValidation.getRole();
             new AdminLoginGUI(message,role,username).setVisible(true);
+            this.dispose();
         } else {
             loginLabel.setText(message);
             usernameTextField.setText("");
             passwordField.setText("");
             new LoginGUI();
+            this.dispose();
            
         }
        

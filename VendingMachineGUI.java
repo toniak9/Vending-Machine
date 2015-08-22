@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 public class VendingMachineGUI extends javax.swing.JFrame {
 
     private GuiSubject subject;
+    double SmartCardPrice = 0; 
     /**
      * Creates new form VendingMachineGUI
      */
@@ -39,6 +40,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         requirementsPanel = new javax.swing.JPanel();
         cbCalorieCount = new javax.swing.JCheckBox();
         cbSugarContent = new javax.swing.JCheckBox();
@@ -49,6 +51,11 @@ public class VendingMachineGUI extends javax.swing.JFrame {
         titlePanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         welcomeLabel = new javax.swing.JLabel();
+        buySmartCardPanel = new javax.swing.JPanel();
+        smart10RadioButton = new javax.swing.JRadioButton();
+        smart20RadioButton = new javax.swing.JRadioButton();
+        smart50RadioButton = new javax.swing.JRadioButton();
+        smartCardCheckOutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,6 +167,69 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        buySmartCardPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose SmartCard"));
+
+        buttonGroup1.add(smart10RadioButton);
+        smart10RadioButton.setText("Smart10");
+        smart10RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smart10RadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(smart20RadioButton);
+        smart20RadioButton.setText("Smart20");
+        smart20RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smart20RadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(smart50RadioButton);
+        smart50RadioButton.setText("Smart50");
+        smart50RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smart50RadioButtonActionPerformed(evt);
+            }
+        });
+
+        smartCardCheckOutButton.setText("CheckOut");
+        smartCardCheckOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smartCardCheckOutButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout buySmartCardPanelLayout = new javax.swing.GroupLayout(buySmartCardPanel);
+        buySmartCardPanel.setLayout(buySmartCardPanelLayout);
+        buySmartCardPanelLayout.setHorizontalGroup(
+            buySmartCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buySmartCardPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(smart10RadioButton)
+                .addGap(38, 38, 38)
+                .addComponent(smart20RadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(smart50RadioButton)
+                .addGap(54, 54, 54))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buySmartCardPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(smartCardCheckOutButton)
+                .addGap(30, 30, 30))
+        );
+        buySmartCardPanelLayout.setVerticalGroup(
+            buySmartCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buySmartCardPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(buySmartCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(smart10RadioButton)
+                    .addComponent(smart20RadioButton)
+                    .addComponent(smart50RadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(smartCardCheckOutButton)
+                .addGap(39, 39, 39))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,7 +241,9 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                         .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(requirementsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(requirementsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buySmartCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -181,7 +253,9 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(requirementsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buySmartCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -245,6 +319,32 @@ public class VendingMachineGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbFoodTypeActionPerformed
 
+    private void smartCardCheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smartCardCheckOutButtonActionPerformed
+        // TODO add your handling code here:
+        new PaymentGUI(Double.toString(SmartCardPrice),"BuySmartCard").setVisible(true);
+    }//GEN-LAST:event_smartCardCheckOutButtonActionPerformed
+
+    private void smart10RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smart10RadioButtonActionPerformed
+        // TODO add your handling code here:
+        if(smart10RadioButton.isSelected()) {
+            SmartCardPrice = 10.0;
+        }
+    }//GEN-LAST:event_smart10RadioButtonActionPerformed
+
+    private void smart20RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smart20RadioButtonActionPerformed
+        // TODO add your handling code here:
+        if(smart20RadioButton.isSelected()) {
+            SmartCardPrice = 20.0;
+        }
+    }//GEN-LAST:event_smart20RadioButtonActionPerformed
+
+    private void smart50RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smart50RadioButtonActionPerformed
+        // TODO add your handling code here:
+        if(smart50RadioButton.isSelected()) {
+            SmartCardPrice = 50.0;
+        }
+    }//GEN-LAST:event_smart50RadioButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,12 +382,18 @@ public class VendingMachineGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProceed;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel buySmartCardPanel;
     private javax.swing.JCheckBox cbCalorieCount;
     private javax.swing.JCheckBox cbFatContent;
     private javax.swing.JCheckBox cbFoodType;
     private javax.swing.JCheckBox cbPriceRange;
     private javax.swing.JCheckBox cbSugarContent;
     private javax.swing.JPanel requirementsPanel;
+    private javax.swing.JRadioButton smart10RadioButton;
+    private javax.swing.JRadioButton smart20RadioButton;
+    private javax.swing.JRadioButton smart50RadioButton;
+    private javax.swing.JButton smartCardCheckOutButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel welcomeLabel;

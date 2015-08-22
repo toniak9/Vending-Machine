@@ -43,7 +43,7 @@ public class CalorieCountGUI extends javax.swing.JFrame {
         okCalorieCountButton = new javax.swing.JButton();
         calorieSlider = new javax.swing.JSlider();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         CalorieCountPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Calorie Count"));
 
