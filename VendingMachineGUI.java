@@ -336,7 +336,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
 
     private void smartCardCheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smartCardCheckOutButtonActionPerformed
         // TODO add your handling code here:
-        //new PaymentGUI(Double.toString(SmartCardPrice),"BuySmartCard").setVisible(true);
+        new PaymentGUI(Double.toString(SmartCardPrice),"BuySmartCard",null).setVisible(true);
     }//GEN-LAST:event_smartCardCheckOutButtonActionPerformed
 
     private void smart10RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smart10RadioButtonActionPerformed
