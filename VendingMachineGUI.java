@@ -56,6 +56,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
         smart20RadioButton = new javax.swing.JRadioButton();
         smart50RadioButton = new javax.swing.JRadioButton();
         smartCardCheckOutButton = new javax.swing.JButton();
+        adminLoginButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,7 +116,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                     .addComponent(cbFatContent)
                     .addComponent(cbPriceRange)
                     .addComponent(cbFoodType))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requirementsPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnProceed)
@@ -151,20 +152,20 @@ public class VendingMachineGUI extends javax.swing.JFrame {
             .addGroup(titlePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(welcomeLabel)
-                .addGap(107, 107, 107)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(titlePanelLayout.createSequentialGroup()
+                .addGap(241, 241, 241)
                 .addComponent(titleLabel)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
         titlePanelLayout.setVerticalGroup(
             titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(titleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(welcomeLabel)
                 .addContainerGap())
-            .addGroup(titlePanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(titleLabel)
-                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         buySmartCardPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose SmartCard"));
@@ -230,32 +231,46 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                 .addGap(39, 39, 39))
         );
 
+        adminLoginButton.setText("Admin Login");
+        adminLoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminLoginButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(requirementsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buySmartCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(120, Short.MAX_VALUE))
+                    .addComponent(requirementsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buySmartCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(adminLoginButton)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(requirementsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buySmartCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(requirementsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buySmartCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adminLoginButton)
+                        .addContainerGap())))
         );
 
         pack();
@@ -321,7 +336,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
 
     private void smartCardCheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smartCardCheckOutButtonActionPerformed
         // TODO add your handling code here:
-        new PaymentGUI(Double.toString(SmartCardPrice),"BuySmartCard").setVisible(true);
+        //new PaymentGUI(Double.toString(SmartCardPrice),"BuySmartCard").setVisible(true);
     }//GEN-LAST:event_smartCardCheckOutButtonActionPerformed
 
     private void smart10RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smart10RadioButtonActionPerformed
@@ -344,6 +359,10 @@ public class VendingMachineGUI extends javax.swing.JFrame {
             SmartCardPrice = 50.0;
         }
     }//GEN-LAST:event_smart50RadioButtonActionPerformed
+
+    private void adminLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLoginButtonActionPerformed
+        new LoginGUI().setVisible(true);
+    }//GEN-LAST:event_adminLoginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,6 +400,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton adminLoginButton;
     private javax.swing.JButton btnProceed;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buySmartCardPanel;
