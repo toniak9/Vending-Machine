@@ -11,6 +11,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,10 +22,14 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 
@@ -43,8 +49,13 @@ public class CartGUI extends javax.swing.JFrame {
      private JTable outputTable;
      private JTable wishListTable;
      private JTable nutritionalFactsTable;
+     private static final int DEPENDENT_COL = 3;
+     private static final int ITEM_COL = 2;
+     int selectedRow = 0;
+     boolean isActualRowSelected = false;
      
-  
+     private int comboValues[];
+     private Vector comboVector;
      double totalPrice = 0.0;
      List userRequirements;
     
@@ -53,6 +64,11 @@ public class CartGUI extends javax.swing.JFrame {
      }
      
     public CartGUI(List userRequirements) {
+        comboVector = new Vector();
+        comboValues = new int[100];
+        for (int i = 0; i < 100; i++) {
+            comboValues[i] = 1;
+        }
         initComponents();
         this.userRequirements = userRequirements;
         addJTable();
@@ -73,9 +89,12 @@ public class CartGUI extends javax.swing.JFrame {
     }
     
     private static class JTableComboBoxRenderer implements TableCellRenderer {        
-        @Override public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        @Override 
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            System.out.println("getTableCellRendererComponent: " + isSelected + "row: " + row
+            + "column:" + column + "value:" + value);
             JComboBox combobox = (JComboBox)value;
-            return combobox;  
+            return combobox;
         }
     }
   
@@ -189,15 +208,32 @@ public class CartGUI extends javax.swing.JFrame {
          String [] values = {"1", "2", "3","4","5"};
          
          if (model3 == null) {
-            model3 = new DefaultTableModel();
+            model3 = new DefaultTableModel(); 
+             
             model3.addColumn("ItemCode");
             model3.addColumn("ItemName");
             model3.addColumn("Qunatity");
             model3.addColumn("Price");
             model3.addColumn("Remove");
 
-         } 
+         }
+
          wishListTable = new JTable(model3);
+         /*wishListTable.setRowSelectionAllowed(true);
+         wishListTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);*/
+         wishListTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+             @Override
+             public void valueChanged(ListSelectionEvent e) {
+                 //System.out.println("List :"  + e);
+                 DefaultListSelectionModel dls = (DefaultListSelectionModel) e.getSource();
+                 System.out.println(dls.getAnchorSelectionIndex());
+                // System.out.println(e.getSource());
+                 selectedRow = dls.getAnchorSelectionIndex();
+                 //System.out.println("List :"  + e.getLastIndex());
+                 isActualRowSelected = true;
+            }
+         });
          
          Iterator<HashMap> iterator = userRequirements.iterator();
 	 while (iterator.hasNext()) {
@@ -210,7 +246,7 @@ public class CartGUI extends javax.swing.JFrame {
             if(code == guiCode) {
                 row.add(hashRow.get("itemCode"));
                 row.add(hashRow.get("itemName"));
-                row.add("");
+                row.add("1");
                 row.add("$"+ hashRow.get("itemCost"));
                 row.add("delete");
                
@@ -243,46 +279,62 @@ public class CartGUI extends javax.swing.JFrame {
                 };
                 ButtonColumn buttonColumn = new ButtonColumn(wishListTable, delete, 4);
 
-                /* jCombo Action */
-                ComboColumn comboColumn = null;
-                TableCellRenderer comboRenderer = new JTableComboBoxRenderer();
-                Action update;
-                update = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        // System.out.println("Combo action performed:" +e);
-                        JTable table = (JTable)e.getSource();
-                       // System.out.println("Table row is: " + table.getSelectedRow());
-                        
-                        // Selected Row, column 1 (itemCode)
-                        long itemCode = (long) table.getValueAt(table.getSelectedRow(), 0);
-                        // System.out.println("Quantity:" + e.getModifiers());
-                        Iterator<HashMap> iterator = userRequirements.iterator();
-                        while (iterator.hasNext()) {
-                            HashMap hashRow = iterator.next();
-                            if (itemCode == (long) hashRow.get("itemCode")) {
-                                double price = ((double)hashRow.get("itemCost")) * e.getModifiers();
-                                System.out.println("modifiers"+e.getModifiers());
-                                table.setValueAt("$"+price, table.getSelectedRow(), 3);
-                                model3.fireTableCellUpdated(table.getSelectedRow(), 3);
-                               
-                                totalPrice = 0;
-                                for(int i = 0; i < table.getRowCount(); i++) {
-                                    String a = (String)table.getValueAt(i, 3);
-                                    totalPrice = totalPrice + Double.parseDouble(a.substring(1));
+                JComboBox combo = new JComboBox(values);
+                TableColumnModel columnModel = wishListTable.getColumnModel();
+                columnModel.getColumn(ITEM_COL).setCellEditor(new DefaultCellEditor(combo));
+                /* For Sruti
+                TableColumnModel columnModel1 = wishListTable.getColumnModel();
+                DefaultCellEditor tce = (DefaultCellEditor) columnModel1.getColumn(ITEM_COL).getCellEditor();
+                JComboBox combo1 = (JComboBox) tce.getComponent();
+                System.out.println("combo1 " + combo1.getSelectedItem());
+                */
+                
+                // DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+                // renderer.setToolTipText("Click for combo box");
+                // wishListTable.getColumnModel().getColumn(2).setCellRenderer(renderer);
+                combo.addItemListener(new ItemListener() {
 
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        System.out.println(" Row: " + selectedRow);
+                        if (!isActualRowSelected)
+                            return;
+                        
+                       // int row = wishListTable.getSelectedRow();
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            System.out.println(" Row1: " + selectedRow);
+                            isActualRowSelected = false;
+                            System.out.println(e.getItem() + " selected");
+                            String a;
+                            int value = Integer.parseInt((String) e.getItem());
+                            if (selectedRow == -1) return;
+                            long itemCode = (long) wishListTable.getValueAt(selectedRow, 0);
+                            double itemPrice = 0.0;
+                            // System.out.println("Code:" + itemCode);
+                            Iterator<HashMap> iterator = userRequirements.iterator();
+                            while (iterator.hasNext()) {
+                                HashMap hashRow = iterator.next();
+                                if (itemCode == (long) hashRow.get("itemCode")) {
+                                    itemPrice = ((double)hashRow.get("itemCost")) * value;
+                                    // System.out.println("modifiers: "+value);
+                                    wishListTable.setValueAt("$"+itemPrice, selectedRow, DEPENDENT_COL);
+                                    //model3.fireTableCellUpdated(selectedRow, DEPENDENT_COL);
+                                    totalPrice = 0;
+                                    for(int i = 0; i < wishListTable.getRowCount(); i++) {
+                                        a = (String)wishListTable.getValueAt(i, DEPENDENT_COL);
+                                        /*for (int j = 0; j < wishListTable.getColumnCount(); j++)
+                                            System.out.println("col:" + j + " value:" + wishListTable.getValueAt(i, j));
+                                        System.out.println("value at the row: " + i + " is : " + a);*/
+                                        totalPrice = totalPrice + Double.parseDouble(a.substring(1));
+                                    }
+                                    checkoutTextField.setText(Double.toString(totalPrice));
+                                    break;
                                 }
-                                checkoutTextField.setText(Double.toString(totalPrice));
-                                break; 
                             }
-                            
                         }
                     }
-                };
-                comboColumn = new ComboColumn(wishListTable, update, 2, values);
-                break;
-         
-            } 
+                });   
+            }
         }
          
             
@@ -702,16 +754,25 @@ public class CartGUI extends javax.swing.JFrame {
 
     private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckoutButtonActionPerformed
         // TODO add your handling code here:
-     /*   for(int i = 0; i < wishListTable.getRowCount(); i++) {
-            long itemcode = (long)wishListTable.getValueAt(i, 0);
-            System.out.println("item code for checkout"+itemcode);
-            long itemCount = Long.parseLong((String) wishListTable.getValueAt(i, 2));
-            System.out.println("item count for checkout"+itemCount);
-        }*/
+        
+        HashMap itemQuantity = new HashMap();
+        for(int i = 0; i < wishListTable.getRowCount(); i++) {
+            long itemCode = (long)wishListTable.getValueAt(i, 0);
+          //  System.out.println("item code for checkout"+itemcode);
+             TableColumnModel columnModel1 = wishListTable.getColumnModel();
+             DefaultCellEditor tce = (DefaultCellEditor) columnModel1.getColumn(ITEM_COL).getCellEditor();
+             JComboBox combo = (JComboBox) tce.getComponent();
+             System.out.println("combo " + wishListTable.getValueAt(i, 2));
+             long itemCount = Long.parseLong((String) wishListTable.getValueAt(i, 2));
+         //   System.out.println("item count for checkout"+itemCount);
+             itemQuantity.put("itemCode", itemCode);
+             itemQuantity.put("itemCount", itemCount);
+             
+        }
         
         
         System.out.println(checkoutTextField.getText());
-        new PaymentGUI(checkoutTextField.getText(),"BuyItems").setVisible(true);
+        new PaymentGUI(checkoutTextField.getText(),"BuyItems", itemQuantity).setVisible(true);
                 
     }//GEN-LAST:event_CheckoutButtonActionPerformed
 
