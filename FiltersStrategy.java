@@ -36,6 +36,7 @@ class ViewAllFilter implements FiltersStrategy {
             Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+file));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
+            JSONArray cardItems = (JSONArray) jsonObject.get("CardItems");
             
             for(int i=0; i<foodItems.size(); i++){ 
                 JSONObject foodObject = (JSONObject) foodItems.get(i);
@@ -61,7 +62,31 @@ class ViewAllFilter implements FiltersStrategy {
                     itemSummary.add(FilterSummary);    
                 }    
             }
-            System.out.println(itemSummary);
+            
+            for(int k=0; k<cardItems.size(); k++) {
+                JSONObject cardObject = (JSONObject) cardItems.get(k);
+                JSONArray cards = (JSONArray) cardObject.get("items");
+                
+                for(int l=0; l<cards.size(); l++){
+                    FilterSummary = new HashMap<>();
+                    JSONObject cardItemObj = (JSONObject) cards.get(l);
+                    String cardName = (String) cardItemObj.get("name");
+                    double cardBalance = (double) cardItemObj.get("balance");
+                    long cardCount = (long) cardItemObj.get("count");
+                    long itemCode = (Long) cardItemObj.get("code");
+                    
+                    FilterSummary.put("itemCode",itemCode);
+                    FilterSummary.put("itemName", cardName);
+                    FilterSummary.put("itemCategory", "SmartCal card");
+                    FilterSummary.put("itemCost"," ");
+                    FilterSummary.put("itemCount",Long.toString(cardCount));
+
+                    itemSummary.add(FilterSummary);  
+                }
+            }
+            
+           
+            System.out.println("Item summary " +itemSummary);
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (ParseException ex) {

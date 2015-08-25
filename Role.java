@@ -58,6 +58,7 @@ class AdminRole implements Role {
             Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
+            JSONArray cardItems = (JSONArray) jsonObject.get("CardItems");
             
             for(int i=0; i<itemsChanged.size(); i++){
                 HashMap itemsSummary = itemsChanged.get(i);
@@ -75,10 +76,24 @@ class AdminRole implements Role {
                             long itemCount = (long) itemsSummary.get("itemCount");
                             itemsObject.put("count", itemCount);
                             System.out.println("new item count is put");
+                        } else {
+                            System.out.println("In else part:"+ itemCode);
+                            for(int l=0; l<cardItems.size(); l++){
+                                JSONObject cardObject = (JSONObject) cardItems.get(l);
+                                JSONArray cardItemsArray = (JSONArray) cardObject.get("items");
+                                for(int m=0; m< cardItemsArray.size(); m++){
+                                    JSONObject cardItemsObject = (JSONObject) cardItemsArray.get(m);
+                                    
+                                    if(itemCode == (long)cardItemsObject.get("code")){
+                                        long itemCount = (long) itemsSummary.get("itemCount");
+                                        cardItemsObject.put("count", itemCount);
+                                        System.out.println("card new item count is put");
+                                    }
+                                }
+                            }   
                         }
                     }
-                }
-                
+                }    
             }
             System.out.println("Food items"+ foodItems);
             File file=new File("/Users/Tonia/Desktop/"+filename);   
@@ -206,7 +221,7 @@ class ManagerRole implements Role {
                 }
             }
  
-            File file=new File("/Users/Tonia/Desktop/Food.json");   
+            File file=new File("/Users/Tonia/Desktop/"+filename);   
             FileWriter fileWriter = new FileWriter(file);  
             fileWriter.write(jsonObject.toJSONString());  
             fileWriter.flush();  

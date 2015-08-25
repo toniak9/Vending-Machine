@@ -22,7 +22,7 @@ import org.json.simple.parser.ParseException;
  * @author Sruti
  */
 public interface PaymentStrategy {
-     public String doOperation(double num1, double num2, double num3); 
+     public String doOperation(double totalPrice, double coinsEntered, double num3); 
 }
 
 class OperationCoinsVerify implements PaymentStrategy{
@@ -32,13 +32,12 @@ class OperationCoinsVerify implements PaymentStrategy{
        if(num1 == num2) {
            return "coins matched";
        } else if(num1 < num2) {
-           a = num1 - num2;
-           return "your change is returned";
-       } else if(num1 > num2) {
            a = num2 - num1;
+           return "your change $"+a+" is returned";
+       } else if(num1 > num2) {
            return "Please add more coins";
        } else {
-           return " do nothing";
+           return "do nothing";
        }
    }
 }
@@ -60,7 +59,7 @@ class OperationCardVerify implements PaymentStrategy{
                   System.out.println("Card details"+ cardDetails);
                   long accessCode = (long) cardDetailsObject.get("accessCode");
                   
-                  if(cardNumber == (long)num1 && accessCode == (long)num2){
+                  if((cardNumber == (long)num1) && (accessCode == (long)num2)){
                     double balance = (double) cardDetailsObject.get("balance");
                     balance -= num3;
                     cardDetailsObject.put("balance", balance);
@@ -90,7 +89,6 @@ class OperationCardVerify implements PaymentStrategy{
    }
 }
 
-
 class Context {
    private PaymentStrategy strategy;
 
@@ -98,8 +96,8 @@ class Context {
       this.strategy = strategy;
    }
 
-   public String executeStrategy(double num1, double num2, double num3){
-       return strategy.doOperation(num1, num2, num3);
+   public String executeStrategy(double cardNum, double accessCode, double price){
+       return strategy.doOperation(cardNum, accessCode, price);
       
    }
 }
