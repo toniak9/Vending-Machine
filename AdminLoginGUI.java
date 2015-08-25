@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -446,6 +447,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
          }
          //role = new AdminRole();
          role.restockAction(updatedList);
+         JOptionPane.showMessageDialog(null, " Item count is Updated");
 
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
