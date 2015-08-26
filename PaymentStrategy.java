@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -25,7 +26,7 @@ import org.json.simple.parser.ParseException;
 public interface PaymentStrategy {
      
      public String doOperation(double totalPrice, double coinsEntered, double num3); 
-     public void updateQuantity(HashMap quantity, double price);
+     public void updateQuantity(List<HashMap> quantity, double price);
 }
 
 class OperationCoinsVerify implements PaymentStrategy{
@@ -45,7 +46,7 @@ class OperationCoinsVerify implements PaymentStrategy{
    }
 
     @Override
-    public void updateQuantity(HashMap quantity, double price) {
+    public void updateQuantity(List<HashMap> quantity, double price) {
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
             Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/SanJoseVMFood.json"));
@@ -55,7 +56,8 @@ class OperationCoinsVerify implements PaymentStrategy{
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
             for(int i=0; i<quantity.size(); i++){
-                long itemCode = (long) quantity.get("itemCode");
+                HashMap itemsSelected = quantity.get(i);
+                long itemCode = (long) itemsSelected.get("itemCode");
                 
                 for(int j=0; j<foodItems.size(); j++){
                     
@@ -66,10 +68,11 @@ class OperationCoinsVerify implements PaymentStrategy{
                         JSONObject itemsObject = (JSONObject) items.get(k);
                    
                         if(itemCode == (long)itemsObject.get("code")){
-                            long itemCount = (long) quantity.get("itemCount");
+                            long itemCount = (long) itemsSelected.get("itemCount");
                             long jsonItemCount = (long) itemsObject.get("count");
                             if((jsonItemCount-itemCount)>0)
                                 itemsObject.put("count", jsonItemCount-itemCount);
+                            itemsObject.put("count", itemCount);
                             System.out.println("new item count is put");
                         } 
                     }
@@ -88,8 +91,9 @@ class OperationCoinsVerify implements PaymentStrategy{
             Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
-        }   
-    }  
+        }
+        
+    }
 }
 
 class OperationCardVerify implements PaymentStrategy{
@@ -138,7 +142,7 @@ class OperationCardVerify implements PaymentStrategy{
    }
 
     @Override
-    public void updateQuantity(HashMap quantity, double price) {
+    public void updateQuantity(List<HashMap> quantity, double price) {
         try {
             org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
             Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/SanJoseVMFood.json"));
@@ -148,7 +152,8 @@ class OperationCardVerify implements PaymentStrategy{
             JSONArray foodItems = (JSONArray) jsonObject.get("FoodItems");
             
             for(int i=0; i<quantity.size(); i++){
-                long itemCode = (long) quantity.get("itemCode");
+                HashMap itemsSelected = quantity.get(i);
+                long itemCode = (long) itemsSelected.get("itemCode");
                 
                 for(int j=0; j<foodItems.size(); j++){
                     
@@ -159,7 +164,7 @@ class OperationCardVerify implements PaymentStrategy{
                         JSONObject itemsObject = (JSONObject) items.get(k);
                    
                         if(itemCode == (long)itemsObject.get("code")){
-                            long itemCount = (long) quantity.get("itemCount");
+                            long itemCount = (long) itemsSelected.get("itemCount");
                             long jsonItemCount = (long) itemsObject.get("count");
                             if((jsonItemCount-itemCount)>0)
                                 itemsObject.put("count", jsonItemCount-itemCount);
@@ -194,7 +199,7 @@ class Context {
       this.strategy = strategy;
    }
 
-   public String executeStrategy(double price, double cardNum, double accessCode, HashMap quantity){
+   public String executeStrategy(double price, double cardNum, double accessCode, List<HashMap> quantity){
        strategy.updateQuantity(quantity,price);
        return strategy.doOperation(price, cardNum, accessCode);
       

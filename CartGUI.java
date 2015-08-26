@@ -15,6 +15,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -760,7 +761,7 @@ public class CartGUI extends javax.swing.JFrame {
 
     private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckoutButtonActionPerformed
         // TODO add your handling code here:
-        
+        List<HashMap> cartItems = new ArrayList<>();
         HashMap itemQuantity = new HashMap();
         for(int i = 0; i < wishListTable.getRowCount(); i++) {
             long itemCode = (long)wishListTable.getValueAt(i, 0);
@@ -775,16 +776,16 @@ public class CartGUI extends javax.swing.JFrame {
              itemQuantity.put("itemCode", itemCode);
              itemQuantity.put("itemCount", itemCount);
              itemQuantity.put("itemName", itemName);
+             cartItems.add(itemQuantity);
 
         }
         
         System.out.println(checkoutTextField.getText());
          try {
-             new PaymentGUI(checkoutTextField.getText(),"BuyItems", itemQuantity).setVisible(true);
+             new PaymentGUI(checkoutTextField.getText(),"BuyItems", cartItems).setVisible(true);
          } catch (IOException ex) {
              Logger.getLogger(CartGUI.class.getName()).log(Level.SEVERE, null, ex);
          }
-         
          this.dispose();
 
     }//GEN-LAST:event_CheckoutButtonActionPerformed

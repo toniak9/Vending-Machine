@@ -28,8 +28,13 @@ public class SmartCardParser {
     JSONDataAccess dataAccess;
     
     public void setBalance(double balance, String cardType) {
-        this.balance = balance;   
-        this.cardType = cardType;
+        this.balance = balance; 
+        if(this.balance == 10.0)
+            this.cardType = "Smart10";
+        if(this.balance == 20.0)
+            this.cardType = "Smart20";
+        if(this.balance == 50.0)
+            this.cardType = "Smart50";
     }
     
     public void decrementCount(){

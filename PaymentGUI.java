@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -23,9 +24,10 @@ import javax.swing.JPanel;
 public class PaymentGUI extends javax.swing.JFrame {
 
     private String totalPrice;
+    private String requestType;
     long itemCode, itemCount;
     private double coinValue = 0.0;
-    private HashMap quantity;
+    private List<HashMap> quantity;
     Context context;
     /**
      * Creates new form PaymentGUI
@@ -34,7 +36,7 @@ public class PaymentGUI extends javax.swing.JFrame {
      //   initComponents();
     }
     
-     public PaymentGUI(String totalPrice, String requestType, HashMap quantity) throws IOException {
+     public PaymentGUI(String totalPrice, String requestType, List<HashMap> quantity) throws IOException {
          this.totalPrice = totalPrice;
          this.quantity = quantity;
          initComponents();
@@ -55,6 +57,7 @@ public class PaymentGUI extends javax.swing.JFrame {
           changeSlotTextField.setEditable(false);
          performance();
          if(requestType.equalsIgnoreCase("BuySmartCard")) {
+             this.requestType = "BuySmartCard";
              rbCard.setEnabled(false);
          }
          
@@ -104,6 +107,7 @@ public class PaymentGUI extends javax.swing.JFrame {
         cardConfirmButton = new javax.swing.JButton();
         accessCodeTextField = new javax.swing.JTextField();
         paymentHomeButton = new javax.swing.JButton();
+        itemDispenserPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -263,10 +267,6 @@ public class PaymentGUI extends javax.swing.JFrame {
                         .addComponent(coinsClearButton)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coinsPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(coinsMsgLabel)
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coinsPanelLayout.createSequentialGroup()
                         .addGroup(coinsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(quarterCoinButton)
                             .addComponent(dollarCoinButton))
@@ -274,12 +274,18 @@ public class PaymentGUI extends javax.swing.JFrame {
                         .addComponent(coinConfirmButton)
                         .addGap(88, 88, 88))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coinsPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(coinsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(changeSlotTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coinsTotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(61, 61, 61))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coinsPanelLayout.createSequentialGroup()
+                                .addComponent(coinsMsgLabel)
+                                .addGap(101, 101, 101))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coinsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addGroup(coinsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(changeSlotTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(coinsTotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(61, 61, 61))))))
         );
         coinsPanelLayout.setVerticalGroup(
             coinsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,6 +380,17 @@ public class PaymentGUI extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout itemDispenserPanelLayout = new javax.swing.GroupLayout(itemDispenserPanel);
+        itemDispenserPanel.setLayout(itemDispenserPanelLayout);
+        itemDispenserPanelLayout.setHorizontalGroup(
+            itemDispenserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        itemDispenserPanelLayout.setVerticalGroup(
+            itemDispenserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 376, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout paymentPanelLayout = new javax.swing.GroupLayout(paymentPanel);
         paymentPanel.setLayout(paymentPanelLayout);
         paymentPanelLayout.setHorizontalGroup(
@@ -390,8 +407,12 @@ public class PaymentGUI extends javax.swing.JFrame {
                         .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(coinsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                        .addComponent(paymentHomeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(paymentPanelLayout.createSequentialGroup()
+                                .addGap(0, 118, Short.MAX_VALUE)
+                                .addComponent(paymentHomeButton))
+                            .addComponent(itemDispenserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(15, 15, 15))))
         );
         paymentPanelLayout.setVerticalGroup(
@@ -403,6 +424,8 @@ public class PaymentGUI extends javax.swing.JFrame {
                 .addComponent(paymentOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(itemDispenserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(paymentHomeButton)
                         .addGap(27, 27, 27))
@@ -411,7 +434,7 @@ public class PaymentGUI extends javax.swing.JFrame {
                         .addComponent(coinsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -449,8 +472,8 @@ public class PaymentGUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, msg);
         cardNumberField.setText("");
         accessCodeTextField.setText("");
-
-        
+        System.out.println("items selelcted: "+quantity );
+        itemDispenser(quantity);  
     }//GEN-LAST:event_cardConfirmButtonActionPerformed
 
     private void rbCoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCoinsActionPerformed
@@ -514,29 +537,51 @@ public class PaymentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_coinsClearButtonActionPerformed
 
     private void coinConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coinConfirmButtonActionPerformed
-        // TODO add your handling code here:
-        context = new Context(new OperationCoinsVerify());
         double coinsValue = Double.parseDouble(coinsTotalTextField.getText());
         double temp = 0.0;
         double change;
         double price = Double.parseDouble(totalPrice);
-        //String msg = context.executeStrategy(price, coinsValue, temp);
-        String msg = context.executeStrategy(Double.parseDouble(totalPrice), coinsValue, temp, quantity);
+        
+        if(this.requestType.equalsIgnoreCase("BuySmartCard")) {
+            SmartCardParser smartCardParser = new SmartCardParser();
+            double balance = (double)Double.valueOf(paymentTextField.getText().toString());
+            smartCardParser.setBalance(balance, requestType);
+            if(price < coinsValue) {
+                change = coinsValue - price;
+                changeSlotTextField.setText(Double.toString(change));
+                JOptionPane.showMessageDialog(null, "Please collect change and card");
+            } 
+            if(price == coinsValue) {
+                coinsTotalTextField.setText("");
+                JOptionPane.showMessageDialog(null, "Thanks,coins matched! Collect your card");
+            } else {
+                JOptionPane.showMessageDialog(null, "Please insert $"+ (price-coinsValue) +" coins");
+            }
+            
+            
+        } else {
+            context = new Context(new OperationCoinsVerify());
+            
+            //String msg = context.executeStrategy(price, coinsValue, temp);
+            String msg = context.executeStrategy(Double.parseDouble(totalPrice), coinsValue, temp, quantity);
 
-       
-      //  coinsMsgLabel.setText(msg);
-        JOptionPane.showMessageDialog(null, msg);
-        if(price < coinsValue) {
-            change = coinsValue - price;
-            changeSlotTextField.setText(Double.toString(change));
-        } 
-        if(price == coinsValue) {
-            coinsTotalTextField.setText("");
+          //  coinsMsgLabel.setText(msg);
+            JOptionPane.showMessageDialog(null, msg);
+            if(price < coinsValue) {
+                change = coinsValue - price;
+                changeSlotTextField.setText(Double.toString(change));
+                System.out.println("items selected: "+quantity );
+                itemDispenser(quantity);
+                coinsTotalTextField.setText("");
+            } 
+            if(price == coinsValue) {
+                coinsTotalTextField.setText("");
+                System.out.println("items selected: "+quantity );
+                itemDispenser(quantity);
+            }
         }
-        if(price == coinsValue) {
-            coinsTotalTextField.setText("");
-        }
-   
+        
+        
     }//GEN-LAST:event_coinConfirmButtonActionPerformed
 
     private void paymentHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentHomeButtonActionPerformed
@@ -544,15 +589,16 @@ public class PaymentGUI extends javax.swing.JFrame {
         new VendingMachineGUI().setVisible(true);
         this.dispose();  
     }//GEN-LAST:event_paymentHomeButtonActionPerformed
-    public void itemDispenser(HashMap quantity) {
+    
+    public void itemDispenser(List<HashMap> quantity) {
+        HashMap cartItems = new HashMap();
         for(int i=0; i< quantity.size(); i++) {
-            JLabel _lbl = new JLabel("Label " +i);//make label and assign text in 1 line
-            _lbl.setText(quantity.get("itemName")+" ---- "+ quantity.get("itemCount"));
-           /* panel.add(_lbl);//add label we made
-            panel.revalidate();
-            panel.repaint();
-            frame.pack();//so our frame resizes to compensate for new components
-            */
+            System.out.println("in loop");
+            JLabel _lbl = new JLabel("Label"+i);//make label and assign text in 1 line
+            _lbl.setText(cartItems.get("itemName")+" ---- "+ cartItems.get("itemCount"));
+            itemDispenserPanel.add(_lbl);//add label we made
+            itemDispenserPanel.revalidate();
+            itemDispenserPanel.repaint();            
         }
     }
     /**
@@ -609,6 +655,7 @@ public class PaymentGUI extends javax.swing.JFrame {
     private javax.swing.JTextField coinsTotalTextField;
     private javax.swing.JButton dimeCoinButton;
     private javax.swing.JButton dollarCoinButton;
+    private javax.swing.JPanel itemDispenserPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton nickelCoinButton;
     private javax.swing.JButton paymentHomeButton;

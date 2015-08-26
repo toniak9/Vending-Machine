@@ -5,6 +5,9 @@
  */
 package projectvendingmachine;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -335,8 +338,12 @@ public class VendingMachineGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cbFoodTypeActionPerformed
 
     private void smartCardCheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smartCardCheckOutButtonActionPerformed
-        // TODO add your handling code here:
-        new PaymentGUI(Double.toString(SmartCardPrice),"BuySmartCard",null).setVisible(true);
+        try {
+            // TODO add your handling code here:
+          new PaymentGUI(Double.toString(SmartCardPrice),"BuySmartCard",null).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendingMachineGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_smartCardCheckOutButtonActionPerformed
 
     private void smart10RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smart10RadioButtonActionPerformed
