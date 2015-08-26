@@ -39,8 +39,9 @@ public interface Role{
    public void restockAction(List<HashMap> itemsChanged);
    public void addItem(HashMap addItem);
    public void deleteItem(long code);
-   public void update();
+   public void addAdmin(String username,String password);
    public void setFilename(String filename);
+   
 }
 
 class AdminRole implements Role {
@@ -123,7 +124,7 @@ class AdminRole implements Role {
     }
 
     @Override
-    public void update() {
+    public void addAdmin(String username,String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
@@ -278,7 +279,32 @@ class ManagerRole implements Role {
     }
 
     @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void addAdmin(String username,String password) {
+        try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/loginDetails.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray loginID = (JSONArray) jsonObject.get("Login IDs");
+            JSONObject loginObject = new JSONObject();
+            loginObject.put("username", username);
+            loginObject.put("password", password);
+            loginObject.put("role", "admin");
+            loginID.add(loginObject);
+            System.out.println(loginID);    
+         
+            File file=new File("/Users/Tonia/Desktop/loginDetails.json");   
+            FileWriter fileWriter = new FileWriter(file);  
+            fileWriter.write(jsonObject.toJSONString());  
+            fileWriter.flush();  
+            fileWriter.close(); 
+        }
+        catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginValidation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginValidation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(LoginValidation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
