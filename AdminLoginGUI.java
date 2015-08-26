@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -54,6 +55,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
  
     public AdminLoginGUI(String message, String userRole, String username) {
        // this.adminMessage = message;
+        
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println( "Hello" );
@@ -65,7 +67,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         timer = new Timer( (15 * 60 * 1000), actionListener );
         timer.start();
         System.out.println("msg in adminGUI"+message);
+       
         initComponents();
+        statsImageLabel.setIcon(new ImageIcon("/Users/Sruti/Downloads/pie.thumbnail.png"));
+        
         adminLoginMessage.setText("Welcome "+username);
       //  sanJoseVMButton.setSelected(true);
         
@@ -177,6 +182,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         sanJoseVMButton = new javax.swing.JRadioButton();
         santaClaraVMButton = new javax.swing.JRadioButton();
         statisticsButton = new javax.swing.JButton();
+        statsImageLabel = new javax.swing.JLabel();
         adminSummaryPanel = new javax.swing.JPanel();
         adminFileterPanel = new javax.swing.JPanel();
         snacksCheckBox = new javax.swing.JCheckBox();
@@ -224,26 +230,32 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             .addGroup(vendingMachinePanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                        .addComponent(sanJoseVMButton)
-                        .addContainerGap(516, Short.MAX_VALUE))
-                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                        .addComponent(santaClaraVMButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(santaClaraVMButton)
+                    .addComponent(sanJoseVMButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendingMachinePanelLayout.createSequentialGroup()
+                        .addComponent(statsImageLabel)
+                        .addGap(99, 99, 99))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendingMachinePanelLayout.createSequentialGroup()
                         .addComponent(statisticsButton)
-                        .addGap(51, 51, 51))))
+                        .addGap(74, 74, 74))))
         );
         vendingMachinePanelLayout.setVerticalGroup(
             vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(statisticsButton)
+                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vendingMachinePanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addComponent(sanJoseVMButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(santaClaraVMButton)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(santaClaraVMButton))
+                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(statsImageLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(statisticsButton)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         adminSummaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Items Summary"));
@@ -362,15 +374,14 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                             .addComponent(userLogoutButton))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(22, 22, 22)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(adminFileterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(adminSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(adminFileterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(vendingMachinePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(adminSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(259, 259, 259)
                         .addComponent(updateMessagejLabel)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,33 +390,24 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(adminLoginMessage)
-                        .addGap(36, 36, 36))
+                        .addGap(56, 56, 56))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(userLogoutButton)
                         .addGap(18, 18, 18)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(adminSummaryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateMessagejLabel)
                 .addGap(20, 20, 20)
                 .addComponent(adminFileterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void sanJoseVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sanJoseVMButtonActionPerformed
-        timer.restart();
-      //  System.out.println("Selected : " + sanJoseVMButton.isSelected());
-        if(sanJoseVMButton.isSelected()){
-            filename = "SanJoseVMFood.json"; 
-            role.setFilename(filename);
-            addJTableItemSummary();
-        }
-    }//GEN-LAST:event_sanJoseVMButtonActionPerformed
 
     private void snacksCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snacksCheckBoxActionPerformed
         timer.restart();
@@ -502,14 +504,11 @@ public class AdminLoginGUI extends javax.swing.JFrame {
            
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    private void santaClaraVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_santaClaraVMButtonActionPerformed
-        timer.restart();
-        if(santaClaraVMButton.isSelected()){
-            filename = "SantaClaraVMFood.json"; 
-            role.setFilename(filename);
-            addJTableItemSummary();
-        }
-    }//GEN-LAST:event_santaClaraVMButtonActionPerformed
+    private void userLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogoutButtonActionPerformed
+        
+        new LoginGUI().setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_userLogoutButtonActionPerformed
 
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
         timer.restart();
@@ -518,18 +517,30 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         PieChartController controller = new PieChartController(demo, chartModel);
         controller.setFilename(filename);
         controller.updateView();
-        
+
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
-
     }//GEN-LAST:event_statisticsButtonActionPerformed
 
-    private void userLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogoutButtonActionPerformed
-        
-        new LoginGUI().setVisible(true); 
-        this.dispose();
-    }//GEN-LAST:event_userLogoutButtonActionPerformed
+    private void santaClaraVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_santaClaraVMButtonActionPerformed
+        timer.restart();
+        if(santaClaraVMButton.isSelected()){
+            filename = "SantaClaraVMFood.json";
+            role.setFilename(filename);
+            addJTableItemSummary();
+        }
+    }//GEN-LAST:event_santaClaraVMButtonActionPerformed
+
+    private void sanJoseVMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sanJoseVMButtonActionPerformed
+        timer.restart();
+        //  System.out.println("Selected : " + sanJoseVMButton.isSelected());
+        if(sanJoseVMButton.isSelected()){
+            filename = "SanJoseVMFood.json";
+            role.setFilename(filename);
+            addJTableItemSummary();
+        }
+    }//GEN-LAST:event_sanJoseVMButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -580,6 +591,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton santaClaraVMButton;
     private javax.swing.JCheckBox snacksCheckBox;
     private javax.swing.JButton statisticsButton;
+    private javax.swing.JLabel statsImageLabel;
     private javax.swing.JLabel updateMessagejLabel;
     private javax.swing.JButton userLogoutButton;
     private javax.swing.JPanel vendingMachinePanel;

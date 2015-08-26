@@ -14,11 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.*;
@@ -64,6 +67,7 @@ public class CartGUI extends javax.swing.JFrame {
      }
      
     public CartGUI(List userRequirements) {
+        
         comboVector = new Vector();
         comboValues = new int[100];
         for (int i = 0; i < 100; i++) {
@@ -71,8 +75,14 @@ public class CartGUI extends javax.swing.JFrame {
         }
         initComponents();
         this.userRequirements = userRequirements;
+        if(userRequirements.isEmpty()) {
+            new VendingMachineGUI().setVisible(true);
+            JOptionPane.showMessageDialog(null, " Items are not existing");
+            dispose();
+        }
         addJTable();
         checkoutPanel.setVisible(false);
+        checkoutTextField.setEditable(false);
         
       /*  JScrollPane cartScrollpane = new JScrollPane();
         cartScrollpane.setPreferredSize(new Dimension(200, 200));
@@ -767,12 +777,18 @@ public class CartGUI extends javax.swing.JFrame {
          //   System.out.println("item count for checkout"+itemCount);
              itemQuantity.put("itemCode", itemCode);
              itemQuantity.put("itemCount", itemCount);
-             
+              
         }
         
         
         System.out.println(checkoutTextField.getText());
-        new PaymentGUI(checkoutTextField.getText(),"BuyItems", itemQuantity).setVisible(true);
+         try {
+             new PaymentGUI(checkoutTextField.getText(),"BuyItems", itemQuantity).setVisible(true);
+         } catch (IOException ex) {
+             Logger.getLogger(CartGUI.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+         this.dispose();
                 
     }//GEN-LAST:event_CheckoutButtonActionPerformed
 
