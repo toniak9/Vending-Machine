@@ -40,6 +40,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     List itemSummary = new ArrayList();
     List filtersList = new ArrayList();
     private String filename = null;
+    private String userRole;
     Role role;
     DefaultTableModel model = null;
     private JTable summaryTable;
@@ -54,8 +55,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }
  
     public AdminLoginGUI(String message, String userRole, String username) {
-       // this.adminMessage = message;
-        
+        this.userRole = userRole;
+
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println( "Hello" );
@@ -69,17 +70,18 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         System.out.println("msg in adminGUI"+message);
        
         initComponents();
-        statsImageLabel.setIcon(new ImageIcon("/Users/Sruti/Downloads/pie.thumbnail.png"));
+        statsImageLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/pie.thumbnail.png"));
         
         adminLoginMessage.setText("Welcome "+username);
       //  sanJoseVMButton.setSelected(true);
         
        //depending on the user logged, role object is created
-        if(userRole.equalsIgnoreCase("Admin")){
+        if(this.userRole.equalsIgnoreCase("Admin")){
             role = new AdminRole();
             AddButton.setEnabled(false);
             DeleteButton.setEnabled(false);
-        } else if(userRole.equalsIgnoreCase("Manager")) {
+            addAdminjButton.setEnabled(false);
+        } else if(this.userRole.equalsIgnoreCase("Manager")) {
             role = new ManagerRole();
         } else {
             System.out.println("No one to handle");
@@ -92,7 +94,16 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         
         if(model == null){
           //  System.out.println("model value" +model);
-            model = new DefaultTableModel();
+            if(this.userRole.equalsIgnoreCase("Admin")){
+                model = new DefaultTableModel() {    
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == 4;
+                }
+                };
+            } else {
+                model = new DefaultTableModel();
+            }
             model.addColumn("ItemCode");
             model.addColumn("ItemName");
             model.addColumn("ItemCategory");
@@ -103,6 +114,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         }
         
         summaryTable = new JTable(model);
+        
+        
         // summaryTable.setSize(new Dimension(100, 100));
         
         //checks if any filters are selected and calls the FilterStrategy class
@@ -191,6 +204,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         AddButton = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
         UpdateButton = new javax.swing.JButton();
+        addAdminjButton = new javax.swing.JButton();
         userLogoutButton = new javax.swing.JButton();
         updateMessagejLabel = new javax.swing.JLabel();
 
@@ -294,7 +308,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             }
         });
 
-        AddButton.setText("Add");
+        AddButton.setText("Add Item");
         AddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddButtonActionPerformed(evt);
@@ -315,27 +329,35 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             }
         });
 
+        addAdminjButton.setText("Add Admin");
+        addAdminjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAdminjButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout adminFileterPanelLayout = new javax.swing.GroupLayout(adminFileterPanel);
         adminFileterPanel.setLayout(adminFileterPanelLayout);
         adminFileterPanelLayout.setHorizontalGroup(
             adminFileterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminFileterPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(adminFileterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(adminFileterPanelLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
                         .addComponent(snacksCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(beveragesCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(candiesCheckBox))
                     .addGroup(adminFileterPanelLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addComponent(AddButton)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DeleteButton)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addAdminjButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(UpdateButton)))
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         adminFileterPanelLayout.setVerticalGroup(
             adminFileterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +371,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                 .addGroup(adminFileterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddButton)
                     .addComponent(DeleteButton)
-                    .addComponent(UpdateButton))
+                    .addComponent(UpdateButton)
+                    .addComponent(addAdminjButton))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -382,6 +405,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                         .addGap(259, 259, 259)
                         .addComponent(updateMessagejLabel)))
                 .addContainerGap(59, Short.MAX_VALUE))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,8 +512,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candiesCheckBoxActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-               timer.restart();
-        new AddItem().setVisible(true);
+        timer.restart();
+        new AddItem(filename).setVisible(true);
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -542,6 +566,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sanJoseVMButtonActionPerformed
 
+    private void addAdminjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAdminjButtonActionPerformed
+        new AddAdmin().setVisible(true);
+    }//GEN-LAST:event_addAdminjButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -581,6 +609,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private javax.swing.JButton AddButton;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton UpdateButton;
+    private javax.swing.JButton addAdminjButton;
     private javax.swing.JPanel adminFileterPanel;
     private javax.swing.JLabel adminLoginMessage;
     private javax.swing.JPanel adminSummaryPanel;

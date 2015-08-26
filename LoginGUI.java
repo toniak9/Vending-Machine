@@ -19,7 +19,7 @@ public class LoginGUI extends javax.swing.JFrame {
      */
     public LoginGUI() {
         initComponents();
-        imgLabel.setIcon(new ImageIcon("/Users/Sruti/Downloads/admin.png"));
+        imgLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/admin.png"));
         imgLabel.setText("");
        
     }

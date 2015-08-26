@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 /**
  *
  * @author Sruti
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 public class PaymentGUI extends javax.swing.JFrame {
 
     private String totalPrice;
+    long itemCode, itemCount;
     private double coinValue = 0.0;
     private HashMap quantity;
     Context context;
@@ -42,9 +44,9 @@ public class PaymentGUI extends javax.swing.JFrame {
           jLabel1.setIcon(icon);
           coinsPanel.add(jLabel1);
           System.out.println("image added to japanle");*/
-          coinsImageLabel.setIcon(new ImageIcon("/Users/Sruti/Downloads/manyCoins.png"));
+          coinsImageLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/manyCoins.png"));
           coinsImageLabel.setText("");
-          cardImageLabel.setIcon(new ImageIcon("/Users/Sruti/Downloads/card.png"));
+          cardImageLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/card.png"));
           cardImageLabel.setText("");
           coinsMsgLabel.setText("");
           cardErrorMsgLabel.setText("");
@@ -57,8 +59,6 @@ public class PaymentGUI extends javax.swing.JFrame {
          }
          
     }
-
-     
      public void performance() {
          paymentTextField.setText(totalPrice);
          coinsPanel.setVisible(false);
@@ -443,11 +443,13 @@ public class PaymentGUI extends javax.swing.JFrame {
         double cardNumber = Double.parseDouble(cardNumberField.getText());
         double accessCode = Double.parseDouble(accessCodeTextField.getText());
         context = new Context(new OperationCardVerify());		
-        String msg = context.executeStrategy(cardNumber, accessCode,Double.parseDouble(totalPrice));
+        //String msg = context.executeStrategy(cardNumber, accessCode,Double.parseDouble(totalPrice));
        // cardErrorMsgLabel.setText(msg);
+        String msg = context.executeStrategy(Double.parseDouble(totalPrice),cardNumber, accessCode, quantity);
         JOptionPane.showMessageDialog(null, msg);
         cardNumberField.setText("");
         accessCodeTextField.setText("");
+
         
     }//GEN-LAST:event_cardConfirmButtonActionPerformed
 
@@ -518,7 +520,9 @@ public class PaymentGUI extends javax.swing.JFrame {
         double temp = 0.0;
         double change;
         double price = Double.parseDouble(totalPrice);
-        String msg = context.executeStrategy(price, coinsValue, temp);
+        //String msg = context.executeStrategy(price, coinsValue, temp);
+        String msg = context.executeStrategy(Double.parseDouble(totalPrice), coinsValue, temp, quantity);
+
        
       //  coinsMsgLabel.setText(msg);
         JOptionPane.showMessageDialog(null, msg);
@@ -532,9 +536,7 @@ public class PaymentGUI extends javax.swing.JFrame {
         if(price == coinsValue) {
             coinsTotalTextField.setText("");
         }
-        
-
-        
+   
     }//GEN-LAST:event_coinConfirmButtonActionPerformed
 
     private void paymentHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentHomeButtonActionPerformed
@@ -542,7 +544,17 @@ public class PaymentGUI extends javax.swing.JFrame {
         new VendingMachineGUI().setVisible(true);
         this.dispose();  
     }//GEN-LAST:event_paymentHomeButtonActionPerformed
-
+    public void itemDispenser(HashMap quantity) {
+        for(int i=0; i< quantity.size(); i++) {
+            JLabel _lbl = new JLabel("Label " +i);//make label and assign text in 1 line
+            _lbl.setText(quantity.get("itemName")+" ---- "+ quantity.get("itemCount"));
+           /* panel.add(_lbl);//add label we made
+            panel.revalidate();
+            panel.repaint();
+            frame.pack();//so our frame resizes to compensate for new components
+            */
+        }
+    }
     /**
      * @param args the command line arguments
      */

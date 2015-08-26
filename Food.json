@@ -1,7 +1,8 @@
 {
+"MachineID":"San Jose",
+"Amount":0.0,
 "FoodItems":[
     {
-     "MachineID":"San Jose",
      "itemType":"Snacks",     
      "items":[
             {

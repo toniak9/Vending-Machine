@@ -18,11 +18,12 @@ import javax.swing.JOptionPane;
  */
 public class AddItem extends javax.swing.JFrame {
     private Role role = new ManagerRole();
+    private String filename;
     /**
      * Creates new form AddItem
      */
-    public AddItem() {
-        
+    public AddItem(String filename) {
+        this.filename = filename;
         initComponents();
     }
 
@@ -245,9 +246,11 @@ public class AddItem extends javax.swing.JFrame {
         addToItemsMap.put("protein", proteins);
         addToItemsMap.put("fat", fat);
         
+        role.setFilename(filename);
         role.addItem(addToItemsMap);
         
         JOptionPane.showMessageDialog(null, " Item is Added");
+        this.dispose();
         System.out.println("item added");
         
     }//GEN-LAST:event_ADDButtonActionPerformed

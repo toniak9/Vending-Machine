@@ -119,8 +119,7 @@ public class CartGUI extends javax.swing.JFrame {
          model.addColumn("ItemName");
          model.addColumn("Price");
          model.addColumn("Nutritional Values");
-
-         
+    
         Iterator<HashMap> iterator = userRequirements.iterator();
 	while (iterator.hasNext()) {
             HashMap hashRow = iterator.next();
@@ -140,9 +139,6 @@ public class CartGUI extends javax.swing.JFrame {
                 //  System.out.println("Button action performed:" +e.getSource());
                     JTable table = (JTable)e.getSource();
                     int modelRow = Integer.valueOf(e.getActionCommand());
-                   
-                    
-
                     // Selected Row, column 1 (itemCode)
                      addJTable2((long)table.getValueAt(modelRow, 0));                     
                 }
@@ -768,6 +764,7 @@ public class CartGUI extends javax.swing.JFrame {
         HashMap itemQuantity = new HashMap();
         for(int i = 0; i < wishListTable.getRowCount(); i++) {
             long itemCode = (long)wishListTable.getValueAt(i, 0);
+            String itemName = (String)wishListTable.getValueAt(i, 1);
           //  System.out.println("item code for checkout"+itemcode);
              TableColumnModel columnModel1 = wishListTable.getColumnModel();
              DefaultCellEditor tce = (DefaultCellEditor) columnModel1.getColumn(ITEM_COL).getCellEditor();
@@ -777,9 +774,9 @@ public class CartGUI extends javax.swing.JFrame {
          //   System.out.println("item count for checkout"+itemCount);
              itemQuantity.put("itemCode", itemCode);
              itemQuantity.put("itemCount", itemCount);
-              
+             itemQuantity.put("itemName", itemName);
+
         }
-        
         
         System.out.println(checkoutTextField.getText());
          try {
@@ -789,7 +786,7 @@ public class CartGUI extends javax.swing.JFrame {
          }
          
          this.dispose();
-                
+
     }//GEN-LAST:event_CheckoutButtonActionPerformed
 
     private void CartGuiHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartGuiHomeButtonActionPerformed
