@@ -15,7 +15,6 @@ public class LoginGUI extends javax.swing.JFrame {
     /**
      * Creates new form LoginGUI
      */
-    
     public LoginGUI() {
         initComponents();
        
