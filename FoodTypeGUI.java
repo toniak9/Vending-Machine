@@ -39,40 +39,21 @@ public class FoodTypeGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        foodTypeImagePanel = new javax.swing.JPanel();
         foodTypePanel = new javax.swing.JPanel();
         foodTypeLabel = new javax.swing.JLabel();
         okFoodTypeButton = new javax.swing.JButton();
         cbSnacks = new javax.swing.JCheckBox();
         cbCandies = new javax.swing.JCheckBox();
         cbBeverages = new javax.swing.JCheckBox();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        foodTypeImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        foodTypeImagePanel.setLayout(null);
+
         foodTypePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Food Type"));
+        foodTypePanel.setOpaque(false);
 
         foodTypeLabel.setText("Select the type of food");
 
@@ -110,7 +91,7 @@ public class FoodTypeGUI extends javax.swing.JFrame {
                             .addComponent(foodTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbCandies)
                             .addComponent(cbBeverages))))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         foodTypePanelLayout.setVerticalGroup(
             foodTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,26 +104,27 @@ public class FoodTypeGUI extends javax.swing.JFrame {
                 .addComponent(cbCandies)
                 .addGap(18, 18, 18)
                 .addComponent(cbBeverages)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(okFoodTypeButton)
                 .addGap(31, 31, 31))
         );
+
+        foodTypeImagePanel.add(foodTypePanel);
+        foodTypePanel.setBounds(70, 50, 310, 250);
+
+        foodTypeImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/blueBackground.jpg")); // NOI18N
+        foodTypeImagePanel.add(foodTypeImageLabel);
+        foodTypeImageLabel.setBounds(0, 0, 460, 370);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(foodTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+            .addComponent(foodTypeImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(foodTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+            .addComponent(foodTypeImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -214,10 +196,10 @@ public class FoodTypeGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbBeverages;
     private javax.swing.JCheckBox cbCandies;
     private javax.swing.JCheckBox cbSnacks;
+    private javax.swing.JLabel foodTypeImageLabel;
+    private javax.swing.JPanel foodTypeImagePanel;
     private javax.swing.JLabel foodTypeLabel;
     private javax.swing.JPanel foodTypePanel;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton okFoodTypeButton;
     // End of variables declaration//GEN-END:variables
 }

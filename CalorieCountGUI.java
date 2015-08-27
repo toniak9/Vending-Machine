@@ -37,15 +37,20 @@ public class CalorieCountGUI extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        calorieGUIImagePanel = new javax.swing.JPanel();
         CalorieCountPanel = new javax.swing.JPanel();
         calorieCountLabel = new javax.swing.JLabel();
         CalorieTextField = new javax.swing.JTextField();
         okCalorieCountButton = new javax.swing.JButton();
         calorieSlider = new javax.swing.JSlider();
+        calorieCountImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        calorieGUIImagePanel.setLayout(null);
+
         CalorieCountPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Calorie Count"));
+        CalorieCountPanel.setOpaque(false);
 
         calorieCountLabel.setText("Enter the range of Calorie count (0 - 250)");
 
@@ -105,21 +110,22 @@ public class CalorieCountGUI extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        calorieGUIImagePanel.add(CalorieCountPanel);
+        CalorieCountPanel.setBounds(40, 60, 362, 257);
+
+        calorieCountImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/blueBackground.jpg")); // NOI18N
+        calorieGUIImagePanel.add(calorieCountImageLabel);
+        calorieCountImageLabel.setBounds(-5, -4, 460, 380);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(CalorieCountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+            .addComponent(calorieGUIImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(CalorieCountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+            .addComponent(calorieGUIImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
@@ -176,7 +182,9 @@ public class CalorieCountGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CalorieCountPanel;
     private javax.swing.JTextField CalorieTextField;
+    private javax.swing.JLabel calorieCountImageLabel;
     private javax.swing.JLabel calorieCountLabel;
+    private javax.swing.JPanel calorieGUIImagePanel;
     private javax.swing.JSlider calorieSlider;
     private javax.swing.JButton okCalorieCountButton;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

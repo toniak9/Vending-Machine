@@ -34,15 +34,20 @@ public class PriceRangeGUI extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        priceGuiImagePanel = new javax.swing.JPanel();
         priceRangePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         priceRangeTextField = new javax.swing.JTextField();
         priceRangeButton = new javax.swing.JButton();
         priceSlider = new javax.swing.JSlider();
+        priceGuiImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        priceGuiImagePanel.setLayout(null);
+
         priceRangePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Price Range"));
+        priceRangePanel.setOpaque(false);
 
         jLabel1.setText("Enter the price Range ( 1$ - 10$)");
 
@@ -69,49 +74,51 @@ public class PriceRangeGUI extends javax.swing.JFrame {
         priceRangePanelLayout.setHorizontalGroup(
             priceRangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(priceRangePanelLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
                 .addGroup(priceRangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(priceRangePanelLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(priceRangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(priceSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(priceRangePanelLayout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(priceRangeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(priceRangePanelLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(priceRangeButton)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addGroup(priceRangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(priceSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(priceRangePanelLayout.createSequentialGroup()
+                            .addGroup(priceRangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(priceRangeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, priceRangePanelLayout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(priceRangeButton)))
+                            .addGap(53, 53, 53)))
+                    .addComponent(jLabel1))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         priceRangePanelLayout.setVerticalGroup(
             priceRangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(priceRangePanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(priceSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(priceRangeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(priceRangeButton)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
+
+        priceGuiImagePanel.add(priceRangePanel);
+        priceRangePanel.setBounds(50, 50, 320, 250);
+
+        priceGuiImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/blueBackground.jpg")); // NOI18N
+        priceGuiImageLabel.setSize(new java.awt.Dimension(460, 380));
+        priceGuiImagePanel.add(priceGuiImageLabel);
+        priceGuiImageLabel.setBounds(-5, -4, 460, 380);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(priceRangePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+            .addComponent(priceGuiImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(priceRangePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+            .addComponent(priceGuiImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
         );
 
         bindingGroup.bind();
@@ -165,6 +172,8 @@ public class PriceRangeGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel priceGuiImageLabel;
+    private javax.swing.JPanel priceGuiImagePanel;
     private javax.swing.JButton priceRangeButton;
     private javax.swing.JPanel priceRangePanel;
     private javax.swing.JTextField priceRangeTextField;

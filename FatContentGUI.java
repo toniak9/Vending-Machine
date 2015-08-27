@@ -34,15 +34,20 @@ public class FatContentGUI extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        fatGuiImagePanel = new javax.swing.JPanel();
         fatContentPanel = new javax.swing.JPanel();
         fatContentLabel = new javax.swing.JLabel();
         FatTextField = new javax.swing.JTextField();
         fatContentButton = new javax.swing.JButton();
         fatSlider = new javax.swing.JSlider();
+        fatGuiImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        fatGuiImagePanel.setLayout(null);
+
         fatContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Fat Content"));
+        fatContentPanel.setOpaque(false);
 
         fatContentLabel.setText("Enter the range of fat content (0 - 200)");
 
@@ -74,7 +79,7 @@ public class FatContentGUI extends javax.swing.JFrame {
         fatContentPanelLayout.setHorizontalGroup(
             fatContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fatContentPanelLayout.createSequentialGroup()
-                .addGap(0, 53, Short.MAX_VALUE)
+                .addGap(0, 42, Short.MAX_VALUE)
                 .addComponent(fatContentLabel)
                 .addGap(51, 51, 51))
             .addGroup(fatContentPanelLayout.createSequentialGroup()
@@ -94,7 +99,7 @@ public class FatContentGUI extends javax.swing.JFrame {
         fatContentPanelLayout.setVerticalGroup(
             fatContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fatContentPanelLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(fatContentLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fatSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -105,21 +110,22 @@ public class FatContentGUI extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
+        fatGuiImagePanel.add(fatContentPanel);
+        fatContentPanel.setBounds(50, 60, 350, 240);
+
+        fatGuiImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/blueBackground.jpg")); // NOI18N
+        fatGuiImagePanel.add(fatGuiImageLabel);
+        fatGuiImageLabel.setBounds(-5, -4, 460, 380);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(fatContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+            .addComponent(fatGuiImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(fatContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+            .addComponent(fatGuiImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
@@ -178,6 +184,8 @@ public class FatContentGUI extends javax.swing.JFrame {
     private javax.swing.JButton fatContentButton;
     private javax.swing.JLabel fatContentLabel;
     private javax.swing.JPanel fatContentPanel;
+    private javax.swing.JLabel fatGuiImageLabel;
+    private javax.swing.JPanel fatGuiImagePanel;
     private javax.swing.JSlider fatSlider;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

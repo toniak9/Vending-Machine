@@ -37,6 +37,7 @@ public class SugarContentGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        sugarGuiImagePanel = new javax.swing.JPanel();
         SugarContentPanel = new javax.swing.JPanel();
         sugarContentLabel = new javax.swing.JLabel();
         lowSugarRadioButton = new javax.swing.JRadioButton();
@@ -46,10 +47,14 @@ public class SugarContentGUI extends javax.swing.JFrame {
         lowRangeLabel = new javax.swing.JLabel();
         mediumRangeLabel = new javax.swing.JLabel();
         highRangeLabel = new javax.swing.JLabel();
+        sugarGuiImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        sugarGuiImagePanel.setLayout(null);
+
         SugarContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Sugars Level"));
+        SugarContentPanel.setOpaque(false);
 
         sugarContentLabel.setText("Select the level of sugar content ");
 
@@ -127,21 +132,23 @@ public class SugarContentGUI extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
+        sugarGuiImagePanel.add(SugarContentPanel);
+        SugarContentPanel.setBounds(60, 60, 330, 243);
+
+        sugarGuiImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/blueBackground.jpg")); // NOI18N
+        sugarGuiImageLabel.setSize(new java.awt.Dimension(460, 380));
+        sugarGuiImagePanel.add(sugarGuiImageLabel);
+        sugarGuiImageLabel.setBounds(-5, -4, 460, 380);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(SugarContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addComponent(sugarGuiImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(SugarContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(sugarGuiImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
         );
 
         pack();
@@ -213,5 +220,7 @@ public class SugarContentGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton mediumSugarRadioButton;
     private javax.swing.JButton sugarContentButton;
     private javax.swing.JLabel sugarContentLabel;
+    private javax.swing.JLabel sugarGuiImageLabel;
+    private javax.swing.JPanel sugarGuiImagePanel;
     // End of variables declaration//GEN-END:variables
 }

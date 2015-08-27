@@ -28,6 +28,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
     public VendingMachineGUI() {
         initComponents();
         subject = new GuiSubject();
+       
     }
     
     
@@ -311,6 +312,7 @@ public class VendingMachineGUI extends javax.swing.JFrame {
             
             subject.notifyObserver(arr);
             //new CartGUI().setVisible(true);
+            this.dispose();
         }
         
         

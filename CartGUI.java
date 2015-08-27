@@ -5,6 +5,7 @@
  */
 package projectvendingmachine;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -74,12 +75,10 @@ public class CartGUI extends javax.swing.JFrame {
         }
         initComponents();
         this.userRequirements = userRequirements;
-        if(userRequirements.isEmpty()) {
-            new VendingMachineGUI().setVisible(true);
-            JOptionPane.showMessageDialog(null, " Items are not existing");
-            dispose();
-        }
         addJTable();
+        if(userRequirements.isEmpty()) {
+            JOptionPane.showMessageDialog(null, " Items are not existing");
+        }
         checkoutPanel.setVisible(false);
         checkoutTextField.setEditable(false);
         
@@ -113,7 +112,6 @@ public class CartGUI extends javax.swing.JFrame {
         //System.out.println("In cart GUI");
         //System.out.println(userRequirements);
          outputTable = new JTable(model);
-         outputPanel.setSize(new Dimension(100, 100));
          model.addColumn("ItemCode");
          model.addColumn("ItemName");
          model.addColumn("Price");
@@ -151,9 +149,19 @@ public class CartGUI extends javax.swing.JFrame {
         
         JScrollPane outputScrollpane = new JScrollPane(outputTable);
     	// create a window
+        
         outputScrollpane.setPreferredSize(new Dimension(500, 200));
     	outputPanel.setLayout(new BorderLayout());
     	outputPanel.add(outputScrollpane, BorderLayout.CENTER);
+        
+        outputTable.setSelectionBackground(Color.GRAY);
+        outputTable.setSelectionForeground(Color.black);
+        outputTable.setOpaque(false);
+        outputTable.setShowGrid(false);
+        ((DefaultTableCellRenderer)outputTable.getDefaultRenderer(Object.class)).setOpaque(false);
+        outputScrollpane.setOpaque(false);
+        outputScrollpane.getViewport().setOpaque(false);
+       
         outputPanel.revalidate();
 
      }
@@ -161,7 +169,7 @@ public class CartGUI extends javax.swing.JFrame {
      public void addJTable2(long itemCode) {
          if (model1 == null) {
             model1 = new DefaultTableModel();
-            model1.addColumn("Nutritional Facts");
+            model1.addColumn("Nutrition Facts");
             model1.addColumn("Values");
          } else {
             model1.removeRow(0);
@@ -169,6 +177,7 @@ public class CartGUI extends javax.swing.JFrame {
             model1.removeRow(0);
          }
         nutritionalFactsTable = new JTable(model1);
+        nutritionalFactsTable.setOpaque(false);
         
         Iterator<HashMap> iterator2 = userRequirements.iterator();
 	while (iterator2.hasNext()) {
@@ -204,6 +213,16 @@ public class CartGUI extends javax.swing.JFrame {
         nutritionsScrollpane.setPreferredSize(new Dimension(100, 200));
         nutritionalFactsPanel.setLayout(new BorderLayout());
         nutritionalFactsPanel.add(nutritionsScrollpane, BorderLayout.CENTER);
+        
+     //   nutritionalFactsTable.setSelectionBackground(Color.LIGHT_GRAY);
+        nutritionalFactsTable.setSelectionForeground(Color.black);
+        
+        nutritionalFactsTable.setOpaque(false);
+        nutritionalFactsTable.setShowGrid(false);
+        ((DefaultTableCellRenderer)nutritionalFactsTable.getDefaultRenderer(Object.class)).setOpaque(false);
+        nutritionsScrollpane.setOpaque(false);
+        nutritionsScrollpane.getViewport().setOpaque(false);
+        
         nutritionalFactsPanel.revalidate();
        
     } 
@@ -224,6 +243,7 @@ public class CartGUI extends javax.swing.JFrame {
          }
 
          wishListTable = new JTable(model3);
+         wishListTable.setOpaque(false);
          /*wishListTable.setRowSelectionAllowed(true);
          wishListTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);*/
          wishListTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -348,6 +368,17 @@ public class CartGUI extends javax.swing.JFrame {
         wishListScrollpane.setPreferredSize(new Dimension(500, 200));
     	wishListPanel.setLayout(new BorderLayout());
     	wishListPanel.add(wishListScrollpane, BorderLayout.CENTER);
+        
+        wishListTable.setSelectionBackground(Color.GRAY);
+        wishListTable.setSelectionForeground(Color.black);
+        
+        wishListTable.setOpaque(false);
+        wishListTable.setShowGrid(false);
+        ((DefaultTableCellRenderer)wishListTable.getDefaultRenderer(Object.class)).setOpaque(false);
+        wishListScrollpane.setOpaque(false);
+        wishListScrollpane.getViewport().setOpaque(false);
+        
+        
         wishListPanel.revalidate();
         
         keyPadTextField.setText("");
@@ -382,15 +413,19 @@ public class CartGUI extends javax.swing.JFrame {
         Button0 = new javax.swing.JButton();
         ButtonADD = new javax.swing.JButton();
         nutritionalFactsPanel = new javax.swing.JPanel();
+        CartGuiHomeButton = new javax.swing.JButton();
         checkoutPanel = new javax.swing.JPanel();
         checkoutLabel = new javax.swing.JLabel();
         checkoutTextField = new javax.swing.JTextField();
         CheckoutButton = new javax.swing.JButton();
-        CartGuiHomeButton = new javax.swing.JButton();
+        cartImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        cartPanel.setLayout(null);
+
         outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Suggestion List"));
+        outputPanel.setOpaque(false);
 
         javax.swing.GroupLayout outputPanelLayout = new javax.swing.GroupLayout(outputPanel);
         outputPanel.setLayout(outputPanelLayout);
@@ -400,23 +435,31 @@ public class CartGUI extends javax.swing.JFrame {
         );
         outputPanelLayout.setVerticalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 156, Short.MAX_VALUE)
         );
 
+        cartPanel.add(outputPanel);
+        outputPanel.setBounds(10, 90, 517, 180);
+
         wishListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Wish List"));
+        wishListPanel.setOpaque(false);
 
         javax.swing.GroupLayout wishListPanelLayout = new javax.swing.GroupLayout(wishListPanel);
         wishListPanel.setLayout(wishListPanelLayout);
         wishListPanelLayout.setHorizontalGroup(
             wishListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
         wishListPanelLayout.setVerticalGroup(
             wishListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 156, Short.MAX_VALUE)
         );
 
+        cartPanel.add(wishListPanel);
+        wishListPanel.setBounds(10, 290, 520, 180);
+
         keyPadPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("KeyPad"));
+        keyPadPanel.setOpaque(false);
 
         Button1.setText("1");
         Button1.addActionListener(new java.awt.event.ActionListener() {
@@ -569,7 +612,12 @@ public class CartGUI extends javax.swing.JFrame {
                 .addGap(189, 189, 189))
         );
 
+        cartPanel.add(keyPadPanel);
+        keyPadPanel.setBounds(550, 290, 191, 250);
+
+        nutritionalFactsPanel.setBackground(new java.awt.Color(202, 206, 209));
         nutritionalFactsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Nutritional Facts"));
+        nutritionalFactsPanel.setOpaque(false);
 
         javax.swing.GroupLayout nutritionalFactsPanelLayout = new javax.swing.GroupLayout(nutritionalFactsPanel);
         nutritionalFactsPanel.setLayout(nutritionalFactsPanelLayout);
@@ -582,7 +630,20 @@ public class CartGUI extends javax.swing.JFrame {
             .addGap(0, 153, Short.MAX_VALUE)
         );
 
+        cartPanel.add(nutritionalFactsPanel);
+        nutritionalFactsPanel.setBounds(550, 90, 191, 177);
+
+        CartGuiHomeButton.setText("Home");
+        CartGuiHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CartGuiHomeButtonActionPerformed(evt);
+            }
+        });
+        cartPanel.add(CartGuiHomeButton);
+        CartGuiHomeButton.setBounds(620, 580, 81, 29);
+
         checkoutPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Checkout"));
+        checkoutPanel.setOpaque(false);
 
         checkoutLabel.setText("Total Cost in USD :");
 
@@ -617,60 +678,22 @@ public class CartGUI extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        CartGuiHomeButton.setText("Home");
-        CartGuiHomeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CartGuiHomeButtonActionPerformed(evt);
-            }
-        });
+        cartPanel.add(checkoutPanel);
+        checkoutPanel.setBounds(10, 490, 516, 125);
 
-        javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
-        cartPanel.setLayout(cartPanelLayout);
-        cartPanelLayout.setHorizontalGroup(
-            cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cartPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(keyPadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(CartGuiHomeButton))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        cartPanelLayout.setVerticalGroup(
-            cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cartPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nutritionalFactsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(wishListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(keyPadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(checkoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CartGuiHomeButton))
-                .addContainerGap())
-        );
+        cartImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/CartImage.jpg")); // NOI18N
+        cartPanel.add(cartImageLabel);
+        cartImageLabel.setBounds(0, 0, 790, 640);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(cartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(cartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -844,6 +867,7 @@ public class CartGUI extends javax.swing.JFrame {
     private javax.swing.JButton ButtonX;
     private javax.swing.JButton CartGuiHomeButton;
     private javax.swing.JButton CheckoutButton;
+    private javax.swing.JLabel cartImageLabel;
     private javax.swing.JPanel cartPanel;
     private javax.swing.JLabel checkoutLabel;
     private javax.swing.JPanel checkoutPanel;
