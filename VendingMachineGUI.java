@@ -43,6 +43,10 @@ public class VendingMachineGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel2 = new javax.swing.JPanel();
+        titlePanel = new javax.swing.JPanel();
+        titleLabel = new javax.swing.JLabel();
+        welcomeLabel = new javax.swing.JLabel();
         requirementsPanel = new javax.swing.JPanel();
         cbCalorieCount = new javax.swing.JCheckBox();
         cbSugarContent = new javax.swing.JCheckBox();
@@ -50,19 +54,53 @@ public class VendingMachineGUI extends javax.swing.JFrame {
         cbPriceRange = new javax.swing.JCheckBox();
         cbFoodType = new javax.swing.JCheckBox();
         btnProceed = new javax.swing.JButton();
-        titlePanel = new javax.swing.JPanel();
-        titleLabel = new javax.swing.JLabel();
-        welcomeLabel = new javax.swing.JLabel();
+        adminLoginButton = new javax.swing.JButton();
         buySmartCardPanel = new javax.swing.JPanel();
         smart10RadioButton = new javax.swing.JRadioButton();
         smart20RadioButton = new javax.swing.JRadioButton();
         smart50RadioButton = new javax.swing.JRadioButton();
         smartCardCheckOutButton = new javax.swing.JButton();
-        adminLoginButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setLayout(null);
+
+        titlePanel.setOpaque(false);
+
+        titleLabel.setFont(new java.awt.Font("Lucida Grande", 3, 24)); // NOI18N
+
+        welcomeLabel.setText("Welcome  ");
+
+        javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
+        titlePanel.setLayout(titlePanelLayout);
+        titlePanelLayout.setHorizontalGroup(
+            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(titlePanelLayout.createSequentialGroup()
+                .addGroup(titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(titlePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(welcomeLabel))
+                    .addGroup(titlePanelLayout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(titleLabel)))
+                .addContainerGap(388, Short.MAX_VALUE))
+        );
+        titlePanelLayout.setVerticalGroup(
+            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(welcomeLabel)
+                .addContainerGap())
+        );
+
+        jPanel2.add(titlePanel);
+        titlePanel.setBounds(10, 0, 629, 40);
+
         requirementsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose your options"));
+        requirementsPanel.setOpaque(false);
 
         cbCalorieCount.setText("Calorie Count");
         cbCalorieCount.addActionListener(new java.awt.event.ActionListener() {
@@ -113,21 +151,23 @@ public class VendingMachineGUI extends javax.swing.JFrame {
             .addGroup(requirementsPanelLayout.createSequentialGroup()
                 .addGap(128, 128, 128)
                 .addGroup(requirementsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbSugarContent)
-                    .addComponent(cbCalorieCount)
-                    .addComponent(cbFatContent)
-                    .addComponent(cbPriceRange)
-                    .addComponent(cbFoodType))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requirementsPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnProceed)
-                .addGap(21, 21, 21))
+                    .addGroup(requirementsPanelLayout.createSequentialGroup()
+                        .addGroup(requirementsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbSugarContent)
+                            .addComponent(cbCalorieCount)
+                            .addComponent(cbFatContent)
+                            .addComponent(cbPriceRange))
+                        .addContainerGap(299, Short.MAX_VALUE))
+                    .addGroup(requirementsPanelLayout.createSequentialGroup()
+                        .addComponent(cbFoodType)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProceed)
+                        .addGap(107, 107, 107))))
         );
         requirementsPanelLayout.setVerticalGroup(
             requirementsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requirementsPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(35, 35, 35)
                 .addComponent(cbCalorieCount)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbSugarContent)
@@ -136,42 +176,26 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbPriceRange)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbFoodType)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProceed)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(requirementsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbFoodType)
+                    .addComponent(btnProceed))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        titleLabel.setFont(new java.awt.Font("Lucida Grande", 3, 24)); // NOI18N
-        titleLabel.setText("FOODEX");
+        jPanel2.add(requirementsPanel);
+        requirementsPanel.setBounds(20, 80, 560, 230);
 
-        welcomeLabel.setText("Welcome  ");
-
-        javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
-        titlePanel.setLayout(titlePanelLayout);
-        titlePanelLayout.setHorizontalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(titlePanelLayout.createSequentialGroup()
-                .addGroup(titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(titlePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(welcomeLabel))
-                    .addGroup(titlePanelLayout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(titleLabel)))
-                .addContainerGap(285, Short.MAX_VALUE))
-        );
-        titlePanelLayout.setVerticalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(welcomeLabel)
-                .addContainerGap())
-        );
+        adminLoginButton.setText("Admin Login");
+        adminLoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminLoginButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(adminLoginButton);
+        adminLoginButton.setBounds(490, 500, 124, 29);
 
         buySmartCardPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose SmartCard"));
+        buySmartCardPanel.setOpaque(false);
 
         buttonGroup1.add(smart10RadioButton);
         smart10RadioButton.setText("Smart10");
@@ -215,11 +239,11 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                 .addComponent(smart20RadioButton)
                 .addGap(34, 34, 34)
                 .addComponent(smart50RadioButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buySmartCardPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(smartCardCheckOutButton)
-                .addGap(30, 30, 30))
+                .addGap(91, 91, 91))
         );
         buySmartCardPanelLayout.setVerticalGroup(
             buySmartCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,48 +253,27 @@ public class VendingMachineGUI extends javax.swing.JFrame {
                     .addComponent(smart10RadioButton)
                     .addComponent(smart20RadioButton)
                     .addComponent(smart50RadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(smartCardCheckOutButton)
-                .addGap(39, 39, 39))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        adminLoginButton.setText("Admin Login");
-        adminLoginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminLoginButtonActionPerformed(evt);
-            }
-        });
+        jPanel2.add(buySmartCardPanel);
+        buySmartCardPanel.setBounds(20, 320, 560, 170);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/background.jpeg")); // NOI18N
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(0, 0, 670, 560);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(requirementsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buySmartCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adminLoginButton)
-                .addGap(12, 12, 12))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(requirementsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buySmartCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(adminLoginButton))
-                .addContainerGap(14, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -412,6 +415,8 @@ public class VendingMachineGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbFoodType;
     private javax.swing.JCheckBox cbPriceRange;
     private javax.swing.JCheckBox cbSugarContent;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel requirementsPanel;
     private javax.swing.JRadioButton smart10RadioButton;
     private javax.swing.JRadioButton smart20RadioButton;
