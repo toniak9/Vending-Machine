@@ -50,11 +50,9 @@
                       <Component id="updateMessagejLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-<<<<<<< Updated upstream
+
               <EmptySpace pref="59" max="32767" attributes="0"/>
-=======
-              <EmptySpace pref="8" max="32767" attributes="0"/>
->>>>>>> Stashed changes
+
           </Group>
       </Group>
     </DimensionLayout>
