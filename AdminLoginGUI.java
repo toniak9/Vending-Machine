@@ -125,7 +125,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             }
             
           //  System.out.println("Filename:" + filename);
-            FilterContext context = new FilterContext(new ViewAllFilter(),filename);		
+            FilterContext context = new FilterContext(new ViewAllFilter(),filename);        
             this.itemSummary = context.executeStrategy();
          //   System.out.println("viewAll itemSummary"+itemSummary);
 
@@ -133,7 +133,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
             if(! itemSummary.isEmpty()){
                 itemSummary.clear();
             }
-            FilterContext context = new FilterContext(new ItemTypeFilter(filtersList),filename);		
+            FilterContext context = new FilterContext(new ItemTypeFilter(filtersList),filename);        
             this.itemSummary = context.executeStrategy();
           //  System.out.println("ItemType filter itemSummary"+itemSummary);
 
@@ -156,7 +156,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         Iterator<HashMap> iterator = itemSummary.iterator();
          // System.out.println("reached near iterator");
          
-	 while (iterator.hasNext()) {
+     while (iterator.hasNext()) {
             HashMap hashRow = iterator.next();
             // System.out.println("reached into whileloop");
             Vector row = new Vector();
@@ -171,10 +171,10 @@ public class AdminLoginGUI extends javax.swing.JFrame {
          }
  
         JScrollPane itemSummaryScrollpane = new JScrollPane(summaryTable);
-    	// create a window
+        // create a window
         itemSummaryScrollpane.setPreferredSize(new Dimension(500, 200));
-    	adminSummaryPanel.setLayout(new BorderLayout());
-    	adminSummaryPanel.add(itemSummaryScrollpane, BorderLayout.CENTER);
+        adminSummaryPanel.setLayout(new BorderLayout());
+        adminSummaryPanel.add(itemSummaryScrollpane, BorderLayout.CENTER);
      //   System.out.println("reached end of addjtable method");
         adminSummaryPanel.revalidate();
         
