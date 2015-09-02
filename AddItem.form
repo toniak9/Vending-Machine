@@ -23,230 +23,262 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="AddItemPanel" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" pref="799" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="AddItemPanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" min="-2" pref="471" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="AddItemPanel">
+    <Container class="javax.swing.JPanel" name="jPanel1">
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="itemTypeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCategoryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCodeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCountLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCostLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="itemTypeTextField" max="32767" attributes="0"/>
-                      <Component id="itemNameTextField" max="32767" attributes="0"/>
-                      <Component id="itemCategoryTextField" max="32767" attributes="0"/>
-                      <Component id="itemCodeTextField" max="32767" attributes="0"/>
-                      <Component id="itemCountTextField" pref="105" max="32767" attributes="0"/>
-                      <Component id="itemCostTextField" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="115" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="sugarsLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                          <Component id="sugarsTextField" min="-2" pref="96" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="calorieCountLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="calorieCountTextField" min="-2" pref="96" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="protiensLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                          <Component id="protiensTextField" min="-2" pref="96" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="fatContentLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                          <Component id="fatContentTextField" min="-2" pref="96" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="nutrtionalFactsLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="250" max="-2" attributes="0"/>
-                  <Component id="ADDButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="CLEARButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="nutrtionalFactsLabel" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="itemTypeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemTypeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="calorieCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="calorieCountTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="itemNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sugarsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sugarsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="itemCategoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCategoryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="protiensLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="protiensTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="itemCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="fatContentLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="fatContentTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="itemCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCountTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="itemCostLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemCostTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ADDButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="CLEARButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="67" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="itemTypeLabel">
+        <Container class="javax.swing.JPanel" name="AddItemPanel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Item Type"/>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="itemNameLabel">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="0" width="690" height="-1"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="itemCostLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="itemCostTextField" min="-2" pref="105" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="itemCountLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="itemCountTextField" min="-2" pref="105" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="itemCodeLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="itemCodeTextField" min="-2" pref="105" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="itemCategoryLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="itemCategoryTextField" min="-2" pref="105" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="itemNameLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="itemNameTextField" min="-2" pref="105" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="itemTypeLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="itemTypeTextField" min="-2" pref="105" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="99" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="fatContentLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="fatContentTextField" min="-2" pref="96" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="protiensLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="protiensTextField" min="-2" pref="96" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="sugarsLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="sugarsTextField" min="-2" pref="96" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="calorieCountLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="calorieCountTextField" min="-2" pref="96" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="ADDButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              <Component id="CLEARButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="itemTypeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemTypeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="calorieCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="calorieCountTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="itemNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sugarsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sugarsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="itemCategoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemCategoryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="protiensLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="protiensTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="itemCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemCodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fatContentLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fatContentTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="itemCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemCountTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="itemCostLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemCostTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="ADDButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CLEARButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="42" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="itemTypeLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Item Type"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="itemNameLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Item Name"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="itemCategoryLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Item Category"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="itemCodeLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Item Code"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="itemCountLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Item Count"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="itemCostLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Item Cost"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="calorieCountLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Calorie Count"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="sugarsLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sugars"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="protiensLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Protiens"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fatContentLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fat content"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="itemTypeTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="itemNameTextField">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemNameTextFieldActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="itemCategoryTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="itemCodeTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="itemCountTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="itemCostTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="calorieCountTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="sugarsTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="protiensTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="fatContentTextField">
+            </Component>
+            <Component class="javax.swing.JButton" name="ADDButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ADD"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ADDButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="CLEARButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="CLEAR"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CLEARButtonActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Item Name"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="/Users/Tonia/Desktop/images/addItemImage.jpg"/>
+            </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="itemCategoryLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Item Category"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="itemCodeLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Item Code"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="itemCountLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Item Count"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="itemCostLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Item Cost"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="nutrtionalFactsLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nutritional Facts"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="calorieCountLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Calorie Count"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="sugarsLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Sugars"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="protiensLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Protiens"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="fatContentLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Fat content"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="itemTypeTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="itemNameTextField">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemNameTextFieldActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="itemCategoryTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="itemCodeTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="itemCountTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="itemCostTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="calorieCountTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="sugarsTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="protiensTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="fatContentTextField">
-        </Component>
-        <Component class="javax.swing.JButton" name="ADDButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ADD"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ADDButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="CLEARButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CLEAR"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CLEARButtonActionPerformed"/>
-          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="0" width="800" height="470"/>
+            </Constraint>
+          </Constraints>
         </Component>
       </SubComponents>
     </Container>

@@ -41,6 +41,7 @@ public interface Role{
    public void deleteItem(long code);
    public void addAdmin(String username,String password);
    public void setFilename(String filename);
+   public double getQuantity(String filename);
    
 }
 
@@ -126,6 +127,25 @@ class AdminRole implements Role {
     @Override
     public void addAdmin(String username,String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public double getQuantity(String filename) {
+        double amount = 0.0;
+        try {
+            org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
+            JSONObject jsonObject = (JSONObject) obj;
+            amount =(double) jsonObject.get("Amount");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return amount; 
+            
     }
 }
 
@@ -257,6 +277,8 @@ class ManagerRole implements Role {
                    
                         if(code == (long)itemsObject.get("code")){
                             itemsObject.clear();
+                            jsonObject.remove(itemsObject);
+                            
                             break;
                         }
                     }
@@ -306,5 +328,23 @@ class ManagerRole implements Role {
         } catch (ParseException ex) {
             Logger.getLogger(LoginValidation.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    @Override
+    public double getQuantity(String filename) {
+        double amount = 0.0;
+        try {
+            org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
+            Object obj = parser.parse(new FileReader("/Users/Tonia/Desktop/"+filename));
+            JSONObject jsonObject = (JSONObject) obj;
+            amount =(double) jsonObject.get("Amount");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminRole.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return amount; 
+            
     }
 }

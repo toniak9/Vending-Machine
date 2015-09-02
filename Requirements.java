@@ -26,12 +26,7 @@ public interface Requirements {
 class ConcreteRequirements implements Requirements{
     ConcreteRequirements(){
         super();
-        try {
-        //  System.out.println(selectedReq.get("calorie"));
-            parser.foodParser(selectedReq);
-        } catch (IOException ex) {
-            Logger.getLogger(ConcreteRequirements.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        parser.foodParser(selectedReq);
     }
     public void update(String req){}
     public int display(){
@@ -152,9 +147,7 @@ abstract class FoodTypeReq implements RequirementsDecorator {
     abstract public void update(String req);
     abstract public int display(); 
     abstract public String getType(); 
-    
-       
-    
+   
  }
 
     class CompositeFoodType extends FoodTypeReq {

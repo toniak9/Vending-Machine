@@ -29,29 +29,41 @@ public class AddAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         addAdminUsername = new javax.swing.JLabel();
         addAdminUsernameTextField = new javax.swing.JTextField();
         addAdminPwdjLabel = new javax.swing.JLabel();
         addAdminPwdjTextField = new javax.swing.JTextField();
         addAdminjButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        addAdminUsername.setText("Username:");
+        jPanel1.setLayout(null);
+
+        addAdminUsername.setText("Set User");
+        jPanel1.add(addAdminUsername);
+        addAdminUsername.setBounds(130, 80, 51, 16);
 
         addAdminUsernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addAdminUsernameTextFieldActionPerformed(evt);
             }
         });
+        jPanel1.add(addAdminUsernameTextField);
+        addAdminUsernameTextField.setBounds(230, 70, 139, 28);
 
-        addAdminPwdjLabel.setText("Password: ");
+        addAdminPwdjLabel.setText("Set Password ");
+        jPanel1.add(addAdminPwdjLabel);
+        addAdminPwdjLabel.setBounds(130, 130, 100, 30);
 
         addAdminPwdjTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addAdminPwdjTextFieldActionPerformed(evt);
             }
         });
+        jPanel1.add(addAdminPwdjTextField);
+        addAdminPwdjTextField.setBounds(230, 130, 138, 28);
 
         addAdminjButton.setText("add user");
         addAdminjButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,43 +71,22 @@ public class AddAdmin extends javax.swing.JFrame {
                 addAdminjButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(addAdminjButton);
+        addAdminjButton.setBounds(180, 200, 98, 29);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/Tonia/Desktop/images/addUserImage.jpg")); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(-9, -10, 540, 320);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addAdminPwdjLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addAdminPwdjTextField))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addAdminUsername)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addAdminUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(addAdminjButton)))
-                .addContainerGap(131, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addAdminUsername)
-                    .addComponent(addAdminUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addAdminPwdjLabel)
-                    .addComponent(addAdminPwdjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(addAdminjButton)
-                .addGap(27, 27, 27))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
         );
 
         pack();
@@ -156,5 +147,7 @@ public class AddAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel addAdminUsername;
     private javax.swing.JTextField addAdminUsernameTextField;
     private javax.swing.JButton addAdminjButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

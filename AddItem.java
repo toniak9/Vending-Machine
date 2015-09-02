@@ -36,6 +36,7 @@ public class AddItem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         AddItemPanel = new javax.swing.JPanel();
         itemTypeLabel = new javax.swing.JLabel();
         itemNameLabel = new javax.swing.JLabel();
@@ -43,7 +44,6 @@ public class AddItem extends javax.swing.JFrame {
         itemCodeLabel = new javax.swing.JLabel();
         itemCountLabel = new javax.swing.JLabel();
         itemCostLabel = new javax.swing.JLabel();
-        nutrtionalFactsLabel = new javax.swing.JLabel();
         calorieCountLabel = new javax.swing.JLabel();
         sugarsLabel = new javax.swing.JLabel();
         protiensLabel = new javax.swing.JLabel();
@@ -60,8 +60,13 @@ public class AddItem extends javax.swing.JFrame {
         fatContentTextField = new javax.swing.JTextField();
         ADDButton = new javax.swing.JButton();
         CLEARButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setLayout(null);
+
+        AddItemPanel.setOpaque(false);
 
         itemTypeLabel.setText("Item Type");
 
@@ -74,8 +79,6 @@ public class AddItem extends javax.swing.JFrame {
         itemCountLabel.setText("Item Count");
 
         itemCostLabel.setText("Item Cost");
-
-        nutrtionalFactsLabel.setText("Nutritional Facts");
 
         calorieCountLabel.setText("Calorie Count");
 
@@ -110,58 +113,65 @@ public class AddItem extends javax.swing.JFrame {
         AddItemPanelLayout.setHorizontalGroup(
             AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddItemPanelLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(itemTypeLabel)
-                    .addComponent(itemNameLabel)
-                    .addComponent(itemCategoryLabel)
-                    .addComponent(itemCodeLabel)
-                    .addComponent(itemCountLabel)
-                    .addComponent(itemCostLabel))
-                .addGap(29, 29, 29)
-                .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(itemTypeTextField)
-                    .addComponent(itemNameTextField)
-                    .addComponent(itemCategoryTextField)
-                    .addComponent(itemCodeTextField)
-                    .addComponent(itemCountTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(itemCostTextField))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(AddItemPanelLayout.createSequentialGroup()
-                        .addComponent(sugarsLabel)
-                        .addGap(72, 72, 72)
-                        .addComponent(sugarsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(138, 138, 138)
+                        .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(itemCostLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(itemCostTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(itemCountLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(itemCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(itemCodeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(itemCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(itemCategoryLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(itemCategoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(itemNameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(itemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(itemTypeLabel)
+                                .addGap(32, 32, 32)
+                                .addComponent(itemTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                        .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(fatContentLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fatContentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(protiensLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(protiensTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(sugarsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(sugarsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddItemPanelLayout.createSequentialGroup()
+                                .addComponent(calorieCountLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(calorieCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(AddItemPanelLayout.createSequentialGroup()
-                        .addComponent(calorieCountLabel)
-                        .addGap(28, 28, 28)
-                        .addComponent(calorieCountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AddItemPanelLayout.createSequentialGroup()
-                        .addComponent(protiensLabel)
-                        .addGap(63, 63, 63)
-                        .addComponent(protiensTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AddItemPanelLayout.createSequentialGroup()
-                        .addComponent(fatContentLabel)
-                        .addGap(43, 43, 43)
-                        .addComponent(fatContentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ADDButton)
+                        .addGap(48, 48, 48)
+                        .addComponent(CLEARButton)
+                        .addGap(139, 139, 139)))
                 .addGap(66, 66, 66))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddItemPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nutrtionalFactsLabel)
-                .addGap(135, 135, 135))
-            .addGroup(AddItemPanelLayout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(ADDButton)
-                .addGap(32, 32, 32)
-                .addComponent(CLEARButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AddItemPanelLayout.setVerticalGroup(
             AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddItemPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(nutrtionalFactsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(78, 78, 78)
                 .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(itemTypeLabel)
                     .addComponent(itemTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,25 +203,29 @@ public class AddItem extends javax.swing.JFrame {
                 .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(itemCostLabel)
                     .addComponent(itemCostTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addGap(18, 18, 18)
                 .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ADDButton)
                     .addComponent(CLEARButton))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
+
+        jPanel1.add(AddItemPanel);
+        AddItemPanel.setBounds(0, 0, 690, 456);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/Tonia/Desktop/images/addItemImage.jpg")); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 800, 470);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(AddItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AddItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -330,7 +344,8 @@ public class AddItem extends javax.swing.JFrame {
     private javax.swing.JTextField itemNameTextField;
     private javax.swing.JLabel itemTypeLabel;
     private javax.swing.JTextField itemTypeTextField;
-    private javax.swing.JLabel nutrtionalFactsLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel protiensLabel;
     private javax.swing.JTextField protiensTextField;
     private javax.swing.JLabel sugarsLabel;

@@ -24,8 +24,12 @@ import org.json.simple.parser.ParseException;
  *
  * @author Sruti
  */
-public class JsonProgram {
-     public void foodParser(HashMap requirements) throws IOException {
+interface JSONProgramInterface {
+         public void foodParser(HashMap req);
+     }
+public class JsonProgram implements JSONProgramInterface {
+     @Override
+     public void foodParser(HashMap requirements) {
          long calories = 0;
          String sugars = null;
          long fats = 0;

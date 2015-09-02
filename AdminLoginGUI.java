@@ -13,6 +13,7 @@ package projectvendingmachine;
  * The actions performed by each user is mentioned in the Role class
  */
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
 
@@ -70,7 +72,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         System.out.println("msg in adminGUI"+message);
        
         initComponents();
-        statsImageLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/pie.thumbnail.png"));
+        //statsImageLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/pie.thumbnail.png"));
         
         adminLoginMessage.setText("Welcome "+username);
       //  sanJoseVMButton.setSelected(true);
@@ -176,8 +178,17 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         adminSummaryPanel.setLayout(new BorderLayout());
         adminSummaryPanel.add(itemSummaryScrollpane, BorderLayout.CENTER);
      //   System.out.println("reached end of addjtable method");
-        adminSummaryPanel.revalidate();
         
+        summaryTable.setSelectionBackground(Color.gray);
+       // summaryTable.setBackground(Color.lightGray);
+        summaryTable.setForeground(Color.black);
+       /* summaryTable.setOpaque(false);
+        summaryTable.setShowGrid(false);
+      //  ((DefaultTableCellRenderer)summaryTable.getDefaultRenderer(Object.class)).setOpaque(false);
+        itemSummaryScrollpane.setOpaque(false);
+        itemSummaryScrollpane.getViewport().setOpaque(false);*/
+        adminSummaryPanel.revalidate();
+        adminSummaryPanel.repaint();
     }   
 
     /**
@@ -190,12 +201,13 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        updateMessagejLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         adminLoginMessage = new javax.swing.JLabel();
         vendingMachinePanel = new javax.swing.JPanel();
         sanJoseVMButton = new javax.swing.JRadioButton();
         santaClaraVMButton = new javax.swing.JRadioButton();
         statisticsButton = new javax.swing.JButton();
-        statsImageLabel = new javax.swing.JLabel();
         adminSummaryPanel = new javax.swing.JPanel();
         adminFileterPanel = new javax.swing.JPanel();
         snacksCheckBox = new javax.swing.JCheckBox();
@@ -206,13 +218,22 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         UpdateButton = new javax.swing.JButton();
         addAdminjButton = new javax.swing.JButton();
         userLogoutButton = new javax.swing.JButton();
-        updateMessagejLabel = new javax.swing.JLabel();
+        amountDisplayLabel = new javax.swing.JLabel();
+        amountLabel = new javax.swing.JLabel();
+        amountDisplayPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setLayout(null);
 
         adminLoginMessage.setText("Message:");
+        jPanel1.add(adminLoginMessage);
+        adminLoginMessage.setBounds(50, 20, 310, 20);
 
         vendingMachinePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Vending Machines LIst"));
+        vendingMachinePanel.setOpaque(false);
 
         buttonGroup1.add(sanJoseVMButton);
         sanJoseVMButton.setText("San Jose Vending Machine");
@@ -242,50 +263,50 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         vendingMachinePanelLayout.setHorizontalGroup(
             vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(santaClaraVMButton)
-                    .addComponent(sanJoseVMButton))
+                .addContainerGap()
+                .addComponent(sanJoseVMButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendingMachinePanelLayout.createSequentialGroup()
-                        .addComponent(statsImageLabel)
-                        .addGap(99, 99, 99))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendingMachinePanelLayout.createSequentialGroup()
-                        .addComponent(statisticsButton)
-                        .addGap(74, 74, 74))))
+                .addComponent(santaClaraVMButton)
+                .addGap(89, 89, 89)
+                .addComponent(statisticsButton)
+                .addGap(509, 509, 509))
         );
         vendingMachinePanelLayout.setVerticalGroup(
             vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(sanJoseVMButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(santaClaraVMButton))
-                    .addGroup(vendingMachinePanelLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(statsImageLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(statisticsButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addGroup(vendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sanJoseVMButton)
+                    .addComponent(santaClaraVMButton))
+                .addContainerGap(27, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendingMachinePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(statisticsButton)
+                .addContainerGap())
         );
 
+        jPanel1.add(vendingMachinePanel);
+        vendingMachinePanel.setBounds(70, 60, 680, 90);
+
         adminSummaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Items Summary"));
+        adminSummaryPanel.setOpaque(false);
 
         javax.swing.GroupLayout adminSummaryPanelLayout = new javax.swing.GroupLayout(adminSummaryPanel);
         adminSummaryPanel.setLayout(adminSummaryPanelLayout);
         adminSummaryPanelLayout.setHorizontalGroup(
             adminSummaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 668, Short.MAX_VALUE)
         );
         adminSummaryPanelLayout.setVerticalGroup(
             adminSummaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 175, Short.MAX_VALUE)
+            .addGap(0, 256, Short.MAX_VALUE)
         );
 
+        jPanel1.add(adminSummaryPanel);
+        adminSummaryPanel.setBounds(70, 160, 680, 280);
+
         adminFileterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Category Filters"));
+        adminFileterPanel.setOpaque(false);
 
         snacksCheckBox.setText("Snacks");
         snacksCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -357,7 +378,7 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                         .addComponent(addAdminjButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(UpdateButton)))
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         adminFileterPanelLayout.setVerticalGroup(
             adminFileterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,8 +394,11 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                     .addComponent(DeleteButton)
                     .addComponent(UpdateButton)
                     .addComponent(addAdminjButton))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1.add(adminFileterPanel);
+        adminFileterPanel.setBounds(70, 460, 500, 120);
 
         userLogoutButton.setText("Logout");
         userLogoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -382,52 +406,57 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                 userLogoutButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(userLogoutButton);
+        userLogoutButton.setBounds(880, 20, 88, 29);
+
+        amountDisplayLabel.setFont(new java.awt.Font("Lucida Calligraphy", 1, 24)); // NOI18N
+        amountDisplayLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(amountDisplayLabel);
+        amountDisplayLabel.setBounds(640, 500, 80, 50);
+
+        amountLabel.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
+        amountLabel.setText("Amount");
+        jPanel1.add(amountLabel);
+        amountLabel.setBounds(630, 470, 110, 30);
+
+        amountDisplayPanel.setOpaque(false);
+
+        javax.swing.GroupLayout amountDisplayPanelLayout = new javax.swing.GroupLayout(amountDisplayPanel);
+        amountDisplayPanel.setLayout(amountDisplayPanelLayout);
+        amountDisplayPanelLayout.setHorizontalGroup(
+            amountDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        amountDisplayPanelLayout.setVerticalGroup(
+            amountDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(amountDisplayPanel);
+        amountDisplayPanel.setBounds(600, 470, 150, 110);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/Tonia/Desktop/images/adminBackground.jpg")); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1000, 600);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(36, 36, 36)
-                            .addComponent(adminLoginMessage)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(userLogoutButton))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(adminFileterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(vendingMachinePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(adminSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addComponent(updateMessagejLabel)))
-                .addContainerGap(59, Short.MAX_VALUE))
-
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(updateMessagejLabel))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(adminLoginMessage)
-                        .addGap(56, 56, 56))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(userLogoutButton)
-                        .addGap(18, 18, 18)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vendingMachinePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adminSummaryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(96, 96, 96)
                 .addComponent(updateMessagejLabel)
-                .addGap(20, 20, 20)
-                .addComponent(adminFileterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -458,10 +487,13 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                //System.out.println("I:" + i);
                long itemCode = 0;
                String itemCount = "";
+               double itemCost =0.0;
                try {   
                 itemCode = Long.valueOf(summaryTable.getValueAt(i, 0).toString());
                 // long a = Long.valueOf(itemCode);
                 itemCount = (String) summaryTable.getValueAt(i, 4);
+                   System.out.println("price update"+summaryTable.getValueAt(i, 3).toString());
+                itemCost = (double) Double.valueOf(summaryTable.getValueAt(i, 3).toString());
                 
                 // long b = Long.valueOf(itemCount);
                } catch (Exception e) {
@@ -472,13 +504,15 @@ public class AdminLoginGUI extends javax.swing.JFrame {
                }
                 updatedHashMap.put("itemCode",itemCode);
                 updatedHashMap.put("itemCount", Long.parseLong(itemCount));
+                updatedHashMap.put("itemCost", itemCost);
                 
                 updatedList.add(updatedHashMap);
-               
+         
          }
          //role = new AdminRole();
          role.restockAction(updatedList);
-         JOptionPane.showMessageDialog(null, " Item count is Updated");
+         JOptionPane.showMessageDialog(null, " Item is Updated");
+         
 
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
@@ -517,14 +551,17 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-               timer.restart();
+           timer.restart();
+           summaryTable.revalidate();
            int x = summaryTable.getSelectedRow();
+           
            long deleteItemCode = (long) summaryTable.getValueAt(x, 0);
            model.removeRow(x);
           
          //  role = new ManagerRole();
            role.deleteItem(deleteItemCode);
            summaryTable.revalidate();
+           JOptionPane.showMessageDialog(null, " Item is deleted");
            
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
@@ -552,6 +589,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         if(santaClaraVMButton.isSelected()){
             filename = "SantaClaraVMFood.json";
             role.setFilename(filename);
+            double amount = role.getQuantity(filename);
+            amountDisplayLabel.setText(Double.toString(amount));
             addJTableItemSummary();
         }
     }//GEN-LAST:event_santaClaraVMButtonActionPerformed
@@ -562,6 +601,8 @@ public class AdminLoginGUI extends javax.swing.JFrame {
         if(sanJoseVMButton.isSelected()){
             filename = "SanJoseVMFood.json";
             role.setFilename(filename);
+            double amount = role.getQuantity(filename);
+            amountDisplayLabel.setText(Double.toString(amount));
             addJTableItemSummary();
         }
     }//GEN-LAST:event_sanJoseVMButtonActionPerformed
@@ -613,14 +654,18 @@ public class AdminLoginGUI extends javax.swing.JFrame {
     private javax.swing.JPanel adminFileterPanel;
     private javax.swing.JLabel adminLoginMessage;
     private javax.swing.JPanel adminSummaryPanel;
+    private javax.swing.JLabel amountDisplayLabel;
+    private javax.swing.JPanel amountDisplayPanel;
+    private javax.swing.JLabel amountLabel;
     private javax.swing.JCheckBox beveragesCheckBox;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox candiesCheckBox;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton sanJoseVMButton;
     private javax.swing.JRadioButton santaClaraVMButton;
     private javax.swing.JCheckBox snacksCheckBox;
     private javax.swing.JButton statisticsButton;
-    private javax.swing.JLabel statsImageLabel;
     private javax.swing.JLabel updateMessagejLabel;
     private javax.swing.JButton userLogoutButton;
     private javax.swing.JPanel vendingMachinePanel;

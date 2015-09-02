@@ -5,7 +5,9 @@
  */
 package projectvendingmachine;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -43,15 +46,17 @@ public class PaymentGUI extends javax.swing.JFrame {
          this.requestType = requestType;
          initComponents();
          
-          coinsImageLabel.setIcon(new ImageIcon("/Users/Sruti/Desktop/images/manyCoins.png"));
+          coinsImageLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/manyCoins.png"));
           coinsImageLabel.setText("");
-          cardImageLabel.setIcon(new ImageIcon("/Users/Sruti/Desktop/images/card.png"));
+          cardImageLabel.setIcon(new ImageIcon("/Users/Tonia/Desktop/images/card.png"));
           cardImageLabel.setText("");
           coinsMsgLabel.setText("");
           cardErrorMsgLabel.setText("");
           coinsTotalTextField.setEditable(false);
           paymentTextField.setEditable(false);
           changeSlotTextField.setEditable(false);
+          itemDispenserPanel.setEnabled(false);
+         
          performance();
          if(requestType.equalsIgnoreCase("BuySmartCard")) {
              rbCard.setEnabled(false);
@@ -388,7 +393,7 @@ public class PaymentGUI extends javax.swing.JFrame {
                     .addComponent(accessCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(accessCodeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardConfirmButton)
+                .addComponent(cardConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
         );
 
@@ -404,23 +409,15 @@ public class PaymentGUI extends javax.swing.JFrame {
         paymentPanel.add(paymentHomeButton);
         paymentHomeButton.setBounds(500, 660, 81, 29);
 
-        javax.swing.GroupLayout itemDispenserPanelLayout = new javax.swing.GroupLayout(itemDispenserPanel);
-        itemDispenserPanel.setLayout(itemDispenserPanelLayout);
-        itemDispenserPanelLayout.setHorizontalGroup(
-            itemDispenserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 191, Short.MAX_VALUE)
-        );
-        itemDispenserPanelLayout.setVerticalGroup(
-            itemDispenserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 137, Short.MAX_VALUE)
-        );
-
+        itemDispenserPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Item Dispenser"));
+        itemDispenserPanel.setOpaque(false);
         paymentPanel.add(itemDispenserPanel);
-        itemDispenserPanel.setBounds(480, 340, 191, 137);
+        itemDispenserPanel.setBounds(560, 470, 190, 180);
 
-        paymentImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Sruti/Desktop/images/paymentImage.jpg")); // NOI18N
+        paymentImageLabel.setFont(new java.awt.Font("Lucida Calligraphy", 0, 13)); // NOI18N
+        paymentImageLabel.setIcon(new javax.swing.ImageIcon("/Users/Tonia/Desktop/images/paymentImage.jpg")); // NOI18N
         paymentPanel.add(paymentImageLabel);
-        paymentImageLabel.setBounds(0, 0, 860, 730);
+        paymentImageLabel.setBounds(0, 0, 790, 730);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -526,14 +523,18 @@ public class PaymentGUI extends javax.swing.JFrame {
             SmartCardParser smartCardParser = new SmartCardParser();
             double balance = (double)Double.valueOf(paymentTextField.getText().toString());
             smartCardParser.setBalance(balance, requestType);
+            smartCardParser.addCard();
+            smartCardParser.decrementCount();
+            String msg = smartCardParser.getVal();
             if(price < coinsValue) {
                 change = coinsValue - price;
                 changeSlotTextField.setText(Double.toString(change));
-                JOptionPane.showMessageDialog(null, "Please collect change and card");
+                JOptionPane.showMessageDialog(null, "Your change is returend"+msg);
             } 
             if(price == coinsValue) {
                 coinsTotalTextField.setText("");
-                JOptionPane.showMessageDialog(null, "Thanks,coins matched! Collect your card");
+                paymentTextField.setText("");
+                JOptionPane.showMessageDialog(null, msg);
             } else {
                 JOptionPane.showMessageDialog(null, "Please insert $"+ (price-coinsValue) +" coins");
             }
@@ -556,6 +557,7 @@ public class PaymentGUI extends javax.swing.JFrame {
             } 
             if(price == coinsValue) {
                 coinsTotalTextField.setText("");
+                paymentTextField.setText("");
                 System.out.println("items selected: "+quantity );
                 itemDispenser(quantity);
             }
@@ -575,11 +577,16 @@ public class PaymentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_paymentTextFieldActionPerformed
     
     public void itemDispenser(List<HashMap> quantity) {
+        
         HashMap cartItems = new HashMap();
+        /*JScrollPane itemDispenserScrollPane = new JScrollPane();
+        itemDispenserPanel.add(itemDispenserScrollPane, BorderLayout.CENTER);*/
+        
         for(int i=0; i< quantity.size(); i++) {
-            System.out.println("in loop");
-            JLabel _lbl = new JLabel("Label"+i);//make label and assign text in 1 line
-            _lbl.setText(cartItems.get("itemName")+" ---- "+ cartItems.get("itemCount"));
+            cartItems = quantity.get(i);
+            JLabel _lbl = new JLabel(cartItems.get("itemName")+"   -   "+ cartItems.get("itemCount"));//make label and assign text in 1 line
+            _lbl.setFont(new Font("Lucida Calligraphy",Font.BOLD, 12));
+            itemDispenserPanel.setEnabled(true);
             itemDispenserPanel.add(_lbl);//add label we made
             itemDispenserPanel.revalidate();
             itemDispenserPanel.repaint();            

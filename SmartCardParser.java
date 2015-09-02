@@ -26,6 +26,7 @@ public class SmartCardParser {
     private double balance;
     private String cardType;
     JSONDataAccess dataAccess;
+    long cardNum, code;
     
     public void setBalance(double balance, String cardType) {
         this.balance = balance; 
@@ -36,6 +37,13 @@ public class SmartCardParser {
         if(this.balance == 50.0)
             this.cardType = "Smart50";
     }
+     public void setval(long cardnumber, long code) {
+         this.cardNum = cardnumber;
+         this.code = code;
+     }
+     public String getVal(){
+         return "card number is "+cardNum+" \n access code is " + code;
+     }
     
     public void decrementCount(){
         CardIterator cardIterator;
@@ -90,9 +98,11 @@ public class SmartCardParser {
             Random r = new Random( System.currentTimeMillis() );
                 long rand5 = 10000 + r.nextInt(20000);
                 long rand3 = 100 + r.nextInt(900);
+                setval(rand5, rand3);
                 cardInfo.put("cardNumber",rand5);
                 cardInfo.put("accessCode",rand3);
                 cardInfo.put("balance",balance);
+                
                 cardDetails.add(cardInfo);
             
             File file=new File("/Users/Tonia/Desktop/CardDetails.json");   
